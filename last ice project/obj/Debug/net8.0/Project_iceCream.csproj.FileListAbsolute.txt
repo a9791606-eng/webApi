@@ -1,0 +1,7 @@
+Z:\יד תשפו\פפנהיים אילה\זילברברג\newProject\Project_iceCream\obj\Debug\net8.0\Project_iceCream.csproj.AssemblyReference.cache
+Z:\יד תשפו\פפנהיים אילה\זילברברג\newProject\Project_iceCream\obj\Debug\net8.0\Project_iceCream.GeneratedMSBuildEditorConfig.editorconfig
+Z:\יד תשפו\פפנהיים אילה\זילברברג\newProject\Project_iceCream\obj\Debug\net8.0\Project_iceCream.AssemblyInfoInputs.cache
+Z:\יד תשפו\פפנהיים אילה\זילברברג\newProject\Project_iceCream\obj\Debug\net8.0\Project_iceCream.AssemblyInfo.cs
+Z:\יד תשפו\פפנהיים אילה\זילברברג\newProject\Project_iceCream\obj\Debug\net8.0\Project_iceCream.csproj.CoreCompileInputs.cache
+Z:\יד תשפו\פפנהיים אילה\זילברברג\newProject\Project_iceCream\obj\Debug\net8.0\Project_iceCream.MvcApplicationPartsAssemblyInfo.cs
+Z:\יד תשפו\פפנהיים אילה\זילברברג\newProject\Project_iceCream\obj\Debug\net8.0\Project_iceCream.MvcApplicationPartsAssemblyInfo.cache
