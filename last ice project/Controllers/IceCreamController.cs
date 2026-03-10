@@ -26,60 +26,49 @@ public class IceCreamController : ControllerBase
     [HttpGet("{id}")]
     public ActionResult<IceCream> Get(int id)
     {
-        var m = services.Get(id);
-        if(m==null)
+        var IceCream = services.Get(id);
+        if(IceCream==null)
             return NotFound();
-        return m;
+        return IceCream;
 
     }
 
     [HttpPost]
-    public ActionResult Create(IceCream newIceCream)
+    public IActionResult Create(IceCream newIceCream)
     {
-        var postedIceCream = services.Create(newIceCream);
-      
-       return CreatedAtAction(nameof(Create), new { id = postedIceCream.Id });
+       // var postedIceCream = services.Create(newIceCream);
+      services.Add(newIceCream);
+       return CreatedAtAction(nameof(Create), new { id = newIceCream.Id }, newIceCream);
     }
 
     [HttpPut("{id}")]
-    public ActionResult Update(int id, IceCream newIceCream)
+    public IActionResult Update(int id, IceCream newIceCream)
     {
-        var ans= services.Update( id, newIceCream);
-      
-        if(ans==1)
-          return NotFound();
+        if (id != newIceCream.Id)
+            return BadRequest();
 
-        if(ans==2)
-           return BadRequest();
+        var existingIceCream = services.Get(id);
+        if (existingIceCream is null)
+            return NotFound();
 
-       
-        return NoContent();
+       services.Update(newIceCream);
+
+       return NoContent();
 
     }
 
     [HttpDelete("{id}")]
-    public ActionResult Delete(int id)
+    public IActionResult Delete(int id)
     {
-        var ans= services.Delete(id);
-      
-        if(ans==false)
+        var ice = services.Get(id);
+
+        if (ice is null )
             return NotFound();
-        return NoContent();
+        services.Delete(id);
+
+        return Content(services.count.ToString());
 
     }
 }
  
-//     [HttpDelete("{id}")]
-//     public ActionResult Delete(int id)
-//     {
-//         var Ice = find(id);
-//         if (Ice == null)
-//             return NotFound();
-//         else
-//         {
-//             services.Remove(Ice);
-//         }  
-//          return NoContent();  
-        
-//     }
-// }
+

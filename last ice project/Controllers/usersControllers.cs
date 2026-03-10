@@ -19,53 +19,55 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet()]
-    public ActionResult<IEnumerable<User>> Get()
+    public ActionResult<IEnumerable<IceCream>> Get()
     {
         return services.Get();
     }
 
     [HttpGet("{id}")]
-    public ActionResult<User> Get(int id)
+    public ActionResult<IceCream> Get(int id)
     {
-        var m = services.Get(id);
-        if(m==null)
+        var IceCream = services.Get(id);
+        if(IceCream==null)
             return NotFound();
-        return m;
+        return IceCream;
 
     }
 
     [HttpPost]
-    public ActionResult Create(User newUser)
+    public IActionResult Create(IceCream newIceCream)
     {
-        var postedUser = services.Create(newUser);
       
-       return CreatedAtAction(nameof(Create), new { id = postedUser.Id });
+      services.Add(newIceCream);
+       return CreatedAtAction(nameof(Create), new { id = newIceCream.Id }, newIceCream);
     }
 
     [HttpPut("{id}")]
-    public ActionResult Update(int id, User newUser)
+    public IActionResult Update(int id, IceCream newIceCream)
     {
-        var ans= services.Update( id, newUser);
-      
-        if(ans==1)
-          return NotFound();
+        if (id != newIceCream.Id)
+            return BadRequest();
 
-        if(ans==2)
-           return BadRequest();
+        var existingIceCream = services.Get(id);
+        if (existingIceCream is null)
+            return NotFound();
 
-       
-        return NoContent();
+       services.Update(newIceCream);
+
+       return NoContent();
 
     }
 
     [HttpDelete("{id}")]
-    public ActionResult Delete(int id)
+    public IActionResult Delete(int id)
     {
-        var ans= services.Delete(id);
-      
-        if(ans==false)
+        var ice = services.Get(id);
+
+        if (ice is null )
             return NotFound();
-        return NoContent();
+        services.Delete(id);
+
+        return Content(services.count.ToString());
 
     }
 }

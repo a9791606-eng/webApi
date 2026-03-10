@@ -19,7 +19,7 @@ public class MyLogMiddleware
         var sw = new Stopwatch();
         sw.Start();
         await next.Invoke(c);
-        logger.LogInformation($"{c.Request.Path}.{c.Request.Method} took {sw.ElapsedMilliseconds}ms."
+        logger.LogDebug($"{c.Request.Path}.{c.Request.Method} took {sw.ElapsedMilliseconds}ms."
             + $" User: {c.User?.FindFirst("userId")?.Value ?? "unknown"}" );
        
     }

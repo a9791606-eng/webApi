@@ -2,10 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography.X509Certificates;
 using IceCreamNamespace.Models;
 using IceCreamService.interfaces;
-using System.IO;
-using System;
-using System.Net;
-using System.Text.Json;
 
 namespace IceCreamNamespace.Services;
 
@@ -13,34 +9,18 @@ namespace IceCreamNamespace.Services;
     {
       
      private List<IceCream> list;
-     private string filePath;
+
     public IceCreamService()
     {
-        this.list = new List<IceCream>(){
+        this.list = new List<IceCream>{
              new IceCream { Id = 1, Name = "vanilla",isGloutenFree=true},
              new IceCream { Id = 2, Name = "strawberry",isGloutenFree=true},
              new IceCream { Id = 3, Name = "chocolate",isGloutenFree=true},
              new IceCream { Id = 4, Name = "Pistachio",isGloutenFree=false} 
         };
-        this.filePath = Path.Combine("Data", "IceCream.json");
-            using (var jsonFile = File.OpenText(filePath))
-            {
-                var content = jsonFile.ReadToEnd();
-                list = JsonSerializer.Deserialize<List<IceCream>>(content,
-                new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
-            }
     }
    
-   private void saveToFile()
-        {
-            var text = JsonSerializer.Serialize(list);
-            File.WriteAllText(filePath, text);
-        }
-        public List<IceCream> GetAll() => list;
-
+   
 
     public List<IceCream> Get()
     {
@@ -60,9 +40,7 @@ namespace IceCreamNamespace.Services;
         var maxId = list.Max(p => p.Id);
         newIceCream.Id = maxId + 1;
         list.Add(newIceCream);
-         saveToFile();
             return newIceCream;
-           
     }
 
     public int Update(int id, IceCream newIceCream)
@@ -71,11 +49,13 @@ namespace IceCreamNamespace.Services;
         if(Ice == null)
           return 1;
 
-        Ice.Name=newIceCream.Name;
-        Ice.isGloutenFree=newIceCream.isGloutenFree;
-        saveToFile();
+        if(Ice.Id != newIceCream.Id)
+           return 2;
+
+        var index = list.IndexOf(Ice);
+        list[index] = newIceCream;
+
         return 3;
-        
     }
 
    
@@ -85,9 +65,7 @@ namespace IceCreamNamespace.Services;
         if(Ice==null)
             return false;
         list.Remove(Ice);
-         saveToFile();
         return true;
-       
     }
 }
     public static class IceCreamExtension{
