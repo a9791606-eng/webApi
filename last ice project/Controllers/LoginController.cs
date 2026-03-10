@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
-using KsPizza.Models;
-using KsPizza.Services;
+using IceCreamNamespace.Models;
+using IceCreamNamespace.Services;
 
-namespace KsPizza.Controllers;
+namespace IceCreamNamespace.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -14,12 +14,11 @@ public class LoginController : ControllerBase
     public LoginController() { }
 
     [HttpPost]
-    public ActionResult<String> Login(User User)
+    public ActionResult<string> Login(User user)
     {
         var dt = DateTime.Now;
 
-        if (User.Username != "test"
-        || User.Password != $"t{dt.Year}#{dt.Day}!")
+        if (user == null || user.FirstName != "test" || user.Password != $"t{dt.Year}#{dt.Day}!")
         {
             return Unauthorized();
         }

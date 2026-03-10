@@ -1,81 +1,75 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using IceCreamNamespace.Models;
 using IceCreamService.interfaces;
 
 namespace IceCreamNamespace.Services;
 
-public  class IceCreamService : IICService
+public class IceCreamService : IICService
 {
-    private List<IceCream> list;
+    private readonly List<IceCream> list;
 
     public IceCreamService()
     {
-        this.list = new List<IceCream>{
-            new IceCream { Id = 1, Name = "vanilla",isGloutenFree=true},
-            new IceCream { Id = 2, Name = "strawberry",isGloutenFree=true},
-            new IceCream { Id = 3, Name = "chocolate",isGloutenFree=true},
-            new IceCream { Id = 4, Name = "Pistachio",isGloutenFree=false} 
+        list = new List<IceCream>
+        {
+            new IceCream { Id = 1, Name = "vanilla", IsGlutenFree = true },
+            new IceCream { Id = 2, Name = "strawberry", IsGlutenFree = true },
+            new IceCream { Id = 3, Name = "chocolate", IsGlutenFree = true },
+            new IceCream { Id = 4, Name = "Pistachio", IsGlutenFree = false }
         };
     }
 
-
-
     public List<IceCream> GetAll()
-    {
-        return list;
-    }
+        => list.ToList();
 
-    private IceCream find(int id)
-    {
-        return list.FirstOrDefault(p => p.Id == id);
-
-    }
-
-    public IceCream GetAll(int id) => find(id);
+    public IceCream Get(int id)
+        => list.FirstOrDefault(p => p.Id == id);
 
     public void Add(IceCream newIceCream)
     {
-        var maxId = list.Max(p => p.Id);
+        var maxId = list.Any() ? list.Max(p => p.Id) : 0;
         newIceCream.Id = maxId + 1;
         list.Add(newIceCream);
-          //  return newIceCream;
     }
 
     public void Update(int id, IceCream newIceCream)
     {
-        var Ice = find(id);
-        if(Ice == null)
-       // return 1;
-
-        if(Ice.Id != newIceCream.Id)
-       // return 2;
-
-        var index = list.IndexOf(Ice);
+        var index = list.FindIndex(p => p.Id == id);
+        if (index == -1) return;
+        newIceCream.Id = id;
         list[index] = newIceCream;
-
-       // return 3;
     }
 
+    public void Update(IceCream newIceCream)
+    {
+        var id = newIceCream?.Id ?? 0;
+        var index = list.FindIndex(p => p.Id == id);
+        if (index == -1) return;
+        // Ensure the id remains the same
+        newIceCream.Id = id;
+        list[index] = newIceCream;
+    }
 
     public void Delete(int id)
     {
-        var Ice= find(id);
-        if(Ice!=null)
-            list.Remove(Ice);
-             //return false;
-        //return true;
+        var item = Get(id);
+        if (item != null) list.Remove(item);
     }
 
     public int Count => list.Count;
 }
-public static class IceCreamExtension{
+
+public static class IceCreamExtension
+{
     public static void AddIceCreamService(this IServiceCollection services)
     {
         services.AddSingleton<IICService, IceCreamService>();
-        //services.AddScope<IOrderManager, OrderManager>();
-        //services.AddTransient<IOrderSender, OrderSenderHttp>();            
     }
 
+    public int Count => list.Count;
 }
+
+
 

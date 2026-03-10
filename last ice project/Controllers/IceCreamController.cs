@@ -4,6 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using IceCreamNamespace.Models;
 using IceCreamNamespace.Services;
 using IceCreamService.interfaces;
+using System.Collections.Generic;
 
 namespace IceCreamNamespace.Controllers;
 
@@ -11,7 +12,7 @@ namespace IceCreamNamespace.Controllers;
 [Route("[controller]")]
 public class IceCreamController : ControllerBase
 {  
-   IICService services;
+   private readonly IICService services;
     public IceCreamController(IICService Iceservices)
     {
         this.services=Iceservices;
@@ -20,7 +21,7 @@ public class IceCreamController : ControllerBase
     [HttpGet()]
     public ActionResult<IEnumerable<IceCream>> Get()
     {
-        return services.Get();
+        return services.GetAll();
     }
 
     [HttpGet("{id}")]
@@ -36,9 +37,8 @@ public class IceCreamController : ControllerBase
     [HttpPost]
     public IActionResult Create(IceCream newIceCream)
     {
-       // var postedIceCream = services.Create(newIceCream);
-      services.Add(newIceCream);
-       return CreatedAtAction(nameof(Create), new { id = newIceCream.Id }, newIceCream);
+       services.Add(newIceCream);
+       return CreatedAtAction(nameof(Get), new { id = newIceCream.Id }, newIceCream);
     }
 
     [HttpPut("{id}")]
@@ -66,9 +66,9 @@ public class IceCreamController : ControllerBase
             return NotFound();
         services.Delete(id);
 
-        return Content(services.count.ToString());
+        return Content(services.Count.ToString());
 
     }
 }
- 
+
 

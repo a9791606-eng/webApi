@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
 using IceCreamNamespace.Models;
 using IceCreamNamespace.Services;
 using IceCreamService.interfaces;
@@ -11,63 +10,58 @@ namespace IceCreamNamespace.Controllers;
 [ApiController]
 [Route("user")]
 public class UsersController : ControllerBase
-{  
-   IUserService services;
+{
+    private readonly IUserService services;
     public UsersController(IUserService Userservices)
     {
-        this.services=Userservices;
+        this.services = Userservices;
     }
 
     [HttpGet()]
-    public ActionResult<IEnumerable<IceCream>> Get()
+    public ActionResult<IEnumerable<User>> Get()
     {
         return services.Get();
     }
 
     [HttpGet("{id}")]
-    public ActionResult<IceCream> Get(int id)
+    public ActionResult<User> Get(int id)
     {
-        var IceCream = services.Get(id);
-        if(IceCream==null)
+        var user = services.Get(id);
+        if (user == null)
             return NotFound();
-        return IceCream;
-
+        return user;
     }
 
     [HttpPost]
-    public IActionResult Create(IceCream newIceCream)
+    public IActionResult Create(User newUser)
     {
-      
-      services.Add(newIceCream);
-       return CreatedAtAction(nameof(Create), new { id = newIceCream.Id }, newIceCream);
+        var created = services.Create(newUser);
+        return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id, IceCream newIceCream)
+    public IActionResult Update(int id, User newUser)
     {
-        if (id != newIceCream.Id)
+        if (id != newUser.Id)
             return BadRequest();
 
-        var existingIceCream = services.Get(id);
-        if (existingIceCream is null)
+        var existing = services.Get(id);
+        if (existing is null)
             return NotFound();
 
-       services.Update(newIceCream);
-
-       return NoContent();
-
+        services.Update(id, newUser);
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var ice = services.Get(id);
-
-        if (ice is null )
+        var user = services.Get(id);
+        if (user is null)
             return NotFound();
+
         services.Delete(id);
-
-        return Content(services.count.ToString());
-
+        var remaining = services.Get().Count;
+        return Content(remaining.ToString());
     }
 }
