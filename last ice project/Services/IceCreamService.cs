@@ -5,24 +5,23 @@ using IceCreamService.interfaces;
 
 namespace IceCreamNamespace.Services;
 
-    public  class IceCreamService : IICService
-    {
-      
-     private List<IceCream> list;
+public  class IceCreamService : IICService
+{
+    private List<IceCream> list;
 
     public IceCreamService()
     {
         this.list = new List<IceCream>{
-             new IceCream { Id = 1, Name = "vanilla",isGloutenFree=true},
-             new IceCream { Id = 2, Name = "strawberry",isGloutenFree=true},
-             new IceCream { Id = 3, Name = "chocolate",isGloutenFree=true},
-             new IceCream { Id = 4, Name = "Pistachio",isGloutenFree=false} 
+            new IceCream { Id = 1, Name = "vanilla",isGloutenFree=true},
+            new IceCream { Id = 2, Name = "strawberry",isGloutenFree=true},
+            new IceCream { Id = 3, Name = "chocolate",isGloutenFree=true},
+            new IceCream { Id = 4, Name = "Pistachio",isGloutenFree=false} 
         };
     }
-   
-   
 
-    public List<IceCream> Get()
+
+
+    public List<IceCream> GetAll()
     {
         return list;
     }
@@ -33,51 +32,50 @@ namespace IceCreamNamespace.Services;
 
     }
 
-    public IceCream Get(int id) => find(id);
+    public IceCream GetAll(int id) => find(id);
 
-    public IceCream Create(IceCream newIceCream)
+    public void Add(IceCream newIceCream)
     {
         var maxId = list.Max(p => p.Id);
         newIceCream.Id = maxId + 1;
         list.Add(newIceCream);
-            return newIceCream;
+          //  return newIceCream;
     }
 
-    public int Update(int id, IceCream newIceCream)
+    public void Update(int id, IceCream newIceCream)
     {
         var Ice = find(id);
         if(Ice == null)
-          return 1;
+       // return 1;
 
         if(Ice.Id != newIceCream.Id)
-           return 2;
+       // return 2;
 
         var index = list.IndexOf(Ice);
         list[index] = newIceCream;
 
-        return 3;
+       // return 3;
     }
 
-   
-    public bool Delete(int id)
+
+    public void Delete(int id)
     {
-         var Ice= find(id);
-        if(Ice==null)
-            return false;
-        list.Remove(Ice);
-        return true;
+        var Ice= find(id);
+        if(Ice!=null)
+            list.Remove(Ice);
+             //return false;
+        //return true;
     }
+
+    public int Count => list.Count;
 }
-    public static class IceCreamExtension{
-      public static void AddIceCreamService(this IServiceCollection services)
-        {
-            services.AddSingleton<IICService, IceCreamService>();
-            //services.AddScope<IOrderManager, OrderManager>();
-            //services.AddTransient<IOrderSender, OrderSenderHttp>();            
-        }
-
-
-
+public static class IceCreamExtension{
+    public static void AddIceCreamService(this IServiceCollection services)
+    {
+        services.AddSingleton<IICService, IceCreamService>();
+        //services.AddScope<IOrderManager, OrderManager>();
+        //services.AddTransient<IOrderSender, OrderSenderHttp>();            
+    }
 
 }
 
