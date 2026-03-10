@@ -1,25 +1,79 @@
+/* Pastel summer theme for IceCream shop */
+:root{
+    --bg: #FFF8F3;
+    --card: #FFF3E8;
+    --accent: #FF9AA2; /* pastel pink */
+    --accent2: #FFD6A5; /* pastel peach */
+    --muted: #6B6B6B;
+    --accent-contrast: #FFFFFF;
+}
+
+html,body{height:100%;}
+body{
+    background: linear-gradient(180deg, #FFFDF9 0%, var(--bg) 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--muted);
+    padding: 24px;
+    margin:0;
+}
+
+.container{ max-width:1100px; margin:0 auto; }
+
+h1{ color: #FF6B81; margin:0 0 8px 0 }
+h3{ color:#FF6B81; margin:6px 0 }
+
+/* Buttons and small controls */
 input[type='submit'],
 button,
 [aria-label] {
     cursor: pointer;
+    font-weight:600;
 }
+button{
+    background: linear-gradient(90deg,var(--accent),var(--accent2));
+    border: none; color:var(--accent-contrast); padding:8px 12px; border-radius:999px; cursor:pointer;
+    box-shadow: 0 6px 14px rgba(255,107,129,0.18);
+}
+.button.ghost{ background:transparent; color:var(--accent); border:1px solid rgba(255,107,129,0.12); box-shadow:none }
+/* Edit form hidden by default */
+#editForm { display: none; margin-top:12px; }
+/* Card grid */
+.grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap:18px;
+    margin-top:18px;
+}
+.card{
+    background: linear-gradient(180deg, var(--card), #FFFFFF);
+    border-radius:14px;
+    padding:14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    transition: transform .18s ease, box-shadow .18s ease;
+    min-height:110px;
+    display:flex; flex-direction:column; justify-content:space-between;
+}
+.card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.08); }
+.card h4{ margin:6px 0 10px 0; color:#FF6B81; font-size:1.05rem }
+.card p{ margin:0; font-size:0.95rem }
+.actions{ margin-top:12px; display:flex; gap:8px }
 
-#editForm {
-    display: none;
-}
+/* Form styling */
+.form-row{ display:flex; gap:8px; align-items:center; margin-top:12px }
+input[type='text']{ padding:8px 10px; border-radius:8px; border:1px solid #F0E6E6; }
+label{ font-size:0.95rem }
 
-table {
-    font-family: Arial, sans-serif;
-    border: 1px solid;
-    border-collapse: collapse;
-}
+#counter{ font-weight:600; color:#FF6B81; margin-top:10px }
 
-th {
-    background-color: #f8f8f8;
-    padding: 5px;
-}
+/* fallback table hidden in modern UI */
+table{ display:none }
 
-td {
-    border: 1px solid;
-    padding: 5px;
-}
+/* responsive */
+@media (max-width:480px){ .grid{ grid-template-columns:1fr } .form-row{ flex-direction:column; align-items:stretch } }
+
+/* Accessibility and small touches */
+a{ color:var(--accent); text-decoration:none }
+a:hover{ text-decoration:underline }
+/* legacy minimal styles preserved */
+th { background-color: #f8f8f8; padding: 5px; }
+td { border: 1px solid; padding: 5px; }

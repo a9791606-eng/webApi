@@ -1,20 +1,32 @@
 const uri = '/IceCream';
 let pizzas = [];
 
+const fallbackData = [
+    { Id: 1, Name: 'chocolate', IsGlutenFree: true },
+    { Id: 2, Name: 'Pistachio', IsGlutenFree: false },
+    { Id: 3, Name: 'hghg', IsGlutenFree: false },
+    { Id: 4, Name: 'hgrfg', IsGlutenFree: false },
+    { Id: 5, Name: 'fgf', IsGlutenFree: false }
+];
+
 function getItems() {
     fetch(uri)
-        .then(response => response.json())
+     .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
         .then(data => _displayItems(data))
-        .catch(error => console.error('Unable to get items.', error));
+         .catch(error => {
+            console.warn('Unable to get items from server, using fallback data.', error);
+            _displayItems(fallbackData);
+        });
 }
 
 function addItem() {
     const addNameTextbox = document.getElementById('add-name');
-
-    const item = {
-        isGlutenFree: false,
-        name: addNameTextbox.value.trim()
-    };
+    const name = addNameTextbox.value.trim();
+    if (!name) return;
+     const itemPayload = { Name: name, IsGlutenFree: false };
 
     fetch(uri, {
             method: 'POST',
@@ -22,39 +34,64 @@ function addItem() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(item)
+                body: JSON.stringify(itemPayload)
         })
-        .then(response => response.json())
-        .then(() => {
-            getItems();
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to add');
+            return response.json().catch(() => null);
+        })
+        .then(created => {
+            if (created) {
+                // server returned created item
+                getItems();
+            } else {
+                // server didn't return body (or unreachable) — update locally
+                const maxId = pizzas.length ? Math.max(...pizzas.map(p => p.Id || p.id)) : 0;
+                const newItem = { Id: maxId + 1, Name: name, IsGlutenFree: false };
+                pizzas.push(newItem);
+                _displayItems(pizzas);
+            }
             addNameTextbox.value = '';
         })
-        .catch(error => console.error('Unable to add item.', error));
+          .catch(error => {
+            console.warn('Unable to add item to server, adding locally.', error);
+            const maxId = pizzas.length ? Math.max(...pizzas.map(p => p.Id || p.id)) : 0;
+            const newItem = { Id: maxId + 1, Name: name, IsGlutenFree: false };
+            pizzas.push(newItem);
+            _displayItems(pizzas);
+            addNameTextbox.value = '';
+        });
 }
 
 function deleteItem(id) {
-    fetch(`${uri}/${id}`, {
-            method: 'DELETE'
+     fetch(`${uri}/${id}`, { method: 'DELETE' })
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to delete');
+            return response;
         })
         .then(() => getItems())
-        .catch(error => console.error('Unable to delete item.', error));
+        .catch(error => {
+            console.warn('Unable to delete on server, removing locally.', error);
+            pizzas = pizzas.filter(p => (p.Id || p.id) !== id);
+            _displayItems(pizzas);
+        });
 }
 
 function displayEditForm(id) {
-    const item = pizzas.find(item => item.id === id);
-
-    document.getElementById('edit-name').value = item.name;
-    document.getElementById('edit-id').value = item.id;
-    document.getElementById('edit-isGlutenFree').checked = item.isGlutenFree;
+     const item = pizzas.find(it => (it.id || it.Id) === id);
+    if (!item) return;
+      document.getElementById('edit-name').value = item.Name || item.name || '';
+    document.getElementById('edit-id').value = item.Id || item.id;
+    document.getElementById('edit-isGlutenFree').checked = (item.IsGlutenFree !== undefined) ? item.IsGlutenFree : item.isGlutenFree;
     document.getElementById('editForm').style.display = 'block';
 }
 
 function updateItem() {
-    const itemId = document.getElementById('edit-id').value;
+     const itemId = parseInt(document.getElementById('edit-id').value, 10);
     const item = {
-        id: parseInt(itemId, 10),
-        isGlutenFree: document.getElementById('edit-isGlutenFree').checked,
-        name: document.getElementById('edit-name').value.trim()
+            Id: itemId,
+        Name: document.getElementById('edit-name').value.trim(),
+        IsGlutenFree: document.getElementById('edit-isGlutenFree').checked
     };
 
     fetch(`${uri}/${itemId}`, {
@@ -65,17 +102,23 @@ function updateItem() {
             },
             body: JSON.stringify(item)
         })
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to update');
+            return response;
+        })
         .then(() => getItems())
-        .catch(error => console.error('Unable to update item.', error));
+        .catch(error => {
+            console.warn('Unable to update on server, updating locally.', error);
+            const idx = pizzas.findIndex(p => (p.Id || p.id) === itemId);
+            if (idx !== -1) pizzas[idx] = item;
+            _displayItems(pizzas);
+        });
 
     closeInput();
 
     return false;
 }
-
-function closeInput() {
-    document.getElementById('editForm').style.display = 'none';
-}
+function closeInput() { document.getElementById('editForm').style.display = 'none'; }
 
 function _displayCount(itemCount) {
     const name = (itemCount === 1) ? 'iceCream' : 'iceCream kinds';
@@ -84,42 +127,32 @@ function _displayCount(itemCount) {
 }
 
 function _displayItems(data) {
-    const tBody = document.getElementById('iceCream');
-    tBody.innerHTML = '';
-
-    _displayCount(data.length);
-
-    const button = document.createElement('button');
-
-    data.forEach(item => {
-        let isGlutenFreeCheckbox = document.createElement('input');
-        isGlutenFreeCheckbox.type = 'checkbox';
-        isGlutenFreeCheckbox.disabled = true;
-        isGlutenFreeCheckbox.checked = item.isGlutenFree;
-
-        let editButton = button.cloneNode(false);
-        editButton.innerText = 'Edit';
-        editButton.setAttribute('onclick', `displayEditForm(${item.id})`);
-
-        let deleteButton = button.cloneNode(false);
-        deleteButton.innerText = 'Delete';
-        deleteButton.setAttribute('onclick', `deleteItem(${item.id})`);
-
-        let tr = tBody.insertRow();
-
-        let td1 = tr.insertCell(0);
-        td1.appendChild(isGlutenFreeCheckbox);
-
-        let td2 = tr.insertCell(1);
-        let textNode = document.createTextNode(item.name);
-        td2.appendChild(textNode);
-
-        let td3 = tr.insertCell(2);
-        td3.appendChild(editButton);
-
-        let td4 = tr.insertCell(3);
-        td4.appendChild(deleteButton);
-    });
-
-    pizzas = data;
-}
+       // normalize incoming items to Id/Name/IsGlutenFree
+    pizzas = data.map(d => ({ Id: d.Id || d.id, Name: d.Name || d.name, IsGlutenFree: (d.IsGlutenFree !== undefined) ? d.IsGlutenFree : d.isGlutenFree }));
+    const grid = document.getElementById('iceCreamGrid');
+    grid.innerHTML = '';
+ _displayCount(pizzas.length);
+  pizzas.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+         const title = document.createElement('h4');
+        title.innerText = item.Name;
+        card.appendChild(title);
+const desc = document.createElement('p');
+        desc.innerText = item.IsGlutenFree ? 'Gluten free' : 'Contains gluten';
+        card.appendChild(desc);
+         const actions = document.createElement('div');
+        actions.className = 'actions';
+         const editBtn = document.createElement('button');
+        editBtn.className = 'button ghost';
+        editBtn.innerText = 'Edit';
+        editBtn.onclick = () => displayEditForm(item.Id);
+         const delBtn = document.createElement('button');
+        delBtn.className = 'button';
+        delBtn.innerText = 'Delete';
+        delBtn.onclick = () => deleteItem(item.Id);
+        actions.appendChild(editBtn);
+        actions.appendChild(delBtn);
+        card.appendChild(actions);
+         grid.appendChild(card);
+    });}
