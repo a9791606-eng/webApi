@@ -1,4 +1,3 @@
-
 using IceCreamNamespace.Services;
 using IceCreamService.interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,6 +5,12 @@ using Microsoft.AspNetCore.Builder;
 using MyMiddleware;
 var builder = WebApplication.CreateBuilder(args);
 
+// Ensure Kestrel listens on the development HTTPS and HTTP ports configured in launchSettings
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenLocalhost(7274, listenOptions => listenOptions.UseHttps()); // HTTPS
+    options.ListenLocalhost(5089); // HTTP
+});
 
 builder.Services.AddIceCreamService();
 builder.Services.AddUserService();

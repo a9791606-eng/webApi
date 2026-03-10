@@ -8,10 +8,9 @@ namespace IceCreamService.interfaces;
     public interface IICService
     {
      List<IceCream> GetAll();
-   
      IceCream Get(int id);
      void Add(IceCream newIceCream);
-     void Update(int id, IceCream newIceCream);
+     void Update(IceCream newIceCream);
      void Delete(int id);
      int Count {get;}
     }

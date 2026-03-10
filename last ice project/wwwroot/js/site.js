@@ -22,9 +22,12 @@ function addItem() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(item)
+            body: JSON.stringify({ Name: item.name, IsGlutenFree: item.isGlutenFree })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to add');
+            return response.json().catch(() => {});
+        })
         .then(() => {
             getItems();
             addNameTextbox.value = '';
@@ -53,8 +56,8 @@ function updateItem() {
     const itemId = document.getElementById('edit-id').value;
     const item = {
         id: parseInt(itemId, 10),
-        isGlutenFree: document.getElementById('edit-isGlutenFree').checked,
-        name: document.getElementById('edit-name').value.trim()
+        IsGlutenFree: document.getElementById('edit-isGlutenFree').checked,
+        Name: document.getElementById('edit-name').value.trim()
     };
 
     fetch(`${uri}/${itemId}`, {
@@ -84,41 +87,41 @@ function _displayCount(itemCount) {
 }
 
 function _displayItems(data) {
-    const tBody = document.getElementById('iceCream');
-    tBody.innerHTML = '';
+    const grid = document.getElementById('iceCreamGrid');
+    grid.innerHTML = '';
 
     _displayCount(data.length);
 
-    const button = document.createElement('button');
-
     data.forEach(item => {
-        let isGlutenFreeCheckbox = document.createElement('input');
-        isGlutenFreeCheckbox.type = 'checkbox';
-        isGlutenFreeCheckbox.disabled = true;
-        isGlutenFreeCheckbox.checked = item.isGlutenFree;
+        const card = document.createElement('div');
+        card.className = 'card';
 
-        let editButton = button.cloneNode(false);
-        editButton.innerText = 'Edit';
-        editButton.setAttribute('onclick', `displayEditForm(${item.id})`);
+        const title = document.createElement('h4');
+        title.innerText = item.name || item.Name;
+        card.appendChild(title);
 
-        let deleteButton = button.cloneNode(false);
-        deleteButton.innerText = 'Delete';
-        deleteButton.setAttribute('onclick', `deleteItem(${item.id})`);
+        const desc = document.createElement('p');
+        desc.innerText = item.isGlutenFree ? 'Gluten free' : 'Contains gluten';
+        card.appendChild(desc);
 
-        let tr = tBody.insertRow();
+        const actions = document.createElement('div');
+        actions.className = 'actions';
 
-        let td1 = tr.insertCell(0);
-        td1.appendChild(isGlutenFreeCheckbox);
+        const editBtn = document.createElement('button');
+        editBtn.className = 'button ghost';
+        editBtn.innerText = 'Edit';
+        editBtn.onclick = () => displayEditForm(item.id || item.Id);
 
-        let td2 = tr.insertCell(1);
-        let textNode = document.createTextNode(item.name);
-        td2.appendChild(textNode);
+        const delBtn = document.createElement('button');
+        delBtn.className = 'button';
+        delBtn.innerText = 'Delete';
+        delBtn.onclick = () => deleteItem(item.id || item.Id);
 
-        let td3 = tr.insertCell(2);
-        td3.appendChild(editButton);
+        actions.appendChild(editBtn);
+        actions.appendChild(delBtn);
+        card.appendChild(actions);
 
-        let td4 = tr.insertCell(3);
-        td4.appendChild(deleteButton);
+        grid.appendChild(card);
     });
 
     pizzas = data;
