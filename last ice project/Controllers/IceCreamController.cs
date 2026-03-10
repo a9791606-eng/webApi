@@ -4,6 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using IceCreamNamespace.Models;
 using IceCreamNamespace.Services;
 using IceCreamService.interfaces;
+using System.Collections.Generic;
 
 namespace IceCreamNamespace.Controllers;
 
@@ -11,7 +12,7 @@ namespace IceCreamNamespace.Controllers;
 [Route("[controller]")]
 public class IceCreamController : ControllerBase
 {  
-   IICService services;
+   private readonly IICService services;
     public IceCreamController(IICService Iceservices)
     {
         this.services=Iceservices;
@@ -20,66 +21,54 @@ public class IceCreamController : ControllerBase
     [HttpGet()]
     public ActionResult<IEnumerable<IceCream>> Get()
     {
-        return services.Get();
+        return services.GetAll();
     }
 
     [HttpGet("{id}")]
     public ActionResult<IceCream> Get(int id)
     {
-        var m = services.Get(id);
-        if(m==null)
+        var IceCream = services.Get(id);
+        if(IceCream==null)
             return NotFound();
-        return m;
+        return IceCream;
 
     }
 
     [HttpPost]
-    public ActionResult Create(IceCream newIceCream)
+    public IActionResult Create(IceCream newIceCream)
     {
-        var postedIceCream = services.Create(newIceCream);
-      
-       return CreatedAtAction(nameof(Create), new { id = postedIceCream.Id });
+       services.Add(newIceCream);
+       return CreatedAtAction(nameof(Get), new { id = newIceCream.Id }, newIceCream);
     }
 
     [HttpPut("{id}")]
-    public ActionResult Update(int id, IceCream newIceCream)
+    public IActionResult Update(int id, IceCream newIceCream)
     {
-        var ans= services.Update( id, newIceCream);
-      
-        if(ans==1)
-          return NotFound();
+        if (id != newIceCream.Id)
+            return BadRequest();
 
-        if(ans==2)
-           return BadRequest();
+        var existingIceCream = services.Get(id);
+        if (existingIceCream is null)
+            return NotFound();
 
-       
-        return NoContent();
+       services.Update(newIceCream);
+
+       return NoContent();
 
     }
 
     [HttpDelete("{id}")]
-    public ActionResult Delete(int id)
+    public IActionResult Delete(int id)
     {
-        var ans= services.Delete(id);
-      
-        if(ans==false)
+        var ice = services.Get(id);
+
+        if (ice is null )
             return NotFound();
-        return NoContent();
+        services.Delete(id);
+
+        return Content(services.Count.ToString());
 
     }
 }
- 
-//     [HttpDelete("{id}")]
-//     public ActionResult Delete(int id)
-//     {
-//         var Ice = find(id);
-//         if (Ice == null)
-//             return NotFound();
-//         else
-//         {
-//             services.Remove(Ice);
-//         }  
-//          return NoContent();  
-        
-//     }
-// }
+
+
