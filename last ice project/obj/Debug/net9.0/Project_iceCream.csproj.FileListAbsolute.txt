@@ -155,3 +155,15 @@ Z:\יד תשפו\פפנהיים אילה\זילברברג\last ice project\obj\D
 Z:\יד תשפו\פפנהיים אילה\זילברברג\last ice project\bin\Debug\net9.0\Data\IceCream.json
 Z:\יד תשפו\פפנהיים אילה\זילברברג\last ice project\obj\Debug\net9.0\compressed\69xq3s99r4-k284hnpdqu.gz
 Z:\יד תשפו\פפנהיים אילה\זילברברג\last ice project\obj\Debug\net9.0\compressed\oz9lk1b6tf-e1pfucwlq6.gz
+C:\Users\huser\Documents\GitHub\webApi\last ice project\obj\Debug\net9.0\Project_iceCream.csproj.AssemblyReference.cache
+C:\Users\huser\Documents\GitHub\webApi\last ice project\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\huser\Documents\GitHub\webApi\last ice project\obj\Debug\net9.0\Project_iceCream.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\huser\Documents\GitHub\webApi\last ice project\obj\Debug\net9.0\Project_iceCream.AssemblyInfoInputs.cache
+C:\Users\huser\Documents\GitHub\webApi\last ice project\obj\Debug\net9.0\Project_iceCream.AssemblyInfo.cs
+C:\Users\huser\Documents\GitHub\webApi\last ice project\obj\Debug\net9.0\Project_iceCream.csproj.CoreCompileInputs.cache
+C:\Users\huser\Documents\GitHub\webApi\last ice project\obj\Debug\net9.0\Project_iceCream.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\huser\Documents\GitHub\webApi\last ice project\obj\Debug\net9.0\Project_iceCream.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\huser\Documents\GitHub\webApi\last ice project\obj\Debug\net9.0\Project_iceCream.sourcelink.json
+C:\Users\huser\Documents\GitHub\webApi\last ice project\obj\Debug\net9.0\Project_iceCream.dll
+C:\Users\huser\Documents\GitHub\webApi\last ice project\obj\Debug\net9.0\refint\Project_iceCream.dll
+C:\Users\huser\Documents\GitHub\webApi\last ice project\obj\Debug\net9.0\Project_iceCream.pdb

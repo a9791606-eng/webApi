@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "B89hDn88JUs=",
+  "dgSpecHash": "bzPJivOIOjY=",
   "success": true,
-  "projectFilePath": "Z:\\יד תשפו\\פפנהיים אילה\\זילברברג\\last ice project\\Project_iceCream.csproj",
+  "projectFilePath": "C:\\Users\\huser\\Documents\\GitHub\\webApi\\last ice project\\Project_iceCream.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\huser\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.0\\microsoft.aspnetcore.openapi.10.0.0.nupkg.sha512",
     "C:\\Users\\huser\\.nuget\\packages\\microsoft.extensions.apidescription.server\\9.0.0\\microsoft.extensions.apidescription.server.9.0.0.nupkg.sha512",
@@ -17,8 +17,10 @@
     {
       "code": "NU1603",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Project_iceCream depends on Microsoft.AspNetCore.OpenApi (>= 9.0.101) but Microsoft.AspNetCore.OpenApi 9.0.101 was not found. Microsoft.AspNetCore.OpenApi 10.0.0 was resolved instead.",
+      "projectPath": "C:\\Users\\huser\\Documents\\GitHub\\webApi\\last ice project\\Project_iceCream.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\huser\\Documents\\GitHub\\webApi\\last ice project\\Project_iceCream.csproj",
       "libraryId": "Microsoft.AspNetCore.OpenApi",
       "targetGraphs": [
         "net9.0"
