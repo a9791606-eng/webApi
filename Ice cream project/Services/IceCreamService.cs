@@ -1,7 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography.X509Certificates;
+
 using IceCreamNamespace.Models;
 using IceCreamService.interfaces;
+using IceCreamProject.Interfaces;
+using Microsoft.AspNetCore.SignalR;
+using IceCreamProject.Hubs;
+using IceCreamProject.Interfaces;
+using IceCreamProject.Services;
 
 namespace IceCreamNamespace.Services;
 
@@ -19,7 +23,23 @@ namespace IceCreamNamespace.Services;
              new IceCream { Id = 4, Name = "Pistachio",isGloutenFree=false} 
         };
     }
-   
+   private readonly IHubContext<ActivityHub> hubContext;
+        private readonly IIceCreamRepository repository;
+        private readonly IRabbitMqService rabbitMqService;
+        private readonly int activeUserId;
+        private readonly string activeUsername;
+
+        public IceCreamService(IIceCreamRepository repository, IActiveUser activeUser, IHubContext<ActivityHub> hubContext, IRabbitMqService rabbitMqService)
+        {
+            this.repository = repository;
+            this.hubContext = hubContext;
+            this.rabbitMqService = rabbitMqService;
+            var user = activeUser.ActiveUser;
+            if (user is null)
+                throw new System.InvalidOperationException("Active user is required");
+            this.activeUserId = user.Id;
+            this.activeUsername = user.Username;
+        }
    
 
     public List<IceCream> Get()
@@ -68,7 +88,13 @@ namespace IceCreamNamespace.Services;
         return true;
     }
 }
-    public static class IceCreamExtension{
+
+public interface IActiveUser
+{
+    object ActiveUser { get; }
+}
+
+public static class IceCreamExtension{
       public static void AddIceCreamService(this IServiceCollection services)
         {
             services.AddSingleton<IICService, IceCreamService>();
