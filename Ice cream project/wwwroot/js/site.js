@@ -1,5 +1,5 @@
 const uri = '/IceCream';
-let pizzas = [];
+let iceCreams = [];
 
 const fallbackData = [
     { Id: 1, Name: 'chocolate', IsGlutenFree: true },
@@ -46,19 +46,19 @@ function addItem() {
                 getItems();
             } else {
                 // server didn't return body (or unreachable) — update locally
-                const maxId = pizzas.length ? Math.max(...pizzas.map(p => p.Id || p.id)) : 0;
+                const maxId = iceCreams.length ? Math.max(...iceCreams.map(p => p.Id || p.id)) : 0;
                 const newItem = { Id: maxId + 1, Name: name, IsGlutenFree: false };
-                pizzas.push(newItem);
-                _displayItems(pizzas);
+                iceCreams.push(newItem);
+                _displayItems(iceCreams);
             }
             addNameTextbox.value = '';
         })
           .catch(error => {
             console.warn('Unable to add item to server, adding locally.', error);
-            const maxId = pizzas.length ? Math.max(...pizzas.map(p => p.Id || p.id)) : 0;
+            const maxId = iceCreams.length ? Math.max(...iceCreams.map(p => p.Id || p.id)) : 0;
             const newItem = { Id: maxId + 1, Name: name, IsGlutenFree: false };
-            pizzas.push(newItem);
-            _displayItems(pizzas);
+            iceCreams.push(newItem);
+            _displayItems(iceCreams);
             addNameTextbox.value = '';
         });
 }
@@ -72,13 +72,13 @@ function deleteItem(id) {
         .then(() => getItems())
         .catch(error => {
             console.warn('Unable to delete on server, removing locally.', error);
-            pizzas = pizzas.filter(p => (p.Id || p.id) !== id);
-            _displayItems(pizzas);
+            iceCreams = iceCreams.filter(p => (p.Id || p.id) !== id);
+            _displayItems(iceCreams);
         });
 }
 
 function displayEditForm(id) {
-     const item = pizzas.find(it => (it.id || it.Id) === id);
+     const item = iceCreams.find(it => (it.id || it.Id) === id);
     if (!item) return;
       document.getElementById('edit-name').value = item.Name || item.name || '';
     document.getElementById('edit-id').value = item.Id || item.id;
@@ -109,9 +109,9 @@ function updateItem() {
         .then(() => getItems())
         .catch(error => {
             console.warn('Unable to update on server, updating locally.', error);
-            const idx = pizzas.findIndex(p => (p.Id || p.id) === itemId);
-            if (idx !== -1) pizzas[idx] = item;
-            _displayItems(pizzas);
+            const idx = iceCreams.findIndex(p => (p.Id || p.id) === itemId);
+            if (idx !== -1) iceCreams[idx] = item;
+            _displayItems(iceCreams);
         });
 
     closeInput();
@@ -128,11 +128,11 @@ function _displayCount(itemCount) {
 
 function _displayItems(data) {
        // normalize incoming items to Id/Name/IsGlutenFree
-    pizzas = data.map(d => ({ Id: d.Id || d.id, Name: d.Name || d.name, IsGlutenFree: (d.IsGlutenFree !== undefined) ? d.IsGlutenFree : d.isGlutenFree }));
+    iceCreams = data.map(d => ({ Id: d.Id || d.id, Name: d.Name || d.name, IsGlutenFree: (d.IsGlutenFree !== undefined) ? d.IsGlutenFree : d.isGlutenFree }));
     const grid = document.getElementById('iceCreamGrid');
     grid.innerHTML = '';
- _displayCount(pizzas.length);
-  pizzas.forEach(item => {
+ _displayCount(iceCreams.length);
+  iceCreams.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
          const title = document.createElement('h4');

@@ -57,7 +57,7 @@ namespace IceCreamProject.Services
         }
     }
 
-    public static partial class KsPizzaExtensions
+    public static partial class UserExtension
     {
         public static IServiceCollection AddRabbitMq(this IServiceCollection services)
         {

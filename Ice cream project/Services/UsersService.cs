@@ -14,10 +14,10 @@ namespace IceCreamNamespace.Services;
     public UsersService()
     {
         this.list = new List<User>{
-             new User { Id = 1, FirstName = "Dan",LastName="aaa"},
-             new User { Id = 2, FirstName = "Avi",LastName="bbb"},
-             new User { Id = 3, FirstName = "Yehuda",LastName="ccc"},
-             new User { Id = 4, FirstName = "Roni",LastName="ddd"} 
+             new User { Id = 1, Username = "Dan",Password="aaa"},
+             new User { Id = 2, Username = "Avi",Password="bbb"},
+             new User { Id = 3, Username = "Yehuda",Password="ccc"},
+             new User { Id = 4, Username = "Roni",Password="ddd"} 
         };
     }
    
@@ -75,13 +75,7 @@ namespace IceCreamNamespace.Services;
             services.AddSingleton<IUserService, UsersService>();          
         }
 
-//  public static class IceCreamExtension{
-//       public static void AddIceCreamService(this IServiceCollection services)
-//         {
-//             services.AddSingleton<IICService, IceCreamService>();
-//             //services.AddScope<IOrderManager, OrderManager>();
-//             //services.AddTransient<IOrderSender, OrderSenderHttp>();            
-//         }
+
 
 
 }
