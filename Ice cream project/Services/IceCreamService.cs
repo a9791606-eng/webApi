@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 using IceCreamProject.Hubs;
 using IceCreamProject.Interfaces;
 using IceCreamProject.Services;
+using IceCreamProject.Models;
 
 namespace IceCreamNamespace.Services;
 
@@ -63,22 +64,30 @@ namespace IceCreamNamespace.Services;
             return newIceCream;
     }
 
-    public int Update(int id, IceCream newIceCream)
+    public void Update(int id, IceCream newIceCream)
     {
-        var Ice = find(id);
-        if(Ice == null)
-          return 1;
+       var existing = repository.Get(newIceCream.Id);
+            if (existing?.UserId != activeUserId)
+                return;
 
-        if(Ice.Id != newIceCream.Id)
-           return 2;
-
-        var index = list.IndexOf(Ice);
-        list[index] = newIceCream;
-
-        return 3;
+            newIceCream.UserId = activeUserId;
+            repository.Update(newIceCream);
+            QueueActivityBroadcast(newIceCream);
     }
 
-   
+    private void QueueActivityBroadcast(IceCream newIceCream)
+    {
+       var message = new IceCreamUpdatedMessage
+            {
+                UserId = activeUserId,
+                Username = activeUsername,
+                IceCreamName = newIceCream.Name,
+                Timestamp = DateTime.UtcNow
+            };
+
+            rabbitMqService.PublishIceCreamUpdated(message).Wait();
+    }
+
     public bool Delete(int id)
     {
          var Ice= find(id);

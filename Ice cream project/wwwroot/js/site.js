@@ -10,16 +10,13 @@ const fallbackData = [
 ];
 
 function getItems() {
-    fetch(uri)
-     .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-        })
+    fetch(uri,{headers: {
+            'Authorization': `Bearer ${authToken}`
+        }
+    })
+        .then(response => response.json())
         .then(data => _displayItems(data))
-         .catch(error => {
-            console.warn('Unable to get items from server, using fallback data.', error);
-            _displayItems(fallbackData);
-        });
+        .catch(error => console.error('Unable to get items.', error));
 }
 
 function addItem() {
@@ -32,7 +29,8 @@ function addItem() {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken}`
             },
                 body: JSON.stringify(itemPayload)
         })
@@ -64,17 +62,14 @@ function addItem() {
 }
 
 function deleteItem(id) {
-     fetch(`${uri}/${id}`, { method: 'DELETE' })
-        .then(response => {
-            if (!response.ok) throw new Error('Failed to delete');
-            return response;
+     fetch(`${uri}/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
         })
         .then(() => getItems())
-        .catch(error => {
-            console.warn('Unable to delete on server, removing locally.', error);
-            iceCreams = iceCreams.filter(p => (p.Id || p.id) !== id);
-            _displayItems(iceCreams);
-        });
+        .catch(error => console.error('Unable to delete item.', error));
 }
 
 function displayEditForm(id) {
@@ -98,7 +93,8 @@ function updateItem() {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken}`
             },
             body: JSON.stringify(item)
         })
@@ -155,4 +151,25 @@ const desc = document.createElement('p');
         actions.appendChild(delBtn);
         card.appendChild(actions);
          grid.appendChild(card);
-    });}
+    });
+function initSignalR() {
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/activityHub", { accessTokenFactory: () => authToken })
+        .build();
+
+    connection.on("ReceiveActivity", function (username, action, pizzaName) {
+        const activityList = document.getElementById("activityList");
+        const li = document.createElement("li");
+        li.textContent = `${username} ${action} '${pizzaName}'`;
+        activityList.insertBefore(li, activityList.firstChild);
+
+        // Keep only last 10 activities
+        while (activityList.children.length > 10) {
+            activityList.removeChild(activityList.lastChild);
+        }
+    });
+
+    connection.start()
+        .then(() => console.log("SignalR connected"))
+        .catch(err => console.error("SignalR connection error:", err));
+}}
