@@ -1,59 +1,44 @@
 using System;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using IceCreamProject.Models;
-using Microsoft.Extensions.DependencyInjection;
-using RabbitMQ.Client;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace IceCreamProject.Services
 {
     public interface IRabbitMqService
     {
         Task PublishIceCreamUpdated(IceCreamUpdatedMessage message);
+        Task PublishLogAsync(object message);
     }
 
     public class RabbitMqService : IRabbitMqService, IDisposable
     {
-        private IConnection connection;
-        private IChannel channel;
-        private const string QueueName = "ice-cream-updates";
+        private readonly string filePath;
 
-        public RabbitMqService()
+        public RabbitMqService(IWebHostEnvironment env)
         {
-            InitializeAsync().GetAwaiter().GetResult();
-        }
-
-        private async System.Threading.Tasks.Task InitializeAsync()
-        {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            connection = await factory.CreateConnectionAsync();
-            channel = await connection.CreateChannelAsync();
-
-            // Declare queue (idempotent - creates if doesn't exist)
-            await channel.QueueDeclareAsync(
-                queue: QueueName,
-                durable: true,      // Survives broker restart
-                exclusive: false,
-                autoDelete: false,
-                arguments: null);
+            var dataDir = Path.Combine(env.ContentRootPath, "Data");
+            Directory.CreateDirectory(dataDir);
+            filePath = Path.Combine(dataDir, "rabbit_messages.jsonl");
         }
 
         public async Task PublishIceCreamUpdated(IceCreamUpdatedMessage message)
         {
             var json = JsonSerializer.Serialize(message);
-            var body = Encoding.UTF8.GetBytes(json);
+            await File.AppendAllTextAsync(filePath, json + Environment.NewLine);
+        }
 
-            await channel.BasicPublishAsync(
-                exchange: "",
-                routingKey: QueueName,
-                body: body);
+        public async Task PublishLogAsync(object message)
+        {
+            var json = JsonSerializer.Serialize(message);
+            await File.AppendAllTextAsync(filePath, json + Environment.NewLine);
         }
 
         public void Dispose()
         {
-            channel?.CloseAsync().Wait();
-            connection?.CloseAsync().Wait();
+            // nothing to dispose for file-based impl
         }
     }
 

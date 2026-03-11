@@ -14,9 +14,21 @@ function getItems() {
             'Authorization': `Bearer ${authToken}`
         }
     })
-        .then(response => response.json())
-        .then(data => _displayItems(data))
-        .catch(error => console.error('Unable to get items.', error));
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json().catch(() => null);
+        })
+        .then(data => {
+            if (!data || (Array.isArray(data) && data.length === 0)) {
+                _displayItems(fallbackData);
+            } else {
+                _displayItems(data);
+            }
+        })
+        .catch(error => {
+            console.error('Unable to get items.', error);
+            _displayItems(fallbackData);
+        });
 }
 
 function addItem() {

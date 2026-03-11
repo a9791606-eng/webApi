@@ -17,6 +17,28 @@ namespace IceCreamProject.Services
         public IceCreamRepository(IWebHostEnvironment webHost)
         {
             filePath = Path.Combine(webHost.ContentRootPath, "Data", "IceCream.json");
+
+            // ensure data folder exists
+            var dir = Path.GetDirectoryName(filePath);
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+
+            // if file missing or empty, create default seed data
+            if (!File.Exists(filePath) || string.IsNullOrWhiteSpace(File.ReadAllText(filePath)))
+            {
+                iceCreams = new List<IceCream>
+                {
+                    new IceCream { Id = 1, Name = "Vanilla", isGloutenFree = true, UserId = 1 },
+                    new IceCream { Id = 2, Name = "Strawberry", isGloutenFree = true, UserId = 1 },
+                    new IceCream { Id = 3, Name = "Chocolate", isGloutenFree = true, UserId = 1 },
+                    new IceCream { Id = 4, Name = "Pistachio", isGloutenFree = false, UserId = 1 }
+                };
+
+                Save();
+                return;
+            }
+
+            // otherwise load existing data
             using var jsonFile = File.OpenText(filePath);
             iceCreams = JsonSerializer.Deserialize<List<IceCream>>(jsonFile.ReadToEnd(),
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true })

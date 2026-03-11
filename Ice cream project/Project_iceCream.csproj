@@ -8,7 +8,7 @@
 
   <ItemGroup>
 
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.101" />
+    <!-- Removed Microsoft.AspNetCore.OpenApi to avoid source generator mismatch with installed SDK packages -->
 
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.16.0" />
 

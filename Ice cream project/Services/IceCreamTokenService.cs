@@ -36,18 +36,3 @@ namespace IceCreamProject.Services
             new JwtSecurityTokenHandler().WriteToken(token);
     }
 }
-
-
-    public class SecurityToken
-    {
-    }
-
-    internal class SymmetricSecurityKey
-    {
-        private byte[] bytes;
-
-        public SymmetricSecurityKey(byte[] bytes)
-        {
-            this.bytes = bytes;
-        }
-    }
