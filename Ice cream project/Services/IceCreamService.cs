@@ -5,8 +5,12 @@ using IceCreamProject.Interfaces;
 using Microsoft.AspNetCore.SignalR;
 using IceCreamProject.Hubs;
 using IceCreamProject.Interfaces;
-using IceCreamProject.Services;
 using IceCreamProject.Models;
+using IceCreamProject.Services;
+
+
+
+
 
 namespace IceCreamNamespace.Services;
 
@@ -38,8 +42,8 @@ namespace IceCreamNamespace.Services;
             var user = activeUser.ActiveUser;
             if (user is null)
                 throw new System.InvalidOperationException("Active user is required");
-            this.activeUserId = user.Id;
-            this.activeUsername = user.Username;
+          //  this.activeUserId = user.Id;
+         //   this.activeUsername = user.Username;
         }
    
 
@@ -95,6 +99,11 @@ namespace IceCreamNamespace.Services;
             return false;
         list.Remove(Ice);
         return true;
+    }
+
+    int IICService.Update(int id, IceCream newIceCream)
+    {
+        throw new NotImplementedException();
     }
 }
 

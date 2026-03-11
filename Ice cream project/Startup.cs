@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using IceCreamProject.Hubs;
 using IceCreamProject.Services;
 using Microsoft.OpenApi;
+using Microsoft.AspNetCore.OpenApi;
+
 
 namespace IceCreamProject
 {
@@ -64,8 +66,8 @@ namespace IceCreamProject
                     [new OpenApiSecuritySchemeReference("bearer", document)] = []
                 });
             });
-            services.AddIceCream();
-            services.AddUserService();
+           // services.AddIceCream();
+           // services.AddUserService();
             services.AddRabbitMq();
             services.AddSignalR();
         }

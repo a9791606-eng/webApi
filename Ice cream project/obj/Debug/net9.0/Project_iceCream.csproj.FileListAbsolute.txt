@@ -122,6 +122,3 @@ C:\Users\User\Documents\GitHub\webAPI\Ice cream project\obj\Debug\net9.0\Project
 C:\Users\User\Documents\GitHub\webAPI\Ice cream project\obj\Debug\net9.0\Project_iceCream.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\User\Documents\GitHub\webAPI\Ice cream project\obj\Debug\net9.0\Project_iceCream.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\User\Documents\GitHub\webAPI\Ice cream project\obj\Debug\net9.0\Project_iceCream.sourcelink.json
-C:\Users\User\Documents\GitHub\webAPI\Ice cream project\obj\Debug\net9.0\Project_iceCream.dll
-C:\Users\User\Documents\GitHub\webAPI\Ice cream project\obj\Debug\net9.0\refint\Project_iceCream.dll
-C:\Users\User\Documents\GitHub\webAPI\Ice cream project\obj\Debug\net9.0\Project_iceCream.pdb

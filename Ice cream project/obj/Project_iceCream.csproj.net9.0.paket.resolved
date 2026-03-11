@@ -1,0 +1,4 @@
+System.Text.Encodings.Web,10.0.4,Transitive,Main,false,true,false,true,,true
+System.IO.Pipelines,10.0.4,Transitive,Main,false,true,false,true,,true
+System.Text.Json,10.0.4,Transitive,Main,false,true,false,true,,true
+Microsoft.OpenApi,3.4,Direct,Main,false,true,false,true,,true

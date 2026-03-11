@@ -1,9 +1,6 @@
-using System;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using IceCreamProject.Models;
-using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
 
 namespace IceCreamProject.Services

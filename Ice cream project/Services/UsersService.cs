@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography.X509Certificates;
 using IceCreamNamespace.Models;
 using IceCreamService.interfaces;
+using IceCreamProject.Hubs;
+using IceCreamProject.Interfaces;
 
 
 namespace IceCreamNamespace.Services;

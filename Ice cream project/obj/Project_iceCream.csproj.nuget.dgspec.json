@@ -29,6 +29,12 @@
           }
         },
         "warningProperties": {
+          "noWarn": [
+            "NU1603",
+            "NU1604",
+            "NU1605",
+            "NU1608"
+          ],
           "warnAsError": [
             "NU1605"
           ]
@@ -46,11 +52,15 @@
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[9.0.101, )"
+              "version": "[10.0.4, )"
             },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[8.16.0, )"
+            },
+            "Microsoft.OpenApi": {
+              "target": "Package",
+              "version": "[3.4.0, )"
             },
             "RabbitMQ.Client": {
               "target": "Package",
@@ -60,9 +70,21 @@
               "target": "Package",
               "version": "[10.0.1, )"
             },
+            "System.IO.Pipelines": {
+              "target": "Package",
+              "version": "[10.0.4, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[8.16.0, )"
+            },
+            "System.Text.Encodings.Web": {
+              "target": "Package",
+              "version": "[10.0.4, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[10.0.4, )"
             }
           },
           "imports": [
