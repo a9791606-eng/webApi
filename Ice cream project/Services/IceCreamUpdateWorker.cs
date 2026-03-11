@@ -1,10 +1,9 @@
 using System;
+using System.IO;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using IceCreamProject.Hubs;
-using IceCreamProject.Models;
 using IceCreamProject.Hubs;
 using IceCreamProject.Models;
 using Microsoft.AspNetCore.SignalR;
@@ -17,8 +16,8 @@ namespace IceCreamProject.Services
     public class IceCreamUpdateWorker : BackgroundService
     {
         private readonly IHubContext<ActivityHub> hubContext;
-        private IConnection connection;
-        private IChannel channel;
+        private dynamic connection;
+        private dynamic channel;
         private const string QueueName = "ice-cream-updates";
 
         public IceCreamUpdateWorker(IHubContext<ActivityHub> hubContext)
@@ -28,53 +27,38 @@ namespace IceCreamProject.Services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            connection = await factory.CreateConnectionAsync();
-            channel = await connection.CreateChannelAsync();
+            var dataDir = Path.Combine(AppContext.BaseDirectory, "..", "Data");
+            var filePath = Path.Combine(dataDir, "rabbit_messages.jsonl");
 
-            await channel.QueueDeclareAsync(
-                queue: QueueName,
-                durable: true,
-                exclusive: false,
-                autoDelete: false,
-                arguments: null);
-
-            var consumer = new AsyncEventingBasicConsumer(channel);
-            consumer.ReceivedAsync += async (model, ea) =>
+            while (!stoppingToken.IsCancellationRequested)
             {
-                var body = ea.Body.ToArray();
-                var json = Encoding.UTF8.GetString(body);
-                var message = JsonSerializer.Deserialize<IceCreamUpdatedMessage>(json);
+                if (File.Exists(filePath))
+                {
+                    var lines = File.ReadAllLines(filePath);
+                    foreach (var line in lines)
+                    {
+                        try
+                        {
+                            var message = JsonSerializer.Deserialize<IceCreamUpdatedMessage>(line);
+                            await Task.Delay(1000, stoppingToken);
+                            await hubContext.Clients.All.SendAsync("ReceiveActivity", message.Username, "updated", message.IceCreamName, stoppingToken);
+                        }
+                        catch { }
+                    }
 
-                // HEAVY OPERATIONS HAPPEN HERE (not in HTTP request thread!)
-                Thread.Sleep(5000);  // Simulate invoice generation, analytics, etc.
+                    // truncate file after processing
+                    File.WriteAllText(filePath, string.Empty);
+                }
 
-                // Broadcast to SignalR after heavy work completes
-                await hubContext.Clients.All.SendAsync(
-                    "ReceiveActivity",
-                    message.Username,
-                    "updated",
-                    message.IceCreamName,
-                    stoppingToken);
-
-                // Acknowledge message
-                await channel.BasicAckAsync(deliveryTag: ea.DeliveryTag, multiple: false);
-            };
-
-            await channel.BasicConsumeAsync(
-                queue: QueueName,
-                autoAck: false,  // Manual acknowledgment for reliability
-                consumer: consumer);
-
-            // Keep the worker running
-            await Task.Delay(Timeout.Infinite, stoppingToken);
+                await Task.Delay(1000, stoppingToken);
+            }
         }
 
-        public override async Task StopAsync(CancellationToken cancellationToken)
+        public override Task StopAsync(CancellationToken cancellationToken)
         {
-            await channel?.CloseAsync();
-            await connection?.CloseAsync();
-            await base.StopAsync(cancellationToken);
+            try { channel?.Close(); } catch { }
+            try { connection?.Close(); } catch { }
+            return base.StopAsync(cancellationToken);
         }
     }
 }

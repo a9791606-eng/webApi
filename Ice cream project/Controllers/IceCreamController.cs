@@ -36,23 +36,31 @@ public class IceCreamController : ControllerBase
     [HttpPost]
     public ActionResult Create(IceCream newIceCream)
     {
-        var postedIceCream = services.Create(newIceCream);
-      
-       return CreatedAtAction(nameof(Create), new { id = postedIceCream.Id });
+        // service.Create is void but sets Id on the passed object
+        services.Create(newIceCream);
+       return CreatedAtAction(nameof(Create), new { id = newIceCream.Id });
     }
 
     [HttpPut("{id}")]
     public ActionResult Update(int id, IceCream newIceCream)
     {
-        var ans= services.Update( id, newIceCream);
-      
-        if(ans==1)
-          return NotFound();
+        try
+        {
+            services.Update(id, newIceCream);
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound();
+        }
+        catch (ArgumentException)
+        {
+            return BadRequest();
+        }
+        catch (InvalidOperationException)
+        {
+            return Forbid();
+        }
 
-        if(ans==2)
-           return BadRequest();
-
-       
         return NoContent();
 
     }
@@ -61,7 +69,7 @@ public class IceCreamController : ControllerBase
     public ActionResult Delete(int id)
     {
         var ans= services.Delete(id);
-      
+        
         if(ans==false)
             return NotFound();
         return NoContent();

@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Documents\\GitHub\\webAPI\\Ice cream project\\Project_iceCream.csproj": {}
+    "Z:\\יד תשפו\\הלוי דבורה\\webapi-זילברגברג\\חדש\\חדש אילה\\webApi\\Ice cream project\\Project_iceCream.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Documents\\GitHub\\webAPI\\Ice cream project\\Project_iceCream.csproj": {
+    "Z:\\יד תשפו\\הלוי דבורה\\webapi-זילברגברג\\חדש\\חדש אילה\\webApi\\Ice cream project\\Project_iceCream.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\webAPI\\Ice cream project\\Project_iceCream.csproj",
+        "projectUniqueName": "Z:\\יד תשפו\\הלוי דבורה\\webapi-זילברגברג\\חדש\\חדש אילה\\webApi\\Ice cream project\\Project_iceCream.csproj",
         "projectName": "Project_iceCream",
-        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\webAPI\\Ice cream project\\Project_iceCream.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\webAPI\\Ice cream project\\obj\\",
+        "projectPath": "Z:\\יד תשפו\\הלוי דבורה\\webapi-זילברגברג\\חדש\\חדש אילה\\webApi\\Ice cream project\\Project_iceCream.csproj",
+        "packagesPath": "C:\\Users\\huser\\.nuget\\packages\\",
+        "outputPath": "Z:\\יד תשפו\\הלוי דבורה\\webapi-זילברגברג\\חדש\\חדש אילה\\webApi\\Ice cream project\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\huser\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "c:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -106,7 +112,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "c:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

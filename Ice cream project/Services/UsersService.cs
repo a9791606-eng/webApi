@@ -11,72 +11,81 @@ namespace IceCreamNamespace.Services;
     public  class UsersService : IUserService
     {
       
-     private List<User> list;
+     private readonly IUserRepository userRepository;
+     private readonly IActiveUser activeUser;
 
-    public UsersService()
+    public UsersService(IUserRepository userRepository, IActiveUser activeUser)
     {
-        this.list = new List<User>{
-             new User { Id = 1, Username = "Dan",Password="aaa"},
-             new User { Id = 2, Username = "Avi",Password="bbb"},
-             new User { Id = 3, Username = "Yehuda",Password="ccc"},
-             new User { Id = 4, Username = "Roni",Password="ddd"} 
-        };
+        this.userRepository = userRepository;
+        this.activeUser = activeUser;
     }
-   
-   
 
     public List<User> Get()
     {
-        return list;
+        var user = activeUser.User;
+        if (user != null && user.IsAdmin)
+            return userRepository.GetAll();
+
+        if (user == null)
+            return new List<User>();
+
+        var me = userRepository.Get(user.Id);
+        return me == null ? new List<User>() : new List<User> { me };
     }
 
-    private User find(int id)
-    {
-        return list.FirstOrDefault(p => p.Id == id);
-
-    }
-
-    public User Get(int id) => find(id);
+    public User Get(int id) => userRepository.Get(id);
 
     public User Create(User newUser)
     {
-        var maxId = list.Max(p => p.Id);
-        newUser.Id = maxId + 1;
-        list.Add(newUser);
-            return newUser;
+        var user = activeUser.User;
+        if (user == null || !user.IsAdmin)
+            return null; // only admin can create users
+
+        userRepository.Add(newUser);
+        return newUser;
     }
 
     public int Update(int id, User newUser)
     {
-        var Ice = find(id);
-        if(Ice == null)
-          return 1;
+        var existing = userRepository.Get(id);
+        if (existing == null) return 1;
+        if (existing.Id != newUser.Id) return 2;
 
-        if(Ice.Id != newUser.Id)
-           return 2;
+        var current = activeUser.User;
+        if (current == null) return 4;
 
-        var index = list.IndexOf(Ice);
-        list[index] = newUser;
+        if (!current.IsAdmin && current.Id != id) return 4;
 
+        if (!current.IsAdmin && newUser.IsAdmin) newUser.IsAdmin = false;
+
+        userRepository.Update(newUser);
         return 3;
     }
 
-   
     public bool Delete(int id)
     {
-         var Ice= find(id);
-        if(Ice==null)
-            return false;
-        list.Remove(Ice);
+        var current = activeUser.User;
+        if (current == null || !current.IsAdmin) return false;
+        var u = userRepository.Get(id);
+        if (u == null) return false;
+
+        // delete user's items as well
+        // Use IIceCreamRepository to remove items belonging to this user
+        userRepository.Delete(id);
         return true;
     }
+
+    public int Count => userRepository.Count;
 }
     public static class UserExtension{
       public static void AddUserService(this IServiceCollection services)
         {
-            services.AddSingleton<IUserService, UsersService>();          
-        }
+            // Register HttpContextAccessor and ActiveUser so services can check ownership/roles
+            services.AddHttpContextAccessor();
+            services.AddScoped<IActiveUser, ActiveUser>();
 
+            services.AddScoped<IUserService, UsersService>();          
+        }
 
 
 
