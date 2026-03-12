@@ -1,19 +1,16 @@
-using System.Threading.Tasks;
 using IceCreamNamespace.Models;
 using System.Collections.Generic;
 
-
-namespace IceCreamService.interfaces;
-
-
+namespace IceCreamService.Interfaces
+{
     public interface IICService
     {
-     List<IceCream> Get();
+     List<IceCream> GetAll();
      IceCream Get(int id);
      void Create(IceCream newIceCream);
-     void Update(int id, IceCream newIceCream);
-     bool Delete(int id);
+     void Delete(int id);
+     void Update(IceCream newIceCream);
      int Count { get; }
     }
-
+}
 

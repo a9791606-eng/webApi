@@ -10,16 +10,18 @@
 <body>
      <div class="container">
         <h1>IceCream Shop</h1>
-
+        <h3>Add</h3>
         <div class="form-row">
             <input type="text" id="add-name" placeholder="New iceCream">
             <button class="button" onclick="addItem()">Add</button>
         </div>
+        <!-- <h3>Add</h3>
+        <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
+            <input type="text" id="add-name" placeholder="New pizza">
+            <input type="submit" value="Add">
+        </form> -->
 
-        <p id="counter"></p>
-
-        <div class="grid" id="iceCreamGrid"></div>
-
+      
         <div id="editForm" style="display:none; margin-top:12px;">
             <h3>Edit</h3>
             <form action="javascript:void(0);" onsubmit="updateItem()">
@@ -31,6 +33,23 @@
                 <input type="submit" value="Save" class="button">
                 <a onclick="closeInput()" aria-label="Close">&#10006;</a>
             </form>
+        </div>
+
+        <p id="counter"></p>
+        <div id="activityFeed">
+            <h3>Activity Feed</h3>
+            <ul id="activityList"></ul>
+        </div>
+        <div class="grid" id="iceCreamGrid">
+            <table>
+                <tr>
+                    <th>Is gluten free?</th>
+                    <th>Name</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tbody id="iceCreams"></tbody>
+            </table>
         </div>
 
         <a href="user.html">למעבר לרשימת המשתמשים</a>

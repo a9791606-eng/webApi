@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using IceCreamNamespace.Models;
-using IceCreamProject.Models;
 
-namespace IceCreamProject.Interfaces
+
+namespace IceCreamNamespace.Interfaces
 {
     public interface IIceCreamRepository
     {

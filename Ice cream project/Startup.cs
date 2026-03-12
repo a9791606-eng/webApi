@@ -1,5 +1,6 @@
 using IceCreamProject.Hubs;
 using IceCreamProject.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,9 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using IceCreamNamespace.Services;
+using Microsoft.OpenApi;
 
-namespace IceCreamProject
+namespace IceCreamNamespace
 {
     public class Startup
     {
@@ -24,11 +25,67 @@ namespace IceCreamProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Minimal setup: controllers and required app services
+            services
+                .AddAuthentication(options =>
+                {
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.RequireHttpsMetadata = false;
+                    cfg.TokenValidationParameters = PizzaTokenService.GetTokenValidationParameters();
+                });
+
+            services.AddAuthorization(cfg =>
+                {
+                    cfg.AddPolicy("Admin", policy => policy.RequireClaim("type", "Admin"));
+                });
             services.AddHttpContextAccessor();
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "IceCream", Version = "v1" });
+                c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    Description = "JWT Authorization header using the Bearer scheme."
+                });
+                c.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+                {
+                    [new OpenApiSecuritySchemeReference("bearer", document)] = []
+                });
+            });
+            services.AddIceCream();
+            services.AddActiveUser();
+            services.AddSignalR();
+            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+            {
+                if (env.IsDevelopment())
+                {
+                    app.UseDeveloperExceptionPage();
+                    app.UseSwagger();
+                    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IceCream v1"));
+                }
 
-            // Custom project services
+                app.UseHttpsRedirection();
+                /*js*/
+                app.UseDefaultFiles();
+                app.UseStaticFiles();
+                /*js (remove "launchUrl" from Properties\launchSettings.json*/
+
+                app.UseRouting();
+
+                app.UseAuthentication();
+                app.UseAuthorization();
+
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                    endpoints.MapHub<ActivityHub>("/activityHub");
+                });
+            }
             services.AddAppRepositories();
             services.AddIceCreamService();
             services.AddUserService();
@@ -37,31 +94,6 @@ namespace IceCreamProject
             services.AddSingleton<IRabbitMqService, RabbitMqService>();
             services.AddRabbitMq();
             services.AddSignalR();
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            // request logging middleware
-            app.UseMiddleware<IceCreamProject.Middleware.RequestLoggingMiddleware>();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapHub<ActivityHub>("/activityHub");
-            });
         }
     }
 }

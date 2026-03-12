@@ -2,82 +2,60 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using IceCreamProject.Models;
-using IceCreamProject.Interfaces;
-using Microsoft.AspNetCore.Hosting;
+using IceCreamService.Interfaces;
 using IceCreamNamespace.Models;
+using Microsoft.AspNetCore.Hosting;
 
-namespace IceCreamProject.Services
+
+namespace IceCreamNamespace.Services
 {
     public class IceCreamRepository : IIceCreamRepository
     {
-        private readonly List<IceCream> iceCreams;
+        private readonly List<IceCream> IceCreams;
         private readonly string filePath;
 
         public IceCreamRepository(IWebHostEnvironment webHost)
         {
             filePath = Path.Combine(webHost.ContentRootPath, "Data", "IceCream.json");
-
-            // ensure data folder exists
-            var dir = Path.GetDirectoryName(filePath);
-            if (!Directory.Exists(dir))
-                Directory.CreateDirectory(dir);
-
-            // if file missing or empty, create default seed data
-            if (!File.Exists(filePath) || string.IsNullOrWhiteSpace(File.ReadAllText(filePath)))
-            {
-                iceCreams = new List<IceCream>
-                {
-                    new IceCream { Id = 1, Name = "Vanilla", isGloutenFree = true, UserId = 1 },
-                    new IceCream { Id = 2, Name = "Strawberry", isGloutenFree = true, UserId = 1 },
-                    new IceCream { Id = 3, Name = "Chocolate", isGloutenFree = true, UserId = 1 },
-                    new IceCream { Id = 4, Name = "Pistachio", isGloutenFree = false, UserId = 1 }
-                };
-
-                Save();
-                return;
-            }
-
-            // otherwise load existing data
             using var jsonFile = File.OpenText(filePath);
-            iceCreams = JsonSerializer.Deserialize<List<IceCream>>(jsonFile.ReadToEnd(),
+            IceCreams = JsonSerializer.Deserialize<List<IceCream>>(jsonFile.ReadToEnd(),
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
                 ?? new List<IceCream>();
         }
 
-        private void Save() => File.WriteAllText(filePath, JsonSerializer.Serialize(iceCreams));
+        private void Save() => File.WriteAllText(filePath, JsonSerializer.Serialize(IceCreams));
 
-        public List<IceCream> GetAll() => iceCreams;
+        public List<IceCream> GetAll() => IceCreams;
 
-        public IceCream Get(int id) => iceCreams.FirstOrDefault(i => i.Id == id);
+        public IceCream Get(int id) => IceCreams.FirstOrDefault(i => i.Id == id);
 
-        public void Add(IceCream iceCream)
+        public void Add(IceCream IceCream)
         {
-            iceCream.Id = iceCreams.Count == 0 ? 1 : iceCreams.Max(i => i.Id) + 1;
-            iceCreams.Add(iceCream);
+            IceCream.Id = IceCreams.Count == 0 ? 1 : IceCreams.Max(i => i.Id) + 1;;
+            IceCreams.Add(IceCream);
             Save();
         }
 
         public void Delete(int id)
         {
-            var iceCream = Get(id);
-            if (iceCream is null)
+            var IceCream = Get(id);
+            if (IceCream is null)
                 return;
 
-            iceCreams.Remove(iceCream);
+            pizzas.Remove(IceCream);
             Save();
         }
 
-        public void Update(IceCream iceCream)
+        public void Update(IceCream IceCream)
         {
-            var index = iceCreams.FindIndex(i => i.Id == iceCream.Id);
+            var index = IceCreams.FindIndex(i => i.Id == IceCream.Id);
             if (index == -1)
                 return;
 
-            iceCreams[index] = iceCream;
+            IceCreams[index] = IceCream;
             Save();
         }
 
-        public int Count => iceCreams.Count;
+        public int Count => IceCreams.Count;
     }
 }

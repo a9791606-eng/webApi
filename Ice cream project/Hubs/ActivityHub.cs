@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using IceCreamNamespace.Models;
+
 
 namespace IceCreamProject.Hubs;
 

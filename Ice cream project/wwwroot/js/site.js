@@ -1,4 +1,5 @@
 const uri = '/IceCream';
+const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzcyMDUzMDg0LCJpc3MiOiJodHRwczovL3BpenphLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9waXp6YS1kZW1vLmNvbSJ9.3BAlAjDBV1Nl8cLYzTPoYrkM5wbIEwxxRywiVtJWjJ8';
 let iceCreams = [];
 
 const fallbackData = [
@@ -10,7 +11,8 @@ const fallbackData = [
 ];
 
 function getItems() {
-    fetch(uri,{headers: {
+    fetch(uri,
+        {headers: {
             'Authorization': `Bearer ${authToken}`
         }
     })
@@ -50,17 +52,8 @@ function addItem() {
             if (!response.ok) throw new Error('Failed to add');
             return response.json().catch(() => null);
         })
-        .then(created => {
-            if (created) {
-                // server returned created item
-                getItems();
-            } else {
-                // server didn't return body (or unreachable) — update locally
-                const maxId = iceCreams.length ? Math.max(...iceCreams.map(p => p.Id || p.id)) : 0;
-                const newItem = { Id: maxId + 1, Name: name, IsGlutenFree: false };
-                iceCreams.push(newItem);
-                _displayItems(iceCreams);
-            }
+         .then(() => {
+            getItems();
             addNameTextbox.value = '';
         })
           .catch(error => {
@@ -85,7 +78,7 @@ function deleteItem(id) {
 }
 
 function displayEditForm(id) {
-     const item = iceCreams.find(it => (it.id || it.Id) === id);
+     const item = iceCreams.find(i => (i.id || i.Id) === id);
     if (!item) return;
       document.getElementById('edit-name').value = item.Name || item.name || '';
     document.getElementById('edit-id').value = item.Id || item.id;
@@ -96,7 +89,7 @@ function displayEditForm(id) {
 function updateItem() {
      const itemId = parseInt(document.getElementById('edit-id').value, 10);
     const item = {
-            Id: itemId,
+            Id: parseInt(itemId, 10),
         Name: document.getElementById('edit-name').value.trim(),
         IsGlutenFree: document.getElementById('edit-isGlutenFree').checked
     };
@@ -139,40 +132,41 @@ function _displayItems(data) {
     iceCreams = data.map(d => ({ Id: d.Id || d.id, Name: d.Name || d.name, IsGlutenFree: (d.IsGlutenFree !== undefined) ? d.IsGlutenFree : d.isGlutenFree }));
     const grid = document.getElementById('iceCreamGrid');
     grid.innerHTML = '';
- _displayCount(iceCreams.length);
-  iceCreams.forEach(item => {
+    _displayCount(iceCreams.length);
+    iceCreams.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
-         const title = document.createElement('h4');
+        const title = document.createElement('h4');
         title.innerText = item.Name;
         card.appendChild(title);
-const desc = document.createElement('p');
+        const desc = document.createElement('p');
         desc.innerText = item.IsGlutenFree ? 'Gluten free' : 'Contains gluten';
         card.appendChild(desc);
-         const actions = document.createElement('div');
+        const actions = document.createElement('div');
         actions.className = 'actions';
-         const editBtn = document.createElement('button');
+        const editBtn = document.createElement('button');
         editBtn.className = 'button ghost';
         editBtn.innerText = 'Edit';
         editBtn.onclick = () => displayEditForm(item.Id);
-         const delBtn = document.createElement('button');
+        const delBtn = document.createElement('button');
         delBtn.className = 'button';
         delBtn.innerText = 'Delete';
         delBtn.onclick = () => deleteItem(item.Id);
         actions.appendChild(editBtn);
         actions.appendChild(delBtn);
         card.appendChild(actions);
-         grid.appendChild(card);
+        grid.appendChild(card);
     });
+}
 function initSignalR() {
     const connection = new signalR.HubConnectionBuilder()
         .withUrl("/activityHub", { accessTokenFactory: () => authToken })
         .build();
 
-    connection.on("ReceiveActivity", function (username, action, pizzaName) {
+    connection.on("ReceiveActivity", function (username, action, IceCreamName) {
         const activityList = document.getElementById("activityList");
         const li = document.createElement("li");
-        li.textContent = `${username} ${action} '${pizzaName}'`;
+        li.textContent = `${username} ${action} '${IceCreamName}'`;
         activityList.insertBefore(li, activityList.firstChild);
 
         // Keep only last 10 activities
@@ -184,4 +178,4 @@ function initSignalR() {
     connection.start()
         .then(() => console.log("SignalR connected"))
         .catch(err => console.error("SignalR connection error:", err));
-}}
+}
