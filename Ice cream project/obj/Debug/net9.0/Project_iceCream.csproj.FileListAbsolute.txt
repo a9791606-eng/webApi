@@ -122,3 +122,15 @@ C:\Users\User\Documents\GitHub\webAPI\Ice cream project\obj\Debug\net9.0\Project
 C:\Users\User\Documents\GitHub\webAPI\Ice cream project\obj\Debug\net9.0\Project_iceCream.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\User\Documents\GitHub\webAPI\Ice cream project\obj\Debug\net9.0\Project_iceCream.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\User\Documents\GitHub\webAPI\Ice cream project\obj\Debug\net9.0\Project_iceCream.sourcelink.json
+C:\Users\huser\Documents\GitHub\webApi\Ice cream project\obj\Debug\net9.0\Project_iceCream.csproj.AssemblyReference.cache
+C:\Users\huser\Documents\GitHub\webApi\Ice cream project\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\huser\Documents\GitHub\webApi\Ice cream project\obj\Debug\net9.0\Project_iceCream.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\huser\Documents\GitHub\webApi\Ice cream project\obj\Debug\net9.0\Project_iceCream.AssemblyInfoInputs.cache
+C:\Users\huser\Documents\GitHub\webApi\Ice cream project\obj\Debug\net9.0\Project_iceCream.AssemblyInfo.cs
+C:\Users\huser\Documents\GitHub\webApi\Ice cream project\obj\Debug\net9.0\Project_iceCream.csproj.CoreCompileInputs.cache
+C:\Users\huser\Documents\GitHub\webApi\Ice cream project\obj\Debug\net9.0\Project_iceCream.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\huser\Documents\GitHub\webApi\Ice cream project\obj\Debug\net9.0\Project_iceCream.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\huser\Documents\GitHub\webApi\Ice cream project\obj\Debug\net9.0\Project_iceCream.sourcelink.json
+C:\Users\huser\Documents\GitHub\webApi\Ice cream project\obj\Debug\net9.0\Project_iceCream.dll
+C:\Users\huser\Documents\GitHub\webApi\Ice cream project\obj\Debug\net9.0\refint\Project_iceCream.dll
+C:\Users\huser\Documents\GitHub\webApi\Ice cream project\obj\Debug\net9.0\Project_iceCream.pdb
