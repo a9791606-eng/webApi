@@ -3,9 +3,8 @@ using IceCreamNamespace.Models;
 using System.Collections.Generic;
 
 
-namespace IceCreamService.interfaces;
-
-
+namespace IceCreamNamespace.Interfaces
+{
     public interface IUserService
     {
      List<User> Get();
@@ -15,5 +14,5 @@ namespace IceCreamService.interfaces;
      bool Delete(int id);
      int Count { get; }
     }
-
+}
 

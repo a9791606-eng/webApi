@@ -3,10 +3,10 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using IceCreamNamespace.Models;
-using IceCreamProject.Interfaces;
+using IceCreamNamespace.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 
-namespace IceCreamProject.Services
+namespace IceCreamNamespace.Services
 {
     public class UserRepository : IUserRepository
     {

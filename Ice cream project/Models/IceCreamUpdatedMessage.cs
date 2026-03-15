@@ -1,6 +1,6 @@
 using System;
 
-namespace IceCreamProject.Models
+namespace IceCreamNamespace.Models
 {
     public class IceCreamUpdatedMessage
     {

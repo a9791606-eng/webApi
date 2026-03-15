@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using IceCreamNamespace.Models;
 using IceCreamNamespace.Services;
-using IceCreamService.interfaces;
+using IceCreamNamespace.Interfaces;
 
 
 namespace IceCreamNamespace.Controllers;

@@ -3,9 +3,9 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using IceCreamProject.Services;
+using IceCreamNamespace.Services;
 
-namespace IceCreamProject.Middleware
+namespace IceCreamNamespace.Middleware
 {
     public class RequestLoggingMiddleware
     {
@@ -37,7 +37,7 @@ namespace IceCreamProject.Middleware
             await _next(context);
 
             sw.Stop();
-            var entry = new IceCreamProject.Models.LogEntry
+            var entry = new IceCreamNamespace.Models.LogEntry
             {
                 Start = start,
                 Controller = controller,

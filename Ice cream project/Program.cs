@@ -1,9 +1,8 @@
-
 using IceCreamNamespace.Services;
-using IceCreamService.interfaces;
+using IceCreamNamespace.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
-using MyMiddleware;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +14,28 @@ using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-builder.Services.AddIceCreamService();
+// Core registrations required for DI
+builder.Services.AddIceCream();
 builder.Services.AddUserService();
+builder.Services.AddAppRepositories();
+builder.Services.AddActiveUser();
+builder.Services.AddSignalR();
+builder.Services.AddSingleton<LoggingQueue>();
+builder.Services.AddHostedService<LoggingWorker>();
+builder.Services.AddSingleton<IRabbitMqService, RabbitMqService>();
+builder.Services.AddRabbitMq();
+
+// Configure authentication so Authorization middleware has a default scheme
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(cfg =>
+    {
+        cfg.RequireHttpsMetadata = false;
+        cfg.TokenValidationParameters = IceCreamTokenService.GetTokenValidationParameters();
+    });
+builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -26,22 +44,21 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.UseAuthorization();
-
-// app.UseMyLogMiddleware();
-// app.UseMy1stMiddleware();
-
 // Configure the HTTP request pipeline.
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
 app.UseDefaultFiles();
 app.UseStaticFiles();
-app.UseHttpsRedirection();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();

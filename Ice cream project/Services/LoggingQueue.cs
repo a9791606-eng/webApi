@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
-using IceCreamProject.Models;
+using IceCreamNamespace.Models;
 
-namespace IceCreamProject.Services
+namespace IceCreamNamespace.Services
 {
     public class LoggingQueue
     {

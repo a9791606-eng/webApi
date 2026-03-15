@@ -1,7 +1,7 @@
 using IceCreamNamespace.Models;
 using System.Collections.Generic;
 
-namespace IceCreamService.Interfaces
+namespace IceCreamNamespace.Interfaces
 {
     public interface IICService
     {

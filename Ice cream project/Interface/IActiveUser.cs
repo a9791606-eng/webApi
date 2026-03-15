@@ -1,11 +1,9 @@
-using KsPizza.Models;
-using Microsoft.AspNetCore.Http;
+using IceCreamNamespace.Models;
 
-
-namespace IceCreamService.Interfaces
+namespace IceCreamNamespace.Interfaces
 {
     public interface IActiveUser
     {
-        User ActiveUser { get; }
+        User? ActiveUser { get; }
     }
 }

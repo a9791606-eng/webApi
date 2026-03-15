@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using IceCreamService.Interfaces;
+using IceCreamNamespace.Interfaces;
 using IceCreamNamespace.Models;
 using Microsoft.AspNetCore.Hosting;
 
@@ -42,7 +42,7 @@ namespace IceCreamNamespace.Services
             if (IceCream is null)
                 return;
 
-            pizzas.Remove(IceCream);
+            IceCreams.Remove(IceCream);
             Save();
         }
 

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
 
-namespace IceCreamProject.Hubs;
+namespace IceCreamNamespace.Hubs;
 
 [Authorize]
 public class ActivityHub : Hub

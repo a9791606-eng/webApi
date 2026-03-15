@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using IceCreamProject.Hubs;
-using IceCreamService.interfaces;
+using IceCreamNamespace.Hubs;
+using IceCreamNamespace.Interfaces;
 using IceCreamNamespace.Models;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,6 +45,9 @@ public class IceCreamService : IICService
             BroadcastActivity("added", IceCream);
         }
 
+        // Implement interface Create by delegating to Add
+        public void Create(IceCream newIceCream) => Add(newIceCream);
+
         public void Delete(int id)
         {
             var IceCream = Get(id);
@@ -81,7 +84,7 @@ public class IceCreamService : IICService
         public static IServiceCollection AddIceCream(this IServiceCollection services)
         {
             services.AddSingleton<IIceCreamRepository, IceCreamRepository>();
-            services.AddScoped<IIceCreamService, IceCreamService>();
+            services.AddScoped<IICService, IceCreamService>();
             return services;
         }
     }

@@ -1,5 +1,5 @@
-using IceCreamProject.Hubs;
-using IceCreamProject.Services;
+using IceCreamNamespace.Hubs;
+using IceCreamNamespace.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi;
 
 namespace IceCreamNamespace
 {
@@ -33,67 +32,59 @@ namespace IceCreamNamespace
                 .AddJwtBearer(cfg =>
                 {
                     cfg.RequireHttpsMetadata = false;
-                    cfg.TokenValidationParameters = PizzaTokenService.GetTokenValidationParameters();
+                    cfg.TokenValidationParameters = IceCreamTokenService.GetTokenValidationParameters();
                 });
 
             services.AddAuthorization(cfg =>
-                {
-                    cfg.AddPolicy("Admin", policy => policy.RequireClaim("type", "Admin"));
-                });
+            {
+                cfg.AddPolicy("Admin", policy => policy.RequireClaim("type", "Admin"));
+            });
+
             services.AddHttpContextAccessor();
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "IceCream", Version = "v1" });
-                c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
-                {
-                    Type = SecuritySchemeType.Http,
-                    Scheme = "bearer",
-                    BearerFormat = "JWT",
-                    Description = "JWT Authorization header using the Bearer scheme."
-                });
-                c.AddSecurityRequirement(document => new OpenApiSecurityRequirement
-                {
-                    [new OpenApiSecuritySchemeReference("bearer", document)] = []
-                });
-            });
+            // Use basic Swagger generation; detailed OpenAPI types removed to avoid package conflicts
+            services.AddSwaggerGen();
+
             services.AddIceCream();
             services.AddActiveUser();
             services.AddSignalR();
-            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-            {
-                if (env.IsDevelopment())
-                {
-                    app.UseDeveloperExceptionPage();
-                    app.UseSwagger();
-                    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IceCream v1"));
-                }
 
-                app.UseHttpsRedirection();
-                /*js*/
-                app.UseDefaultFiles();
-                app.UseStaticFiles();
-                /*js (remove "launchUrl" from Properties\launchSettings.json*/
-
-                app.UseRouting();
-
-                app.UseAuthentication();
-                app.UseAuthorization();
-
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                    endpoints.MapHub<ActivityHub>("/activityHub");
-                });
-            }
+            // the following service registrations belong inside ConfigureServices
             services.AddAppRepositories();
-            services.AddIceCreamService();
+            // AddIceCream already registered above via AddIceCream()
             services.AddUserService();
             services.AddSingleton<LoggingQueue>();
             services.AddHostedService<LoggingWorker>();
             services.AddSingleton<IRabbitMqService, RabbitMqService>();
             services.AddRabbitMq();
-            services.AddSignalR();
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IceCream v1"));
+            }
+
+            app.UseHttpsRedirection();
+            /*js*/
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            /*js (remove "launchUrl" from Properties\launchSettings.json*/
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<ActivityHub>("/activityHub");
+            });
         }
     }
 }

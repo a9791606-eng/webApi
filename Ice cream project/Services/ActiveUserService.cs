@@ -1,4 +1,4 @@
-using IceCreamService.Interfaces;
+using IceCreamNamespace.Interfaces;
 using IceCreamNamespace.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +8,7 @@ namespace IceCreamNamespace.Services
 {
     public class ActiveUserService : IActiveUser
     {
-        public User ActiveUser { get; private set; }
+        public User? ActiveUser { get; private set; }
         public ActiveUserService(IHttpContextAccessor context)
         {
             var userId = context?.HttpContext?.User?.FindFirst("Id");
@@ -19,6 +19,10 @@ namespace IceCreamNamespace.Services
                     Id = int.Parse(userId.Value),
                     Username = "test"
                 };
+            }
+            else
+            {
+                ActiveUser = null;
             }
         }
 
