@@ -22,7 +22,7 @@ namespace IceCreamNamespace.Services;
 
     public List<User> Get()
     {
-        var user = activeUser.User;
+        var user = activeUser.ActiveUser;
         if (user != null && user.IsAdmin)
             return userRepository.GetAll();
 
@@ -37,7 +37,7 @@ namespace IceCreamNamespace.Services;
 
     public User Create(User newUser)
     {
-        var user = activeUser.User;
+        var user = activeUser.ActiveUser;
         if (user == null || !user.IsAdmin)
             return null; // only admin can create users
 
@@ -51,7 +51,7 @@ namespace IceCreamNamespace.Services;
         if (existing == null) return 1;
         if (existing.Id != newUser.Id) return 2;
 
-        var current = activeUser.User;
+        var current = activeUser.ActiveUser;
         if (current == null) return 4;
 
         if (!current.IsAdmin && current.Id != id) return 4;
@@ -64,7 +64,7 @@ namespace IceCreamNamespace.Services;
 
     public bool Delete(int id)
     {
-        var current = activeUser.User;
+        var current = activeUser.ActiveUser;
         if (current == null || !current.IsAdmin) return false;
         var u = userRepository.Get(id);
         if (u == null) return false;
@@ -78,13 +78,10 @@ namespace IceCreamNamespace.Services;
     public int Count => userRepository.Count;
 }
     public static class UserExtension{
-      public static void AddUserService(this IServiceCollection services)
+      public static IServiceCollection AddUserService(this IServiceCollection services)
         {
-            // Register HttpContextAccessor and ActiveUser so services can check ownership/roles
-            services.AddHttpContextAccessor();
-            services.AddScoped<IActiveUser, ActiveUser>();
-
-            services.AddScoped<IUserService, UsersService>();          
+            services.AddScoped<IUserService, UsersService>();
+            return services;
         }
 
 

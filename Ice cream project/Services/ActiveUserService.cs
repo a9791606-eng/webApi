@@ -11,13 +11,20 @@ namespace IceCreamNamespace.Services
         public User ActiveUser { get; private set; }
         public ActiveUserService(IHttpContextAccessor context)
         {
-            var userId = context?.HttpContext?.User?.FindFirst("Id");
-            if (userId != null)
+            var user = context?.HttpContext?.User;
+            if (user == null) return;
+
+            var idClaim = user.FindFirst("id") ?? user.FindFirst("Id");
+            var nameClaim = user.FindFirst("username") ?? user.FindFirst("name");
+            var typeClaim = user.FindFirst("type");
+
+            if (idClaim != null && int.TryParse(idClaim.Value, out var id))
             {
                 ActiveUser = new User
                 {
-                    Id = int.Parse(userId.Value),
-                    Username = "test"
+                    Id = id,
+                    Username = nameClaim?.Value ?? string.Empty,
+                    IsAdmin = string.Equals(typeClaim?.Value, "Admin", System.StringComparison.OrdinalIgnoreCase)
                 };
             }
         }
@@ -28,6 +35,7 @@ namespace IceCreamNamespace.Services
     {
         public static IServiceCollection AddActiveUser(this IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             services.AddScoped<IActiveUser, ActiveUserService>();
             return services;
         }

@@ -1,6 +1,12 @@
 const uri = '/IceCream';
-const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzcyMDUzMDg0LCJpc3MiOiJodHRwczovL3BpenphLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9waXp6YS1kZW1vLmNvbSJ9.3BAlAjDBV1Nl8cLYzTPoYrkM5wbIEwxxRywiVtJWjJ8';
+const tokenKey = 'icecream_token';
+let authToken = localStorage.getItem(tokenKey) || '';
 let iceCreams = [];
+
+// if no token redirect to login page
+if (!authToken && !location.pathname.endsWith('login.html')) {
+    window.location.href = '/login.html';
+}
 
 const fallbackData = [
     { Id: 1, Name: 'chocolate', IsGlutenFree: true },
@@ -10,12 +16,14 @@ const fallbackData = [
     { Id: 5, Name: 'fgf', IsGlutenFree: false }
 ];
 
+function getAuthHeaders(){
+    const headers = {};
+    if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+    return headers;
+}
+
 function getItems() {
-    fetch(uri,
-        {headers: {
-            'Authorization': `Bearer ${authToken}`
-        }
-    })
+    fetch(uri, { headers: getAuthHeaders() })
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok');
             return response.json().catch(() => null);
@@ -41,11 +49,7 @@ function addItem() {
 
     fetch(uri, {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authToken}`
-            },
+            headers: Object.assign({ 'Accept': 'application/json', 'Content-Type': 'application/json' }, getAuthHeaders()),
                 body: JSON.stringify(itemPayload)
         })
         .then(response => {
@@ -69,9 +73,7 @@ function addItem() {
 function deleteItem(id) {
      fetch(`${uri}/${id}`, {
             method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${authToken}`
-            }
+            headers: getAuthHeaders()
         })
         .then(() => getItems())
         .catch(error => console.error('Unable to delete item.', error));
@@ -96,11 +98,7 @@ function updateItem() {
 
     fetch(`${uri}/${itemId}`, {
             method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authToken}`
-            },
+            headers: Object.assign({ 'Accept': 'application/json', 'Content-Type': 'application/json' }, getAuthHeaders()),
             body: JSON.stringify(item)
         })
         .then(response => {

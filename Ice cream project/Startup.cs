@@ -25,6 +25,14 @@ namespace IceCreamNamespace
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAppRepositories();
+            services.AddIceCreamService();
+            services.AddUserService();
+            services.AddSingleton<LoggingQueue>();
+            services.AddHostedService<LoggingWorker>();
+            services.AddSingleton<IRabbitMqService, RabbitMqService>();
+            services.AddRabbitMq();
+
             services
                 .AddAuthentication(options =>
                 {
@@ -33,7 +41,8 @@ namespace IceCreamNamespace
                 .AddJwtBearer(cfg =>
                 {
                     cfg.RequireHttpsMetadata = false;
-                    cfg.TokenValidationParameters = PizzaTokenService.GetTokenValidationParameters();
+                    cfg.TokenValidationParameters = IceCreamTokenService.GetTokenValidationParameters();
+                    cfg.Events = new JwtBearerEvents();
                 });
 
             services.AddAuthorization(cfg =>
@@ -60,40 +69,33 @@ namespace IceCreamNamespace
             services.AddIceCream();
             services.AddActiveUser();
             services.AddSignalR();
-            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        }
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
             {
-                if (env.IsDevelopment())
-                {
-                    app.UseDeveloperExceptionPage();
-                    app.UseSwagger();
-                    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IceCream v1"));
-                }
-
-                app.UseHttpsRedirection();
-                /*js*/
-                app.UseDefaultFiles();
-                app.UseStaticFiles();
-                /*js (remove "launchUrl" from Properties\launchSettings.json*/
-
-                app.UseRouting();
-
-                app.UseAuthentication();
-                app.UseAuthorization();
-
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                    endpoints.MapHub<ActivityHub>("/activityHub");
-                });
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IceCream v1"));
             }
-            services.AddAppRepositories();
-            services.AddIceCreamService();
-            services.AddUserService();
-            services.AddSingleton<LoggingQueue>();
-            services.AddHostedService<LoggingWorker>();
-            services.AddSingleton<IRabbitMqService, RabbitMqService>();
-            services.AddRabbitMq();
-            services.AddSignalR();
+
+            app.UseHttpsRedirection();
+            /*js*/
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            /*js (remove "launchUrl" from Properties\launchSettings.json*/
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<ActivityHub>("/activityHub");
+            });
         }
     }
 }

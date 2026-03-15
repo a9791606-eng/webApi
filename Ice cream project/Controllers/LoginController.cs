@@ -4,6 +4,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using IceCreamNamespace.Models;
 using IceCreamNamespace.Services;
+using IceCreamProject.Services;
+using IceCreamProject.Interfaces;
 
 namespace IceCreamNamespace.Controllers;
 
@@ -11,23 +13,25 @@ namespace IceCreamNamespace.Controllers;
 [Route("[controller]")]
 public class LoginController : ControllerBase
 {
-    public LoginController() { }
+    private readonly IUserRepository _userRepo;
+
+    public LoginController(IUserRepository userRepo) { _userRepo = userRepo; }
 
     [HttpPost]
     public ActionResult<String> Login(User User)
     {
-        var dt = DateTime.Now;
-
-        if (User.Username != "test"
-        || User.Password != $"t{dt.Year}#{dt.Day}!")
-        {
+        if (string.IsNullOrWhiteSpace(User?.Username) || string.IsNullOrWhiteSpace(User?.Password))
             return Unauthorized();
-        }
+
+        // simple credential check against stored users
+        var found = _userRepo.GetAll().Find(u => u.Username == User.Username && u.Password == User.Password);
+        if (found == null) return Unauthorized();
 
         var claims = new List<Claim>
         {
-            new Claim("id", "11235813"),
-            new Claim("username", "test"),
+            new Claim("id", found.Id.ToString()),
+            new Claim("username", found.Username),
+            new Claim("type", found.IsAdmin ? "Admin" : "User")
         };
 
         var token = IceCreamTokenService.GetToken(claims);

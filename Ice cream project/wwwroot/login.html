@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login - IceCream Shop</title>
+    <link rel="stylesheet" href="css/site.css" />
+    <style>
+        /* small override for login form */
+        .login-wrapper{ max-width:420px; margin:40px auto; background:var(--card); padding:18px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.06) }
+        .login-wrapper h2{ color:#FF6B81; margin:0 0 12px 0 }
+        .login-row{ display:flex; flex-direction:column; gap:8px }
+        input[type="password"], input[type="text"]{ padding:10px; border-radius:8px; border:1px solid #F0E6E6 }
+        .notice{ color:var(--muted); font-size:0.95rem }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-wrapper">
+            <h2>התחברות לחנות הגלידה</h2>
+            <p class="notice">הכנס שם משתמש וסיסמה כדי לגשת למערכת.</p>
+            <div class="login-row">
+                <input id="username" type="text" placeholder="Username">
+                <input id="password" type="password" placeholder="Password">
+                <button class="button" onclick="doLogin()">התחבר</button>
+                <p id="error" style="color:#b00020"></p>
+            </div>
+        </div>
+        <p><a href="index.html">חזור לרשימת הגלידות</a></p>
+    </div>
+    <script src="js/login.js"></script>
+</body>
+</html>
