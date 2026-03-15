@@ -38,7 +38,7 @@ namespace IceCreamNamespace.Services;
     public User Create(User newUser)
     {
         var user = activeUser.ActiveUser;
-        if (user == null || !(user.IsAdmin))
+        if (user == null || !user.IsAdmin)
             return null; // only admin can create users
 
         userRepository.Add(newUser);
@@ -77,16 +77,12 @@ namespace IceCreamNamespace.Services;
 
     public int Count => userRepository.Count;
 }
-    public static partial class UserExtension
-     {
-         public static void AddUserService(this IServiceCollection services)
-         {
-             // Register HttpContextAccessor and ActiveUser so services can check ownership/roles
-             services.AddHttpContextAccessor();
-             services.AddScoped<IActiveUser, ActiveUserService>();
-
-             services.AddScoped<IUserService, UsersService>();          
-         }
+    public static class UserExtension{
+      public static IServiceCollection AddUserService(this IServiceCollection services)
+        {
+            services.AddScoped<IUserService, UsersService>();
+            return services;
+        }
 
 
 

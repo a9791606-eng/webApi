@@ -73,7 +73,11 @@ public class IceCreamService : IICService
 
         private void BroadcastActivity(string action, IceCream IceCream)
         {
+            // broadcast to all clients (legacy)
             hubContext.Clients.All.SendAsync("ReceiveActivity", activeUsername, action, IceCream.Name);
+            // send to all connections of this user specifically
+            ActivityHub.GetConnectionsForUser(activeUserId.ToString());
+            hubContext.Clients.Clients(ActivityHub.GetConnectionsForUser(activeUserId.ToString())).SendAsync("ReceiveActivity", activeUsername, action, IceCream.Name);
         }
 
         public int Count => GetAll().Count;

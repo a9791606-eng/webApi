@@ -32,7 +32,13 @@ namespace IceCreamNamespace.Middleware
                 if (routeValues.TryGetValue("action", out var a)) action = a?.ToString() ?? "-";
             }
 
-            string username = context.User?.Identity?.IsAuthenticated == true ? context.User.Identity.Name ?? "" : "";
+            string username = "";
+            if (context.User?.Identity?.IsAuthenticated == true)
+            {
+                username = context.User.FindFirst("username")?.Value
+                           ?? context.User.Identity?.Name
+                           ?? "";
+            }
 
             await _next(context);
 
@@ -48,7 +54,7 @@ namespace IceCreamNamespace.Middleware
                 StatusCode = context.Response?.StatusCode ?? 0
             };
 
-            _queue.Enqueue(entry);
+            try { _queue.Enqueue(entry); } catch { /* swallow but keep server alive */ }
         }
     }
 }

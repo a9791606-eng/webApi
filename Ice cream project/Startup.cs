@@ -24,6 +24,14 @@ namespace IceCreamNamespace
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAppRepositories();
+            services.AddIceCreamService();
+            services.AddUserService();
+            services.AddSingleton<LoggingQueue>();
+            services.AddHostedService<LoggingWorker>();
+            services.AddSingleton<IRabbitMqService, RabbitMqService>();
+            services.AddRabbitMq();
+
             services
                 .AddAuthentication(options =>
                 {
@@ -33,6 +41,7 @@ namespace IceCreamNamespace
                 {
                     cfg.RequireHttpsMetadata = false;
                     cfg.TokenValidationParameters = IceCreamTokenService.GetTokenValidationParameters();
+                    cfg.Events = new JwtBearerEvents();
                 });
 
             services.AddAuthorization(cfg =>
