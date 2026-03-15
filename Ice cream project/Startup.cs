@@ -24,8 +24,9 @@ namespace IceCreamNamespace
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // register repositories and services
             services.AddAppRepositories();
-            services.AddIceCreamService();
+            services.AddIceCream();
             services.AddUserService();
             services.AddSingleton<LoggingQueue>();
             services.AddHostedService<LoggingWorker>();
@@ -46,7 +47,7 @@ namespace IceCreamNamespace
 
             services.AddAuthorization(cfg =>
             {
-                cfg.AddPolicy("Admin", policy => policy.RequireClaim("type", "Admin"));
+                cfg.AddPolicy("AdminOnly", policy => policy.RequireClaim("type", "Admin"));
             });
 
             services.AddHttpContextAccessor();
@@ -54,18 +55,8 @@ namespace IceCreamNamespace
             // Use basic Swagger generation; detailed OpenAPI types removed to avoid package conflicts
             services.AddSwaggerGen();
 
-            services.AddIceCream();
             services.AddActiveUser();
             services.AddSignalR();
-
-            // the following service registrations belong inside ConfigureServices
-            services.AddAppRepositories();
-            // AddIceCream already registered above via AddIceCream()
-            services.AddUserService();
-            services.AddSingleton<LoggingQueue>();
-            services.AddHostedService<LoggingWorker>();
-            services.AddSingleton<IRabbitMqService, RabbitMqService>();
-            services.AddRabbitMq();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -19,7 +19,7 @@
         <h3>Edit</h3>
         <form action="javascript:void(0);" onsubmit="updateItem()">
             <input type="hidden" id="edit-id">
-            <input type="checkbox" id="edit-isWoodMade">
+            <input type="checkbox" id="edit-isGlutenFree">
             <input type="text" id="edit-name">
             <input type="submit" value="Save">
             <a onclick="closeInput()" aria-label="Close">&#10006;</a>
@@ -37,7 +37,9 @@
         </tr>
         <tbody id="User"></tbody>
     </table>
-<a href="index.html">מעבר לרשימת הגלידות</a>
+<a id="itemsLink" href="index.html">מעבר לרשימת הגלידות</a>
+    <div id="toast" class="toast" style="opacity:0"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@7.0.0/dist/browser/signalr.min.js"></script>
     <script src="js/site.js" asp-append-version="true"></script>
     <script type="text/javascript">
         getItems();

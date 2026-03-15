@@ -72,7 +72,6 @@ namespace IceCreamNamespace.Services
         public static IServiceCollection AddAppRepositories(this IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IIceCreamRepository, IceCreamRepository>();
             return services;
         }
     }

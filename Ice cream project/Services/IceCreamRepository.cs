@@ -16,11 +16,22 @@ namespace IceCreamNamespace.Services
 
         public IceCreamRepository(IWebHostEnvironment webHost)
         {
-            filePath = Path.Combine(webHost.ContentRootPath, "Data", "IceCream.json");
-            using var jsonFile = File.OpenText(filePath);
-            IceCreams = JsonSerializer.Deserialize<List<IceCream>>(jsonFile.ReadToEnd(),
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
-                ?? new List<IceCream>();
+            var dataDir = Path.Combine(webHost.ContentRootPath, "Data");
+            Directory.CreateDirectory(dataDir);
+            filePath = Path.Combine(dataDir, "IceCream.json");
+
+            if (File.Exists(filePath))
+            {
+                using var jsonFile = File.OpenText(filePath);
+                IceCreams = JsonSerializer.Deserialize<List<IceCream>>(jsonFile.ReadToEnd(),
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
+                    ?? new List<IceCream>();
+            }
+            else
+            {
+                IceCreams = new List<IceCream>();
+                Save();
+            }
         }
 
         private void Save() => File.WriteAllText(filePath, JsonSerializer.Serialize(IceCreams));

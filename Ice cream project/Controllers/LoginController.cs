@@ -4,8 +4,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using IceCreamNamespace.Models;
 using IceCreamNamespace.Services;
-using IceCreamProject.Services;
-using IceCreamProject.Interfaces;
+using IceCreamNamespace.Interfaces;
+// corrected: use IceCreamNamespace services/interfaces
 
 namespace IceCreamNamespace.Controllers;
 

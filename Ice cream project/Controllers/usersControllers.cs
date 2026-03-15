@@ -4,12 +4,14 @@ using System.Security.Cryptography.X509Certificates;
 using IceCreamNamespace.Models;
 using IceCreamNamespace.Services;
 using IceCreamNamespace.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace IceCreamNamespace.Controllers;
 
 [ApiController]
 [Route("user")]
+[Authorize]
 public class UsersController : ControllerBase
 {  
    IUserService services;
@@ -35,6 +37,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Policy = "AdminOnly")]
     public ActionResult Create(User newUser)
     {
         var postedUser = services.Create(newUser);
@@ -59,6 +62,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Policy = "AdminOnly")]
     public ActionResult Delete(int id)
     {
         var ans= services.Delete(id);

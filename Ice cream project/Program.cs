@@ -11,31 +11,54 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// configure Serilog early
+var logFilePath = builder.Configuration.GetValue<string>("Logging:FilePath")
+    ?? Path.Combine(builder.Environment.ContentRootPath, "Data", "logs-.txt");
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .Enrich.FromLogContext()
+    .WriteTo.File(logFilePath, rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 50_000_000, retainedFileCountLimit: 7)
+    .CreateLogger();
+builder.Host.UseSerilog();
 
 // Core registrations required for DI
 builder.Services.AddIceCream();
 builder.Services.AddUserService();
 builder.Services.AddAppRepositories();
+// ensure repositories are available for services that depend on them
+// AddIceCream registers IceCreamRepository; AddAppRepositories registers UserRepository
 builder.Services.AddActiveUser();
 builder.Services.AddSignalR();
-builder.Services.AddSingleton<LoggingQueue>();
-builder.Services.AddHostedService<LoggingWorker>();
 builder.Services.AddSingleton<IRabbitMqService, RabbitMqService>();
 builder.Services.AddRabbitMq();
 
-// Configure authentication so Authorization middleware has a default scheme
+// Configure authentication: JWT for API + Cookie/Google for external interactive login
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
     .AddJwtBearer(cfg =>
     {
         cfg.RequireHttpsMetadata = false;
         cfg.TokenValidationParameters = IceCreamTokenService.GetTokenValidationParameters();
+    })
+    .AddCookie("External")
+    .AddGoogle("Google", options =>
+    {
+        options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+        options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+        options.SignInScheme = "External";
     });
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireClaim("type", "Admin"));
+});
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -52,13 +75,24 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseDefaultFiles();
+// serve login.html as default
+var defaultFilesOptions = new DefaultFilesOptions();
+defaultFilesOptions.DefaultFileNames.Clear();
+defaultFilesOptions.DefaultFileNames.Add("login.html");
+app.UseDefaultFiles(defaultFilesOptions);
 app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// request logging middleware (now writes to Serilog)
+app.UseMiddleware<IceCreamNamespace.Middleware.RequestLoggingMiddleware>();
+
+app.MapHub<IceCreamNamespace.Hubs.ActivityHub>("/activityHub");
+
+// map external auth callback route for Google (signin-google)
+// the ExternalAuthController handles issuance of JWT after Google signin
 app.MapControllers();
 
 app.Run();

@@ -1,0 +1,14 @@
+2026-03-15 13:24:12.196 +02:00 [INF] User profile is available. Using 'C:\Users\huser\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-15 13:24:12.307 +02:00 [INF] Now listening on: https://localhost:7274
+2026-03-15 13:24:12.308 +02:00 [INF] Now listening on: http://localhost:5089
+2026-03-15 13:24:12.309 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-15 13:24:12.309 +02:00 [INF] Hosting environment: Development
+2026-03-15 13:24:12.309 +02:00 [INF] Content root path: C:\Users\huser\Documents\GitHub\webApi\Ice cream project
+2026-03-15 13:26:00.362 +02:00 [INF] Application is shutting down...
+2026-03-15 13:26:05.785 +02:00 [INF] User profile is available. Using 'C:\Users\huser\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-15 13:26:05.895 +02:00 [INF] Now listening on: https://localhost:7274
+2026-03-15 13:26:05.895 +02:00 [INF] Now listening on: http://localhost:5089
+2026-03-15 13:26:05.897 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-15 13:26:05.897 +02:00 [INF] Hosting environment: Development
+2026-03-15 13:26:05.897 +02:00 [INF] Content root path: C:\Users\huser\Documents\GitHub\webApi\Ice cream project
+2026-03-15 13:28:24.590 +02:00 [INF] Application is shutting down...

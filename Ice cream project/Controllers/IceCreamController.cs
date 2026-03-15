@@ -67,9 +67,10 @@ namespace IceCreamNamespace.Controllers
             if (IceCream is null)
                 return  NotFound();
 
+            // services.Delete enforces ownership; Admin policy is enforced at controller level if needed
             services.Delete(id);
 
-            return Content(services.Count.ToString());
-        }
-    }
-}
+            return NoContent();
+         }
+     }
+ }
