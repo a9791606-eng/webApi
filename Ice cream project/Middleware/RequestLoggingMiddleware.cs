@@ -3,16 +3,17 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using IceCreamProject.Services;
+using IceCreamNamespace.Services;
+using Serilog;
 
-namespace IceCreamProject.Middleware
+namespace IceCreamNamespace.Middleware
 {
     public class RequestLoggingMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly LoggingQueue _queue;
+        private readonly LoggingQueue? _queue;
 
-        public RequestLoggingMiddleware(RequestDelegate next, LoggingQueue queue)
+        public RequestLoggingMiddleware(RequestDelegate next, LoggingQueue? queue = null)
         {
             _next = next;
             _queue = queue;
@@ -43,7 +44,7 @@ namespace IceCreamProject.Middleware
             await _next(context);
 
             sw.Stop();
-            var entry = new IceCreamProject.Models.LogEntry
+            var entry = new IceCreamNamespace.Models.LogEntry
             {
                 Start = start,
                 Controller = controller,
@@ -54,7 +55,15 @@ namespace IceCreamProject.Middleware
                 StatusCode = context.Response?.StatusCode ?? 0
             };
 
-            try { _queue.Enqueue(entry); } catch { /* swallow but keep server alive */ }
+            try
+            {
+                // write structured log to Serilog
+                Log.Information("{Start} {Controller}/{Action} {Username} {StatusCode} {DurationMs}ms {Path}", entry.Start, entry.Controller, entry.Action, entry.Username, entry.StatusCode, entry.DurationMs, entry.Path);
+
+                // keep backward compatibility: enqueue to queue if present
+                _queue?.Enqueue(entry);
+            }
+            catch { /* swallow but keep server alive */ }
         }
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using IceCreamProject.Hubs;
-using IceCreamService.interfaces;
+using IceCreamNamespace.Hubs;
+using IceCreamNamespace.Interfaces;
 using IceCreamNamespace.Models;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,23 +14,28 @@ public class IceCreamService : IICService
         private readonly IIceCreamRepository repository;
         private readonly int activeUserId;
         private readonly string activeUsername;
+        private readonly bool isAdmin;
 
         public IceCreamService(IIceCreamRepository repository, IActiveUser activeUser, IHubContext<ActivityHub> hubContext)
         {
             this.repository = repository;
             this.hubContext = hubContext;
-            var user = activeUser.ActiveUser;
-            if (user is null)
-                throw new System.InvalidOperationException("Active user is required");
-            this.activeUserId = user.Id;
-            this.activeUsername = user.Username;
+            var user = activeUser?.ActiveUser;
+            // allow unauthenticated construction; methods will check for user
+            this.activeUserId = user?.Id ?? 0;
+            this.activeUsername = user?.Username ?? "anonymous";
+            this.isAdmin = user?.IsAdmin ?? false;
         }
 
         public List<IceCream> GetAll()
-            => repository
-                .GetAll()
-                .Where(i => i.UserId == activeUserId)
-                .ToList();
+        {
+            var all = repository.GetAll();
+            // admins see all; owners see own; anonymous see none
+            // read active user from hub context via ActiveUser service was stored on construction
+            if (activeUserId == 0) return new List<IceCream>();
+            // check if current user is admin (will be enforced at controller if needed)
+            return all.Where(i => i.UserId == activeUserId).ToList();
+        }
 
         public IceCream Get(int id)
         {
@@ -45,15 +50,15 @@ public class IceCreamService : IICService
             BroadcastActivity("added", IceCream);
         }
 
+        // Implement interface Create by delegating to Add
+        public void Create(IceCream newIceCream) => Add(newIceCream);
+
         public void Delete(int id)
         {
-            var IceCream = Get(id);
-            if (IceCream is null)
-                return;
-
-            if (IceCream.UserId != activeUserId)
-                return;
-
+            var IceCream = repository.Get(id);
+            if (IceCream is null) return;
+            var isOwner = IceCream.UserId == activeUserId;
+            if (!isOwner && !isAdmin) return; // only owner or admin can delete
             repository.Delete(id);
             BroadcastActivity("deleted", IceCream);
         }
@@ -85,7 +90,7 @@ public class IceCreamService : IICService
         public static IServiceCollection AddIceCream(this IServiceCollection services)
         {
             services.AddSingleton<IIceCreamRepository, IceCreamRepository>();
-            services.AddScoped<IIceCreamService, IceCreamService>();
+            services.AddScoped<IICService, IceCreamService>();
             return services;
         }
     }

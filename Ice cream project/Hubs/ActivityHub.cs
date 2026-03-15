@@ -5,7 +5,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 
 
-namespace IceCreamProject.Hubs;
+namespace IceCreamNamespace.Hubs;
 
 [Authorize]
 public class ActivityHub : Hub

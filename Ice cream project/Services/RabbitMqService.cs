@@ -1,9 +1,9 @@
 using System.Text;
 using System.Text.Json;
-using IceCreamProject.Models;
+using IceCreamNamespace.Models;
 using RabbitMQ.Client;
 
-namespace IceCreamProject.Services
+namespace IceCreamNamespace.Services
 {
     public interface IRabbitMqService
     {

@@ -4,14 +4,14 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using IceCreamProject.Hubs;
-using IceCreamProject.Models;
+using IceCreamNamespace.Hubs;
+using IceCreamNamespace.Models;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace IceCreamProject.Services
+namespace IceCreamNamespace.Services
 {
     public class IceCreamUpdateWorker : BackgroundService
     {

@@ -3,21 +3,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using System.IO;
-using IceCreamProject.Models;
+using IceCreamNamespace.Models;
 using System;
 
-namespace IceCreamProject.Services
+namespace IceCreamNamespace.Services
 {
     public class LoggingWorker : BackgroundService
     {
         private readonly LoggingQueue _queue;
         private readonly string logPath;
-        private readonly IRabbitMqService rabbit;
+        private readonly IRabbitMqService? rabbit;
 
-        public LoggingWorker(LoggingQueue queue, IWebHostEnvironment env, IRabbitMqService rabbit = null)
+        public LoggingWorker(LoggingQueue queue, IWebHostEnvironment env, IRabbitMqService? rabbit = null)
         {
             _queue = queue;
-            rabbit = rabbit;
+            this.rabbit = rabbit;
             var dataDir = Path.Combine(env.ContentRootPath, "Data");
             Directory.CreateDirectory(dataDir);
             logPath = Path.Combine(dataDir, "logs.jsonl");

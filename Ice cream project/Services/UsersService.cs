@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using IceCreamNamespace.Models;
-using IceCreamService.interfaces;
-using IceCreamProject.Hubs;
-using IceCreamProject.Interfaces;
+using IceCreamNamespace.Interfaces;
+using IceCreamNamespace.Hubs;
 
 
 namespace IceCreamNamespace.Services;
@@ -13,12 +15,20 @@ namespace IceCreamNamespace.Services;
       
      private readonly IUserRepository userRepository;
      private readonly IActiveUser activeUser;
+     private readonly IIceCreamRepository iceCreamRepository;
+ 
+     public UsersService(IUserRepository userRepository, IActiveUser activeUser)
+     {
+         this.userRepository = userRepository;
+         this.activeUser = activeUser;
+     }
 
-    public UsersService(IUserRepository userRepository, IActiveUser activeUser)
-    {
-        this.userRepository = userRepository;
-        this.activeUser = activeUser;
-    }
+     public UsersService(IUserRepository userRepository, IActiveUser activeUser, IIceCreamRepository iceCreamRepository)
+     {
+         this.userRepository = userRepository;
+         this.activeUser = activeUser;
+         this.iceCreamRepository = iceCreamRepository;
+     }
 
     public List<User> Get()
     {
@@ -71,13 +81,19 @@ namespace IceCreamNamespace.Services;
 
         // delete user's items as well
         // Use IIceCreamRepository to remove items belonging to this user
+        // ensure we have the repo via DI
+        if (iceCreamRepository != null)
+        {
+            var items = iceCreamRepository.GetAll().Where(i => i.UserId == id).ToList();
+            foreach (var it in items) iceCreamRepository.Delete(it.Id);
+        }
         userRepository.Delete(id);
         return true;
     }
 
     public int Count => userRepository.Count;
 }
-    public static class UserExtension{
+    public static partial class UserExtension{
       public static IServiceCollection AddUserService(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UsersService>();
@@ -86,5 +102,5 @@ namespace IceCreamNamespace.Services;
 
 
 
-}
+ }
 

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using IceCreamNamespace.Models;
 
-namespace IceCreamProject.Interfaces
+namespace IceCreamNamespace.Interfaces
 {
     public interface IUserRepository
     {

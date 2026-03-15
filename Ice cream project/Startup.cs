@@ -1,5 +1,5 @@
-using IceCreamProject.Hubs;
-using IceCreamProject.Services;
+using IceCreamNamespace.Hubs;
+using IceCreamNamespace.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi;
 
 namespace IceCreamNamespace
 {
@@ -25,8 +24,9 @@ namespace IceCreamNamespace
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // register repositories and services
             services.AddAppRepositories();
-            services.AddIceCreamService();
+            services.AddIceCream();
             services.AddUserService();
             services.AddSingleton<LoggingQueue>();
             services.AddHostedService<LoggingWorker>();
@@ -46,31 +46,20 @@ namespace IceCreamNamespace
                 });
 
             services.AddAuthorization(cfg =>
-                {
-                    cfg.AddPolicy("Admin", policy => policy.RequireClaim("type", "Admin"));
-                });
+            {
+                cfg.AddPolicy("AdminOnly", policy => policy.RequireClaim("type", "Admin"));
+            });
+
             services.AddHttpContextAccessor();
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "IceCream", Version = "v1" });
-                c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
-                {
-                    Type = SecuritySchemeType.Http,
-                    Scheme = "bearer",
-                    BearerFormat = "JWT",
-                    Description = "JWT Authorization header using the Bearer scheme."
-                });
-                c.AddSecurityRequirement(document => new OpenApiSecurityRequirement
-                {
-                    [new OpenApiSecuritySchemeReference("bearer", document)] = []
-                });
-            });
-            services.AddIceCream();
+            // Use basic Swagger generation; detailed OpenAPI types removed to avoid package conflicts
+            services.AddSwaggerGen();
+
             services.AddActiveUser();
             services.AddSignalR();
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

@@ -1,4 +1,4 @@
-using IceCreamService.Interfaces;
+using IceCreamNamespace.Interfaces;
 using IceCreamNamespace.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +8,7 @@ namespace IceCreamNamespace.Services
 {
     public class ActiveUserService : IActiveUser
     {
-        public User ActiveUser { get; private set; }
+        public User? ActiveUser { get; private set; }
         public ActiveUserService(IHttpContextAccessor context)
         {
             var user = context?.HttpContext?.User;
@@ -26,6 +26,10 @@ namespace IceCreamNamespace.Services
                     Username = nameClaim?.Value ?? string.Empty,
                     IsAdmin = string.Equals(typeClaim?.Value, "Admin", System.StringComparison.OrdinalIgnoreCase)
                 };
+            }
+            else
+            {
+                ActiveUser = null;
             }
         }
 

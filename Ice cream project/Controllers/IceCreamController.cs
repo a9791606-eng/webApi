@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Cryptography.X509Certificates;
 using IceCreamNamespace.Models;
 using IceCreamNamespace.Services;
-using IceCreamService.interfaces;
+using IceCreamNamespace.Interfaces;
 
 namespace IceCreamNamespace.Controllers
 {
@@ -40,8 +40,8 @@ namespace IceCreamNamespace.Controllers
         [HttpPost]
         public IActionResult Create(IceCream newIceCream)
         {
-            services.Add(newIceCream);
-            return CreatedAtAction(nameof(Create), new { id = newIceCream.Id },newIceCream);
+            services.Create(newIceCream);
+            return CreatedAtAction(nameof(Create), new { id = newIceCream.Id }, newIceCream);
         }
 
         [HttpPut("{id}")]
@@ -67,9 +67,10 @@ namespace IceCreamNamespace.Controllers
             if (IceCream is null)
                 return  NotFound();
 
+            // services.Delete enforces ownership; Admin policy is enforced at controller level if needed
             services.Delete(id);
 
-            return Content(services.Count.ToString());
-        }
-    }
-}
+            return NoContent();
+         }
+     }
+ }

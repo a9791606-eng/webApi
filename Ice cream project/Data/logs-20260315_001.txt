@@ -1,0 +1,1171 @@
+2026-03-15 13:26:34.820 +02:00 [INF] User profile is available. Using 'C:\Users\huser\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-15 13:26:34.940 +02:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address https://127.0.0.1:7274: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-03-15 13:26:34.952 +02:00 [ERR] BackgroundService failed
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at IceCreamNamespace.Services.IceCreamUpdateWorker.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\huser\Documents\GitHub\webApi\Ice cream project\Services\IceCreamUpdateWorker.cs:line 53
+   at Microsoft.Extensions.Hosting.Internal.Host.TryExecuteBackgroundServiceAsync(BackgroundService backgroundService)
+2026-03-15 13:26:34.956 +02:00 [FTL] The HostOptions.BackgroundServiceExceptionBehavior is configured to StopHost. A BackgroundService has thrown an unhandled exception, and the IHost instance is stopping. To avoid this behavior, configure this to Ignore; however the BackgroundService will not be restarted.
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at IceCreamNamespace.Services.IceCreamUpdateWorker.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\huser\Documents\GitHub\webApi\Ice cream project\Services\IceCreamUpdateWorker.cs:line 53
+   at Microsoft.Extensions.Hosting.Internal.Host.TryExecuteBackgroundServiceAsync(BackgroundService backgroundService)
+2026-03-15 13:28:28.808 +02:00 [INF] User profile is available. Using 'C:\Users\huser\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-15 13:28:28.920 +02:00 [INF] Now listening on: https://localhost:7274
+2026-03-15 13:28:28.920 +02:00 [INF] Now listening on: http://localhost:5089
+2026-03-15 13:28:28.921 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-15 13:28:28.921 +02:00 [INF] Hosting environment: Development
+2026-03-15 13:28:28.921 +02:00 [INF] Content root path: C:\Users\huser\Documents\GitHub\webApi\Ice cream project
+2026-03-15 13:28:43.096 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/external/google-callback - null null
+2026-03-15 13:28:43.157 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.ExternalAuthController.GoogleCallback (IceCream)'
+2026-03-15 13:28:43.164 +02:00 [INF] Route matched with {action = "GoogleCallback", controller = "ExternalAuth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GoogleCallback() on controller IceCreamNamespace.Controllers.ExternalAuthController (IceCream).
+2026-03-15 13:28:43.217 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:28:43.236 +02:00 [INF] Executed action IceCreamNamespace.Controllers.ExternalAuthController.GoogleCallback (IceCream) in 68.7414ms
+2026-03-15 13:28:43.246 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.ExternalAuthController.GoogleCallback (IceCream)'
+2026-03-15 13:28:43.247 +02:00 [INF] "2026-03-15T11:28:43.1514642Z" ExternalAuth/GoogleCallback  401 94ms /external/google-callback
+2026-03-15 13:28:43.252 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/external/google-callback - 401 null application/problem+json; charset=utf-8 156.2261ms
+2026-03-15 13:30:40.010 +02:00 [INF] Application is shutting down...
+2026-03-15 13:30:51.625 +02:00 [INF] User profile is available. Using 'C:\Users\huser\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-15 13:30:51.736 +02:00 [INF] Now listening on: https://localhost:7274
+2026-03-15 13:30:51.736 +02:00 [INF] Now listening on: http://localhost:5089
+2026-03-15 13:30:51.737 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-15 13:30:51.738 +02:00 [INF] Hosting environment: Development
+2026-03-15 13:30:51.738 +02:00 [INF] Content root path: C:\Users\huser\Documents\GitHub\webApi\Ice cream project
+2026-03-15 13:34:49.821 +02:00 [INF] Application is shutting down...
+2026-03-15 13:34:59.340 +02:00 [INF] User profile is available. Using 'C:\Users\huser\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-15 13:34:59.459 +02:00 [INF] Now listening on: https://localhost:7274
+2026-03-15 13:34:59.459 +02:00 [INF] Now listening on: http://localhost:5089
+2026-03-15 13:34:59.460 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-15 13:34:59.460 +02:00 [INF] Hosting environment: Development
+2026-03-15 13:34:59.460 +02:00 [INF] Content root path: C:\Users\huser\Documents\GitHub\webApi\Ice cream project
+2026-03-15 13:35:39.407 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/ - null null
+2026-03-15 13:35:39.442 +02:00 [INF] Sending file. Request path: '/login.html'. Physical path: 'C:\Users\huser\Documents\GitHub\webApi\Ice cream project\wwwroot\login.html'
+2026-03-15 13:35:39.444 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/login.html - 200 1599 text/html 39.7026ms
+2026-03-15 13:35:39.452 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/js/login.js - null null
+2026-03-15 13:35:39.453 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/css/site.css - null null
+2026-03-15 13:35:39.458 +02:00 [INF] The file /css/site.css was not modified
+2026-03-15 13:35:39.458 +02:00 [INF] The file /js/login.js was not modified
+2026-03-15 13:35:39.458 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/css/site.css - 304 null text/css 5.2803ms
+2026-03-15 13:35:39.458 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/js/login.js - 304 null text/javascript 5.4573ms
+2026-03-15 13:35:43.260 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:35:43.266 +02:00 [INF] Sending file. Request path: '/index.html'. Physical path: 'C:\Users\huser\Documents\GitHub\webApi\Ice cream project\wwwroot\index.html'
+2026-03-15 13:35:43.270 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 200 2240 text/html 10.033ms
+2026-03-15 13:35:43.281 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/js/site.js - null null
+2026-03-15 13:35:43.282 +02:00 [INF] The file /js/site.js was not modified
+2026-03-15 13:35:43.282 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/js/site.js - 304 null text/javascript 0.9816ms
+2026-03-15 13:35:43.289 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:35:43.292 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:35:43.393 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:35:43.393 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:35:43.398 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:35:43.399 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:35:43.399 +02:00 [INF] "2026-03-15T11:35:43.3914511Z" -/- test 200 7ms /activityHub/negotiate
+2026-03-15 13:35:43.401 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 109.7889ms
+2026-03-15 13:35:43.404 +02:00 [INF] Request starting HTTP/2 CONNECT https://localhost:7274/activityHub?id=L815V5dKp35g3vVRld0T4w&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:35:43.407 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:35:43.410 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:35:43.410 +02:00 [INF] Request finished HTTP/2 CONNECT https://localhost:7274/activityHub?id=L815V5dKp35g3vVRld0T4w&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 6.5341ms
+2026-03-15 13:35:43.411 +02:00 [INF] Connection id "0HNK2GRTRATKQ", Request id "0HNK2GRTRATKQ:0000000F": the application completed without reading the entire request body.
+2026-03-15 13:35:43.412 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:35:43.413 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:35:43.413 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:35:43.413 +02:00 [INF] "2026-03-15T11:35:43.4133734Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:35:43.413 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.1589ms
+2026-03-15 13:35:43.415 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=6mL_wkwO-Zs2NG9FS78chw&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:35:43.416 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:35:43.416 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:35:43.416 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=6mL_wkwO-Zs2NG9FS78chw&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.627ms
+2026-03-15 13:35:43.418 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:35:43.419 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:35:43.419 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:35:43.419 +02:00 [INF] "2026-03-15T11:35:43.4191421Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:35:43.419 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.8212ms
+2026-03-15 13:35:43.420 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:35:43.421 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=042xH2Itcm2Sz84U2-UbrA&_=1773574543420 - null null
+2026-03-15 13:35:43.422 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:35:43.423 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:35:43.424 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:35:43.424 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:35:43.425 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:35:43.425 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 23.4132ms
+2026-03-15 13:35:43.425 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:35:43.425 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.8367ms
+2026-03-15 13:35:43.425 +02:00 [INF] "2026-03-15T11:35:43.3914512Z" IceCream/GetAll test 200 34ms /IceCream
+2026-03-15 13:35:43.425 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:35:43.425 +02:00 [INF] "2026-03-15T11:35:43.4243149Z" IceCream/GetAll test 200 1ms /IceCream
+2026-03-15 13:35:43.425 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 136.3797ms
+2026-03-15 13:35:43.425 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.8157ms
+2026-03-15 13:35:43.427 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:35:43.428 +02:00 [INF] "2026-03-15T11:35:43.4224133Z" -/- test 200 5ms /activityHub
+2026-03-15 13:35:43.428 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=042xH2Itcm2Sz84U2-UbrA&_=1773574543420 - 200 0 application/octet-stream 6.2131ms
+2026-03-15 13:35:43.436 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=042xH2Itcm2Sz84U2-UbrA&_=1773574543434 - null null
+2026-03-15 13:35:43.436 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub?id=042xH2Itcm2Sz84U2-UbrA - text/plain;charset=UTF-8 32
+2026-03-15 13:35:43.437 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:35:43.437 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:35:43.438 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:35:43.438 +02:00 [INF] "2026-03-15T11:35:43.4372061Z" -/- test 200 1ms /activityHub
+2026-03-15 13:35:43.438 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub?id=042xH2Itcm2Sz84U2-UbrA - 200 0 text/plain 2.0428ms
+2026-03-15 13:35:43.442 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:35:43.442 +02:00 [INF] "2026-03-15T11:35:43.4372062Z" -/- test 200 5ms /activityHub
+2026-03-15 13:35:43.443 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=042xH2Itcm2Sz84U2-UbrA&_=1773574543434 - 200 3 application/octet-stream 6.4188ms
+2026-03-15 13:35:43.445 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=042xH2Itcm2Sz84U2-UbrA&_=1773574543443 - null null
+2026-03-15 13:35:43.452 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:35:50.994 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/external/google-login - null null
+2026-03-15 13:35:50.995 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.ExternalAuthController.GoogleLogin (IceCream)'
+2026-03-15 13:35:50.997 +02:00 [INF] Route matched with {action = "GoogleLogin", controller = "ExternalAuth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GoogleLogin() on controller IceCreamNamespace.Controllers.ExternalAuthController (IceCream).
+2026-03-15 13:35:51.022 +02:00 [INF] Executing ChallengeResult with authentication schemes (["Google"]).
+2026-03-15 13:35:51.030 +02:00 [INF] AuthenticationScheme: Google was challenged.
+2026-03-15 13:35:51.031 +02:00 [INF] Executed action IceCreamNamespace.Controllers.ExternalAuthController.GoogleLogin (IceCream) in 33.9808ms
+2026-03-15 13:35:51.031 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.ExternalAuthController.GoogleLogin (IceCream)'
+2026-03-15 13:35:51.031 +02:00 [INF] "2026-03-15T11:35:50.9950715Z" ExternalAuth/GoogleLogin  302 36ms /external/google-login
+2026-03-15 13:35:51.031 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/external/google-login - 302 0 null 36.7928ms
+2026-03-15 13:36:14.951 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/Login - application/json 42
+2026-03-15 13:36:14.951 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:14.955 +02:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.String] Login(IceCreamNamespace.Models.User) on controller IceCreamNamespace.Controllers.LoginController (IceCream).
+2026-03-15 13:36:14.965 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:36:14.977 +02:00 [INF] Executed action IceCreamNamespace.Controllers.LoginController.Login (IceCream) in 21.485ms
+2026-03-15 13:36:14.977 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:14.977 +02:00 [INF] "2026-03-15T11:36:14.9513131Z" Login/Login  401 25ms /Login
+2026-03-15 13:36:14.977 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/Login - 401 null application/problem+json; charset=utf-8 26.5317ms
+2026-03-15 13:36:21.126 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/Login - application/json 44
+2026-03-15 13:36:21.126 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:21.126 +02:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.String] Login(IceCreamNamespace.Models.User) on controller IceCreamNamespace.Controllers.LoginController (IceCream).
+2026-03-15 13:36:21.128 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:36:21.128 +02:00 [INF] Executed action IceCreamNamespace.Controllers.LoginController.Login (IceCream) in 1.9397ms
+2026-03-15 13:36:21.128 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:21.128 +02:00 [INF] "2026-03-15T11:36:21.1266679Z" Login/Login  401 2ms /Login
+2026-03-15 13:36:21.128 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/Login - 401 null application/problem+json; charset=utf-8 2.5266ms
+2026-03-15 13:36:33.406 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/Login - application/json 42
+2026-03-15 13:36:33.406 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:33.406 +02:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.String] Login(IceCreamNamespace.Models.User) on controller IceCreamNamespace.Controllers.LoginController (IceCream).
+2026-03-15 13:36:33.407 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:36:33.407 +02:00 [INF] Executed action IceCreamNamespace.Controllers.LoginController.Login (IceCream) in 0.7689ms
+2026-03-15 13:36:33.407 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:33.407 +02:00 [INF] "2026-03-15T11:36:33.4066421Z" Login/Login  401 1ms /Login
+2026-03-15 13:36:33.407 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/Login - 401 null application/problem+json; charset=utf-8 1.4262ms
+2026-03-15 13:36:34.230 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/Login - application/json 42
+2026-03-15 13:36:34.230 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:34.230 +02:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.String] Login(IceCreamNamespace.Models.User) on controller IceCreamNamespace.Controllers.LoginController (IceCream).
+2026-03-15 13:36:34.231 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:36:34.231 +02:00 [INF] Executed action IceCreamNamespace.Controllers.LoginController.Login (IceCream) in 0.7272ms
+2026-03-15 13:36:34.231 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:34.231 +02:00 [INF] "2026-03-15T11:36:34.2304286Z" Login/Login  401 0ms /Login
+2026-03-15 13:36:34.231 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/Login - 401 null application/problem+json; charset=utf-8 1.2793ms
+2026-03-15 13:36:34.422 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/Login - application/json 42
+2026-03-15 13:36:34.422 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:34.422 +02:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.String] Login(IceCreamNamespace.Models.User) on controller IceCreamNamespace.Controllers.LoginController (IceCream).
+2026-03-15 13:36:34.423 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:36:34.423 +02:00 [INF] Executed action IceCreamNamespace.Controllers.LoginController.Login (IceCream) in 0.7931ms
+2026-03-15 13:36:34.423 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:34.423 +02:00 [INF] "2026-03-15T11:36:34.4225558Z" Login/Login  401 1ms /Login
+2026-03-15 13:36:34.423 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/Login - 401 null application/problem+json; charset=utf-8 1.5388ms
+2026-03-15 13:36:34.670 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/Login - application/json 42
+2026-03-15 13:36:34.670 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:34.670 +02:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.String] Login(IceCreamNamespace.Models.User) on controller IceCreamNamespace.Controllers.LoginController (IceCream).
+2026-03-15 13:36:34.671 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:36:34.671 +02:00 [INF] Executed action IceCreamNamespace.Controllers.LoginController.Login (IceCream) in 0.7032ms
+2026-03-15 13:36:34.671 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:34.671 +02:00 [INF] "2026-03-15T11:36:34.6705294Z" Login/Login  401 0ms /Login
+2026-03-15 13:36:34.671 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/Login - 401 null application/problem+json; charset=utf-8 1.4384ms
+2026-03-15 13:36:45.647 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:36:45.647 +02:00 [INF] "2026-03-15T11:35:43.4524570Z" -/- test 200 62194ms /activityHub
+2026-03-15 13:36:45.647 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=042xH2Itcm2Sz84U2-UbrA&_=1773574543443 - 499 null null 62201.565ms
+2026-03-15 13:36:53.062 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/Login - application/json 42
+2026-03-15 13:36:53.062 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:53.062 +02:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.String] Login(IceCreamNamespace.Models.User) on controller IceCreamNamespace.Controllers.LoginController (IceCream).
+2026-03-15 13:36:53.063 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:36:53.063 +02:00 [INF] Executed action IceCreamNamespace.Controllers.LoginController.Login (IceCream) in 0.8821ms
+2026-03-15 13:36:53.063 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:53.063 +02:00 [INF] "2026-03-15T11:36:53.0624962Z" Login/Login  401 1ms /Login
+2026-03-15 13:36:53.063 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/Login - 401 null application/problem+json; charset=utf-8 1.3492ms
+2026-03-15 13:36:56.582 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/Login - application/json 42
+2026-03-15 13:36:56.582 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:56.582 +02:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.String] Login(IceCreamNamespace.Models.User) on controller IceCreamNamespace.Controllers.LoginController (IceCream).
+2026-03-15 13:36:56.583 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:36:56.583 +02:00 [INF] Executed action IceCreamNamespace.Controllers.LoginController.Login (IceCream) in 1.0977ms
+2026-03-15 13:36:56.583 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:36:56.583 +02:00 [INF] "2026-03-15T11:36:56.5826028Z" Login/Login  401 1ms /Login
+2026-03-15 13:36:56.584 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/Login - 401 null application/problem+json; charset=utf-8 1.5531ms
+2026-03-15 13:37:00.302 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/Login - application/json 44
+2026-03-15 13:37:00.302 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:37:00.302 +02:00 [INF] Route matched with {action = "Login", controller = "Login"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.String] Login(IceCreamNamespace.Models.User) on controller IceCreamNamespace.Controllers.LoginController (IceCream).
+2026-03-15 13:37:00.303 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:37:00.303 +02:00 [INF] Executed action IceCreamNamespace.Controllers.LoginController.Login (IceCream) in 0.919ms
+2026-03-15 13:37:00.303 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.LoginController.Login (IceCream)'
+2026-03-15 13:37:00.303 +02:00 [INF] "2026-03-15T11:37:00.3025421Z" Login/Login  401 1ms /Login
+2026-03-15 13:37:00.303 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/Login - 401 null application/problem+json; charset=utf-8 1.4805ms
+2026-03-15 13:37:02.699 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:02.700 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:02.700 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 0.4549ms
+2026-03-15 13:37:02.716 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:02.717 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:02.717 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:02.717 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:02.717 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:02.717 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:02.717 +02:00 [INF] "2026-03-15T11:37:02.7175564Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:02.717 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.8608ms
+2026-03-15 13:37:02.721 +02:00 [INF] Request starting HTTP/2 CONNECT https://localhost:7274/activityHub?id=mjVED_1lHzJdcJUFFwNn8w&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:02.721 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:02.721 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:02.721 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 3.5804ms
+2026-03-15 13:37:02.721 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:02.721 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:02.721 +02:00 [INF] "2026-03-15T11:37:02.7175564Z" IceCream/GetAll test 200 3ms /IceCream
+2026-03-15 13:37:02.721 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 4.5772ms
+2026-03-15 13:37:02.721 +02:00 [INF] Request finished HTTP/2 CONNECT https://localhost:7274/activityHub?id=mjVED_1lHzJdcJUFFwNn8w&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.357ms
+2026-03-15 13:37:02.721 +02:00 [INF] Connection id "0HNK2GRTRATKQ", Request id "0HNK2GRTRATKQ:0000003B": the application completed without reading the entire request body.
+2026-03-15 13:37:02.722 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:02.723 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:02.723 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:02.723 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:02.723 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.3593ms
+2026-03-15 13:37:02.724 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:02.724 +02:00 [INF] "2026-03-15T11:37:02.7234548Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:02.724 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.3842ms
+2026-03-15 13:37:02.727 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:02.728 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:02.728 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:02.728 +02:00 [INF] "2026-03-15T11:37:02.7283963Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:02.728 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.0721ms
+2026-03-15 13:37:02.732 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=UGHZFFXZMjdBS9czvCv7PQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:02.732 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:02.732 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:02.732 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=UGHZFFXZMjdBS9czvCv7PQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.4963ms
+2026-03-15 13:37:02.735 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:02.735 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:02.736 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:02.736 +02:00 [INF] "2026-03-15T11:37:02.7356800Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:02.736 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.4062ms
+2026-03-15 13:37:02.740 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=PEsKQ0DHdCQqdj2gTXuZtQ&_=1773574622738 - null null
+2026-03-15 13:37:02.740 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:02.741 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:02.741 +02:00 [INF] "2026-03-15T11:37:02.7405292Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:02.741 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=PEsKQ0DHdCQqdj2gTXuZtQ&_=1773574622738 - 200 0 application/octet-stream 1.0381ms
+2026-03-15 13:37:02.743 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub?id=PEsKQ0DHdCQqdj2gTXuZtQ - text/plain;charset=UTF-8 32
+2026-03-15 13:37:02.743 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=PEsKQ0DHdCQqdj2gTXuZtQ&_=1773574622742 - null null
+2026-03-15 13:37:02.744 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:02.744 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:02.744 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:02.744 +02:00 [INF] "2026-03-15T11:37:02.7441704Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:02.744 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub?id=PEsKQ0DHdCQqdj2gTXuZtQ - 200 0 text/plain 0.7339ms
+2026-03-15 13:37:02.744 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:02.744 +02:00 [INF] "2026-03-15T11:37:02.7442556Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:02.744 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=PEsKQ0DHdCQqdj2gTXuZtQ&_=1773574622742 - 200 3 application/octet-stream 1.0005ms
+2026-03-15 13:37:02.747 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=PEsKQ0DHdCQqdj2gTXuZtQ&_=1773574622745 - null null
+2026-03-15 13:37:02.747 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:03.454 +02:00 [INF] Request starting HTTP/2 DELETE https://localhost:7274/IceCream/1 - null null
+2026-03-15 13:37:03.454 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.Delete (IceCream)'
+2026-03-15 13:37:03.456 +02:00 [INF] Route matched with {action = "Delete", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Delete(Int32) on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:03.457 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:37:03.457 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.Delete (IceCream) in 1.258ms
+2026-03-15 13:37:03.457 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.Delete (IceCream)'
+2026-03-15 13:37:03.457 +02:00 [INF] "2026-03-15T11:37:03.4548733Z" IceCream/Delete test 404 2ms /IceCream/1
+2026-03-15 13:37:03.457 +02:00 [INF] Request finished HTTP/2 DELETE https://localhost:7274/IceCream/1 - 404 null application/problem+json; charset=utf-8 3.4968ms
+2026-03-15 13:37:05.940 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:05.941 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:05.941 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 0.528ms
+2026-03-15 13:37:05.946 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:05.946 +02:00 [INF] "2026-03-15T11:37:02.7478523Z" -/- test 200 3199ms /activityHub
+2026-03-15 13:37:05.947 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=PEsKQ0DHdCQqdj2gTXuZtQ&_=1773574622745 - 499 null null 3199.7849ms
+2026-03-15 13:37:05.958 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:05.958 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:05.958 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:05.959 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:05.959 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:05.959 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:05.959 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:05.959 +02:00 [INF] "2026-03-15T11:37:05.9589587Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:05.959 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.9172ms
+2026-03-15 13:37:05.959 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.2498ms
+2026-03-15 13:37:05.959 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:05.959 +02:00 [INF] "2026-03-15T11:37:05.9590897Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:05.959 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.0763ms
+2026-03-15 13:37:05.962 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:05.962 +02:00 [INF] Request starting HTTP/2 CONNECT https://localhost:7274/activityHub?id=KdVeLYfU1iDFt0pYjqgeLQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:05.962 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:05.962 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:05.963 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:05.963 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:05.963 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:05.963 +02:00 [INF] Request finished HTTP/2 CONNECT https://localhost:7274/activityHub?id=KdVeLYfU1iDFt0pYjqgeLQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.4297ms
+2026-03-15 13:37:05.963 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.144ms
+2026-03-15 13:37:05.963 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:05.963 +02:00 [INF] "2026-03-15T11:37:05.9629596Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:05.963 +02:00 [INF] Connection id "0HNK2GRTRATKQ", Request id "0HNK2GRTRATKQ:00000057": the application completed without reading the entire request body.
+2026-03-15 13:37:05.963 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.0615ms
+2026-03-15 13:37:05.965 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:05.965 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:05.966 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:05.966 +02:00 [INF] "2026-03-15T11:37:05.9659646Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:05.966 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.5239ms
+2026-03-15 13:37:05.968 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=1YR-QdUSYuWnGJHt-vdjrQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:05.969 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:05.969 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:05.969 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=1YR-QdUSYuWnGJHt-vdjrQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.8367ms
+2026-03-15 13:37:05.972 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:05.972 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:05.972 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:05.972 +02:00 [INF] "2026-03-15T11:37:05.9727324Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:05.972 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.6167ms
+2026-03-15 13:37:05.975 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=Se-CqdtYmclJUYtUFfStfA&_=1773574625974 - null null
+2026-03-15 13:37:05.976 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:05.976 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:05.976 +02:00 [INF] "2026-03-15T11:37:05.9763510Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:05.976 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=Se-CqdtYmclJUYtUFfStfA&_=1773574625974 - 200 0 application/octet-stream 0.794ms
+2026-03-15 13:37:05.979 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=Se-CqdtYmclJUYtUFfStfA&_=1773574625977 - null null
+2026-03-15 13:37:05.979 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub?id=Se-CqdtYmclJUYtUFfStfA - text/plain;charset=UTF-8 32
+2026-03-15 13:37:05.979 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:05.979 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:05.979 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:05.979 +02:00 [INF] "2026-03-15T11:37:05.9793617Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:05.979 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:05.979 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub?id=Se-CqdtYmclJUYtUFfStfA - 200 0 text/plain 0.5484ms
+2026-03-15 13:37:05.979 +02:00 [INF] "2026-03-15T11:37:05.9793644Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:05.979 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=Se-CqdtYmclJUYtUFfStfA&_=1773574625977 - 200 3 application/octet-stream 0.6794ms
+2026-03-15 13:37:05.982 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=Se-CqdtYmclJUYtUFfStfA&_=1773574625980 - null null
+2026-03-15 13:37:05.982 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:08.610 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:08.611 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:08.611 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 0.5585ms
+2026-03-15 13:37:08.614 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:08.615 +02:00 [INF] "2026-03-15T11:37:05.9827289Z" -/- test 200 2632ms /activityHub
+2026-03-15 13:37:08.615 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=Se-CqdtYmclJUYtUFfStfA&_=1773574625980 - 499 null null 2632.9646ms
+2026-03-15 13:37:08.625 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:08.625 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:08.626 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:08.626 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:08.626 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:08.626 +02:00 [INF] "2026-03-15T11:37:08.6263387Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:08.626 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:08.626 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.207ms
+2026-03-15 13:37:08.626 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:08.626 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1911ms
+2026-03-15 13:37:08.626 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:08.627 +02:00 [INF] "2026-03-15T11:37:08.6263383Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:08.627 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.5674ms
+2026-03-15 13:37:08.630 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:08.631 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:08.631 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:08.631 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:08.631 +02:00 [INF] Request starting HTTP/2 CONNECT https://localhost:7274/activityHub?id=l5zF5o6Vr7HLU_jccRcFBQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:08.631 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.2816ms
+2026-03-15 13:37:08.631 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:08.631 +02:00 [INF] "2026-03-15T11:37:08.6311467Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:08.631 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.1016ms
+2026-03-15 13:37:08.631 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:08.631 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:08.631 +02:00 [INF] Request finished HTTP/2 CONNECT https://localhost:7274/activityHub?id=l5zF5o6Vr7HLU_jccRcFBQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.3349ms
+2026-03-15 13:37:08.631 +02:00 [INF] Connection id "0HNK2GRTRATKQ", Request id "0HNK2GRTRATKQ:0000006F": the application completed without reading the entire request body.
+2026-03-15 13:37:08.634 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:08.634 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:08.634 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:08.634 +02:00 [INF] "2026-03-15T11:37:08.6347556Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:08.634 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.4335ms
+2026-03-15 13:37:08.638 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=1LmDW7_Eh6dKjt06-Lnyaw&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:08.639 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:08.639 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:08.639 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=1LmDW7_Eh6dKjt06-Lnyaw&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.6161ms
+2026-03-15 13:37:08.642 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:08.642 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:08.643 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:08.643 +02:00 [INF] "2026-03-15T11:37:08.6428712Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:08.643 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.7901ms
+2026-03-15 13:37:08.645 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=dsPrKruzlErcyDTaYXoDmQ&_=1773574628644 - null null
+2026-03-15 13:37:08.646 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:08.646 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:08.646 +02:00 [INF] "2026-03-15T11:37:08.6461107Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:08.646 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=dsPrKruzlErcyDTaYXoDmQ&_=1773574628644 - 200 0 application/octet-stream 0.6166ms
+2026-03-15 13:37:08.648 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=dsPrKruzlErcyDTaYXoDmQ&_=1773574628647 - null null
+2026-03-15 13:37:08.648 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub?id=dsPrKruzlErcyDTaYXoDmQ - text/plain;charset=UTF-8 32
+2026-03-15 13:37:08.649 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:08.649 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:08.649 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:08.649 +02:00 [INF] "2026-03-15T11:37:08.6491673Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:08.649 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub?id=dsPrKruzlErcyDTaYXoDmQ - 200 0 text/plain 0.6165ms
+2026-03-15 13:37:08.649 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:08.649 +02:00 [INF] "2026-03-15T11:37:08.6491673Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:08.649 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=dsPrKruzlErcyDTaYXoDmQ&_=1773574628647 - 200 3 application/octet-stream 0.7269ms
+2026-03-15 13:37:08.652 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=dsPrKruzlErcyDTaYXoDmQ&_=1773574628650 - null null
+2026-03-15 13:37:08.653 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:10.038 +02:00 [INF] Request starting HTTP/2 DELETE https://localhost:7274/IceCream/5 - null null
+2026-03-15 13:37:10.038 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.Delete (IceCream)'
+2026-03-15 13:37:10.038 +02:00 [INF] Route matched with {action = "Delete", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Delete(Int32) on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:10.039 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:37:10.039 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.Delete (IceCream) in 0.3076ms
+2026-03-15 13:37:10.039 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.Delete (IceCream)'
+2026-03-15 13:37:10.039 +02:00 [INF] "2026-03-15T11:37:10.0387543Z" IceCream/Delete test 404 0ms /IceCream/5
+2026-03-15 13:37:10.039 +02:00 [INF] Request finished HTTP/2 DELETE https://localhost:7274/IceCream/5 - 404 null application/problem+json; charset=utf-8 0.868ms
+2026-03-15 13:37:12.346 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:12.515 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:12.515 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 168.8414ms
+2026-03-15 13:37:12.577 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:12.577 +02:00 [INF] "2026-03-15T11:37:08.6531648Z" -/- test 200 3924ms /activityHub
+2026-03-15 13:37:12.577 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=dsPrKruzlErcyDTaYXoDmQ&_=1773574628650 - 499 null null 3925.5029ms
+2026-03-15 13:37:12.581 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:12.582 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:12.582 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:12.583 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:12.583 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:12.583 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:12.583 +02:00 [INF] "2026-03-15T11:37:12.5822544Z" -/- test 200 1ms /activityHub/negotiate
+2026-03-15 13:37:12.583 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.751ms
+2026-03-15 13:37:12.583 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:12.583 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1758ms
+2026-03-15 13:37:12.583 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:12.583 +02:00 [INF] "2026-03-15T11:37:12.5832368Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:12.583 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 0.8065ms
+2026-03-15 13:37:12.587 +02:00 [INF] Request starting HTTP/2 CONNECT https://localhost:7274/activityHub?id=8aP2IG2xL5Ayy60ndB2wGQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:12.587 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:12.587 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:12.587 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:12.587 +02:00 [INF] Request finished HTTP/2 CONNECT https://localhost:7274/activityHub?id=8aP2IG2xL5Ayy60ndB2wGQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.4332ms
+2026-03-15 13:37:12.587 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:12.587 +02:00 [INF] Connection id "0HNK2GRTRATKQ", Request id "0HNK2GRTRATKQ:00000089": the application completed without reading the entire request body.
+2026-03-15 13:37:12.587 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:12.587 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:12.587 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1265ms
+2026-03-15 13:37:12.587 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:12.587 +02:00 [INF] "2026-03-15T11:37:12.5876080Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:12.587 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 0.7746ms
+2026-03-15 13:37:12.589 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:12.589 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:12.589 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:12.589 +02:00 [INF] "2026-03-15T11:37:12.5897704Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:12.589 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.437ms
+2026-03-15 13:37:12.592 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=5p2b9DMw7yg4D1UIXPKuWQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:12.592 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:12.592 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:12.592 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=5p2b9DMw7yg4D1UIXPKuWQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.4765ms
+2026-03-15 13:37:12.594 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:12.594 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:12.594 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:12.594 +02:00 [INF] "2026-03-15T11:37:12.5947931Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:12.594 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.4847ms
+2026-03-15 13:37:12.597 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=nJ-8OLs2xukKWEleAfXJIQ&_=1773574632595 - null null
+2026-03-15 13:37:12.597 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:12.597 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:12.597 +02:00 [INF] "2026-03-15T11:37:12.5974988Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:12.597 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=nJ-8OLs2xukKWEleAfXJIQ&_=1773574632595 - 200 0 application/octet-stream 0.576ms
+2026-03-15 13:37:12.600 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=nJ-8OLs2xukKWEleAfXJIQ&_=1773574632598 - null null
+2026-03-15 13:37:12.600 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub?id=nJ-8OLs2xukKWEleAfXJIQ - text/plain;charset=UTF-8 32
+2026-03-15 13:37:12.600 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:12.600 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:12.601 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:12.601 +02:00 [INF] "2026-03-15T11:37:12.6009238Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:12.601 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:12.601 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub?id=nJ-8OLs2xukKWEleAfXJIQ - 200 0 text/plain 0.5501ms
+2026-03-15 13:37:12.601 +02:00 [INF] "2026-03-15T11:37:12.6009234Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:12.601 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=nJ-8OLs2xukKWEleAfXJIQ&_=1773574632598 - 200 3 application/octet-stream 0.6154ms
+2026-03-15 13:37:12.604 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=nJ-8OLs2xukKWEleAfXJIQ&_=1773574632602 - null null
+2026-03-15 13:37:12.604 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:12.729 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:12.730 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:12.730 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 0.6649ms
+2026-03-15 13:37:12.734 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:12.734 +02:00 [INF] "2026-03-15T11:37:12.6046918Z" -/- test 200 130ms /activityHub
+2026-03-15 13:37:12.734 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=nJ-8OLs2xukKWEleAfXJIQ&_=1773574632602 - 499 null null 130.6106ms
+2026-03-15 13:37:12.748 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:12.748 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:12.748 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:12.748 +02:00 [INF] "2026-03-15T11:37:12.7485854Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:12.748 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.4623ms
+2026-03-15 13:37:12.749 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:12.749 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:12.749 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:12.749 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:12.749 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1901ms
+2026-03-15 13:37:12.749 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:12.749 +02:00 [INF] "2026-03-15T11:37:12.7493763Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:12.749 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 0.7543ms
+2026-03-15 13:37:12.751 +02:00 [INF] Request starting HTTP/2 CONNECT https://localhost:7274/activityHub?id=vi7-tofQllIN1_I1ZbA0Pg&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:12.751 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:12.751 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:12.751 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:12.751 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:12.752 +02:00 [INF] Request finished HTTP/2 CONNECT https://localhost:7274/activityHub?id=vi7-tofQllIN1_I1ZbA0Pg&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.6531ms
+2026-03-15 13:37:12.752 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:12.752 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:12.752 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.2308ms
+2026-03-15 13:37:12.752 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:12.752 +02:00 [INF] "2026-03-15T11:37:12.7519485Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:12.752 +02:00 [INF] Connection id "0HNK2GRTRATKQ", Request id "0HNK2GRTRATKQ:0000009F": the application completed without reading the entire request body.
+2026-03-15 13:37:12.752 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 0.7684ms
+2026-03-15 13:37:12.754 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:12.754 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:12.755 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:12.755 +02:00 [INF] "2026-03-15T11:37:12.7549091Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:12.755 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.5516ms
+2026-03-15 13:37:12.757 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=4CGGXJab6uDEH5-wmJGN-Q&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:12.757 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:12.757 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:12.757 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=4CGGXJab6uDEH5-wmJGN-Q&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.5229ms
+2026-03-15 13:37:12.759 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:12.760 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:12.760 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:12.760 +02:00 [INF] "2026-03-15T11:37:12.7600353Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:12.760 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.4507ms
+2026-03-15 13:37:12.762 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=yxwk2wb3GILpkoz__q6NQQ&_=1773574632761 - null null
+2026-03-15 13:37:12.762 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:12.763 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:12.763 +02:00 [INF] "2026-03-15T11:37:12.7629006Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:12.763 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=yxwk2wb3GILpkoz__q6NQQ&_=1773574632761 - 200 0 application/octet-stream 0.9526ms
+2026-03-15 13:37:12.765 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub?id=yxwk2wb3GILpkoz__q6NQQ - text/plain;charset=UTF-8 32
+2026-03-15 13:37:12.765 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=yxwk2wb3GILpkoz__q6NQQ&_=1773574632764 - null null
+2026-03-15 13:37:12.766 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:12.766 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:12.766 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:12.766 +02:00 [INF] "2026-03-15T11:37:12.7661379Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:12.766 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub?id=yxwk2wb3GILpkoz__q6NQQ - 200 0 text/plain 0.3859ms
+2026-03-15 13:37:12.766 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:12.766 +02:00 [INF] "2026-03-15T11:37:12.7662330Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:12.766 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=yxwk2wb3GILpkoz__q6NQQ&_=1773574632764 - 200 3 application/octet-stream 0.4819ms
+2026-03-15 13:37:12.769 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=yxwk2wb3GILpkoz__q6NQQ&_=1773574632767 - null null
+2026-03-15 13:37:12.769 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:14.838 +02:00 [INF] Request starting HTTP/2 DELETE https://localhost:7274/IceCream/2 - null null
+2026-03-15 13:37:14.838 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.Delete (IceCream)'
+2026-03-15 13:37:14.838 +02:00 [INF] Route matched with {action = "Delete", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Delete(Int32) on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:14.838 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:37:14.838 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.Delete (IceCream) in 0.2851ms
+2026-03-15 13:37:14.838 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.Delete (IceCream)'
+2026-03-15 13:37:14.838 +02:00 [INF] "2026-03-15T11:37:14.8384418Z" IceCream/Delete test 404 0ms /IceCream/2
+2026-03-15 13:37:14.838 +02:00 [INF] Request finished HTTP/2 DELETE https://localhost:7274/IceCream/2 - 404 null application/problem+json; charset=utf-8 0.7649ms
+2026-03-15 13:37:16.835 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:16.836 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:16.836 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 0.4952ms
+2026-03-15 13:37:16.842 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:16.842 +02:00 [INF] "2026-03-15T11:37:12.7695729Z" -/- test 200 4072ms /activityHub
+2026-03-15 13:37:16.842 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=yxwk2wb3GILpkoz__q6NQQ&_=1773574632767 - 499 null null 4073.1195ms
+2026-03-15 13:37:16.854 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:16.854 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:16.854 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:16.854 +02:00 [INF] "2026-03-15T11:37:16.8543662Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:16.854 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.5375ms
+2026-03-15 13:37:16.854 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:16.854 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:16.855 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:16.855 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:16.855 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1382ms
+2026-03-15 13:37:16.855 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:16.855 +02:00 [INF] "2026-03-15T11:37:16.8549474Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:16.855 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 0.6819ms
+2026-03-15 13:37:16.857 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:16.857 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:16.858 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:16.858 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:16.858 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.4641ms
+2026-03-15 13:37:16.858 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:16.858 +02:00 [INF] "2026-03-15T11:37:16.8578510Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:16.858 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.7821ms
+2026-03-15 13:37:16.865 +02:00 [INF] Request starting HTTP/2 CONNECT https://localhost:7274/activityHub?id=v6IF6d5CSFN3iX-pKl9POw&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:16.865 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:16.865 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:16.865 +02:00 [INF] Request finished HTTP/2 CONNECT https://localhost:7274/activityHub?id=v6IF6d5CSFN3iX-pKl9POw&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.2378ms
+2026-03-15 13:37:16.865 +02:00 [INF] Connection id "0HNK2GRTRATKQ", Request id "0HNK2GRTRATKQ:000000BB": the application completed without reading the entire request body.
+2026-03-15 13:37:16.867 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:16.867 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:16.867 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:16.867 +02:00 [INF] "2026-03-15T11:37:16.8678095Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:16.867 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.3575ms
+2026-03-15 13:37:16.871 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=AXgIbT2JxUClschkzrUc_w&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:16.871 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:16.871 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:16.872 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=AXgIbT2JxUClschkzrUc_w&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.404ms
+2026-03-15 13:37:16.874 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:16.874 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:16.874 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:16.874 +02:00 [INF] "2026-03-15T11:37:16.8742582Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:16.874 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.4227ms
+2026-03-15 13:37:16.877 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=XN97KaflibHpbYPSCQkk-A&_=1773574636875 - null null
+2026-03-15 13:37:16.877 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:16.877 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:16.877 +02:00 [INF] "2026-03-15T11:37:16.8775578Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:16.877 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=XN97KaflibHpbYPSCQkk-A&_=1773574636875 - 200 0 application/octet-stream 0.6362ms
+2026-03-15 13:37:16.880 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub?id=XN97KaflibHpbYPSCQkk-A - text/plain;charset=UTF-8 32
+2026-03-15 13:37:16.881 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=XN97KaflibHpbYPSCQkk-A&_=1773574636878 - null null
+2026-03-15 13:37:16.881 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:16.881 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:16.881 +02:00 [INF] "2026-03-15T11:37:16.8811222Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:16.881 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:16.881 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub?id=XN97KaflibHpbYPSCQkk-A - 200 0 text/plain 0.3508ms
+2026-03-15 13:37:16.881 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:16.881 +02:00 [INF] "2026-03-15T11:37:16.8812306Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:16.881 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=XN97KaflibHpbYPSCQkk-A&_=1773574636878 - 200 3 application/octet-stream 0.3903ms
+2026-03-15 13:37:16.883 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=XN97KaflibHpbYPSCQkk-A&_=1773574636882 - null null
+2026-03-15 13:37:16.884 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:17.546 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:17.546 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:17.547 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 0.4213ms
+2026-03-15 13:37:17.551 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:17.551 +02:00 [INF] "2026-03-15T11:37:16.8840367Z" -/- test 200 667ms /activityHub
+2026-03-15 13:37:17.551 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=XN97KaflibHpbYPSCQkk-A&_=1773574636882 - 499 null null 667.6149ms
+2026-03-15 13:37:17.565 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:17.565 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:17.565 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:17.565 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:17.565 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:17.565 +02:00 [INF] "2026-03-15T11:37:17.5655839Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:17.565 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:17.565 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.8332ms
+2026-03-15 13:37:17.565 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:17.565 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1268ms
+2026-03-15 13:37:17.565 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:17.566 +02:00 [INF] "2026-03-15T11:37:17.5657051Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:17.566 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 0.6194ms
+2026-03-15 13:37:17.567 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:17.568 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:17.568 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:17.568 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:17.568 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1342ms
+2026-03-15 13:37:17.568 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:17.568 +02:00 [INF] "2026-03-15T11:37:17.5679992Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:17.568 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 0.6616ms
+2026-03-15 13:37:17.585 +02:00 [INF] Request starting HTTP/2 CONNECT https://localhost:7274/activityHub?id=-tzcGL0vMlFH7wcYGYyZiw&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:17.585 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:17.586 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:17.586 +02:00 [INF] Request finished HTTP/2 CONNECT https://localhost:7274/activityHub?id=-tzcGL0vMlFH7wcYGYyZiw&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.6788ms
+2026-03-15 13:37:17.586 +02:00 [INF] Connection id "0HNK2GRTRATKQ", Request id "0HNK2GRTRATKQ:000000D3": the application completed without reading the entire request body.
+2026-03-15 13:37:17.589 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:17.589 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:17.589 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:17.589 +02:00 [INF] "2026-03-15T11:37:17.5892449Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:17.589 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.3892ms
+2026-03-15 13:37:17.591 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=PhuUia0QdmsGKpbmpEgSig&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:17.591 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:17.591 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:17.591 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=PhuUia0QdmsGKpbmpEgSig&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.3515ms
+2026-03-15 13:37:17.594 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:17.594 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:17.594 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:17.594 +02:00 [INF] "2026-03-15T11:37:17.5943010Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:17.594 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.3942ms
+2026-03-15 13:37:17.597 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=Ocu_d2Tc2FMFLt72plXKfg&_=1773574637595 - null null
+2026-03-15 13:37:17.597 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:17.597 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:17.597 +02:00 [INF] "2026-03-15T11:37:17.5973549Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:17.597 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=Ocu_d2Tc2FMFLt72plXKfg&_=1773574637595 - 200 0 application/octet-stream 0.4941ms
+2026-03-15 13:37:17.599 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=Ocu_d2Tc2FMFLt72plXKfg&_=1773574637598 - null null
+2026-03-15 13:37:17.599 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub?id=Ocu_d2Tc2FMFLt72plXKfg - text/plain;charset=UTF-8 32
+2026-03-15 13:37:17.599 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:17.599 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:17.599 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:17.600 +02:00 [INF] "2026-03-15T11:37:17.5999028Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:17.600 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:17.600 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub?id=Ocu_d2Tc2FMFLt72plXKfg - 200 0 text/plain 0.3453ms
+2026-03-15 13:37:17.600 +02:00 [INF] "2026-03-15T11:37:17.5999237Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:17.600 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=Ocu_d2Tc2FMFLt72plXKfg&_=1773574637598 - 200 3 application/octet-stream 0.4248ms
+2026-03-15 13:37:17.602 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=Ocu_d2Tc2FMFLt72plXKfg&_=1773574637601 - null null
+2026-03-15 13:37:17.603 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:17.786 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:17.786 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:17.786 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 0.4256ms
+2026-03-15 13:37:17.792 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:17.792 +02:00 [INF] "2026-03-15T11:37:17.6034132Z" -/- test 200 189ms /activityHub
+2026-03-15 13:37:17.792 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=Ocu_d2Tc2FMFLt72plXKfg&_=1773574637601 - 499 null null 189.7591ms
+2026-03-15 13:37:17.802 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:17.802 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:17.803 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:17.803 +02:00 [INF] "2026-03-15T11:37:17.8026946Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:17.803 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:17.803 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.1268ms
+2026-03-15 13:37:17.804 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:17.804 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:17.804 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:17.804 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1355ms
+2026-03-15 13:37:17.804 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:17.804 +02:00 [INF] "2026-03-15T11:37:17.8045593Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:17.804 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.6848ms
+2026-03-15 13:37:17.806 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:17.806 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:17.806 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:17.807 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:17.807 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.4476ms
+2026-03-15 13:37:17.807 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:17.807 +02:00 [INF] "2026-03-15T11:37:17.8067033Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:17.807 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.0644ms
+2026-03-15 13:37:17.835 +02:00 [INF] Request starting HTTP/2 CONNECT https://localhost:7274/activityHub?id=k0J_no3_UwXlNiLQt0Amug&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:17.836 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:17.836 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:17.836 +02:00 [INF] Request finished HTTP/2 CONNECT https://localhost:7274/activityHub?id=k0J_no3_UwXlNiLQt0Amug&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.3309ms
+2026-03-15 13:37:17.836 +02:00 [INF] Connection id "0HNK2GRTRATKQ", Request id "0HNK2GRTRATKQ:000000EB": the application completed without reading the entire request body.
+2026-03-15 13:37:17.838 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:17.838 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:17.838 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:17.838 +02:00 [INF] "2026-03-15T11:37:17.8388621Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:17.839 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.3421ms
+2026-03-15 13:37:17.840 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=lD20TrSrS7PtRQxWzGuBGA&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:17.840 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:17.840 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:17.840 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=lD20TrSrS7PtRQxWzGuBGA&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.2974ms
+2026-03-15 13:37:17.842 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:17.842 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:17.842 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:17.842 +02:00 [INF] "2026-03-15T11:37:17.8428161Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:17.842 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.3323ms
+2026-03-15 13:37:17.844 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=kcuezQzPgnA1LmuvqhqA0g&_=1773574637843 - null null
+2026-03-15 13:37:17.845 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:17.845 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:17.845 +02:00 [INF] "2026-03-15T11:37:17.8451127Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:17.845 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=kcuezQzPgnA1LmuvqhqA0g&_=1773574637843 - 200 0 application/octet-stream 0.4901ms
+2026-03-15 13:37:17.847 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=kcuezQzPgnA1LmuvqhqA0g&_=1773574637845 - null null
+2026-03-15 13:37:17.847 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub?id=kcuezQzPgnA1LmuvqhqA0g - text/plain;charset=UTF-8 32
+2026-03-15 13:37:17.847 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:17.847 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:17.847 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:17.847 +02:00 [INF] "2026-03-15T11:37:17.8476387Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:17.847 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub?id=kcuezQzPgnA1LmuvqhqA0g - 200 0 text/plain 0.3909ms
+2026-03-15 13:37:17.847 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:17.847 +02:00 [INF] "2026-03-15T11:37:17.8476387Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:17.847 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=kcuezQzPgnA1LmuvqhqA0g&_=1773574637845 - 200 3 application/octet-stream 0.4714ms
+2026-03-15 13:37:17.850 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=kcuezQzPgnA1LmuvqhqA0g&_=1773574637848 - null null
+2026-03-15 13:37:17.850 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:18.002 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:18.002 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:18.002 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 0.3917ms
+2026-03-15 13:37:18.008 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:18.008 +02:00 [INF] "2026-03-15T11:37:17.8502730Z" -/- test 200 157ms /activityHub
+2026-03-15 13:37:18.008 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=kcuezQzPgnA1LmuvqhqA0g&_=1773574637848 - 499 null null 158.2633ms
+2026-03-15 13:37:18.019 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:18.020 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:18.020 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:18.020 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:18.020 +02:00 [INF] "2026-03-15T11:37:18.0203598Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:18.020 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:18.020 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.1432ms
+2026-03-15 13:37:18.020 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:18.021 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:18.021 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1943ms
+2026-03-15 13:37:18.021 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:18.021 +02:00 [INF] "2026-03-15T11:37:18.0208833Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:18.021 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 0.9554ms
+2026-03-15 13:37:18.023 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:18.024 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:18.024 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:18.024 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:18.024 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.7195ms
+2026-03-15 13:37:18.025 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:18.025 +02:00 [INF] "2026-03-15T11:37:18.0240293Z" IceCream/GetAll test 200 1ms /IceCream
+2026-03-15 13:37:18.025 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.7035ms
+2026-03-15 13:37:18.037 +02:00 [INF] Request starting HTTP/2 CONNECT https://localhost:7274/activityHub?id=xQuugmYx4YDPUctaffXf2Q&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:18.037 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:18.037 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:18.037 +02:00 [INF] Request finished HTTP/2 CONNECT https://localhost:7274/activityHub?id=xQuugmYx4YDPUctaffXf2Q&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.2163ms
+2026-03-15 13:37:18.037 +02:00 [INF] Connection id "0HNK2GRTRATKQ", Request id "0HNK2GRTRATKQ:00000103": the application completed without reading the entire request body.
+2026-03-15 13:37:18.039 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:18.040 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:18.040 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:18.040 +02:00 [INF] "2026-03-15T11:37:18.0400798Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:18.040 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.7119ms
+2026-03-15 13:37:18.042 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=_ncyMtlMUo0XWn5CtEiMpA&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:18.042 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:18.042 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:18.043 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=_ncyMtlMUo0XWn5CtEiMpA&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.4013ms
+2026-03-15 13:37:18.045 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:18.045 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:18.045 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:18.045 +02:00 [INF] "2026-03-15T11:37:18.0453614Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:18.045 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.3725ms
+2026-03-15 13:37:18.048 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=M3cmtT7KCMQet5w1xXFN9w&_=1773574638046 - null null
+2026-03-15 13:37:18.048 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:18.048 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:18.048 +02:00 [INF] "2026-03-15T11:37:18.0483844Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:18.048 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=M3cmtT7KCMQet5w1xXFN9w&_=1773574638046 - 200 0 application/octet-stream 0.4992ms
+2026-03-15 13:37:18.050 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=M3cmtT7KCMQet5w1xXFN9w&_=1773574638049 - null null
+2026-03-15 13:37:18.050 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub?id=M3cmtT7KCMQet5w1xXFN9w - text/plain;charset=UTF-8 32
+2026-03-15 13:37:18.050 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:18.050 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:18.050 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:18.050 +02:00 [INF] "2026-03-15T11:37:18.0507979Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:18.050 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub?id=M3cmtT7KCMQet5w1xXFN9w - 200 0 text/plain 0.3533ms
+2026-03-15 13:37:18.051 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:18.051 +02:00 [INF] "2026-03-15T11:37:18.0508117Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:18.051 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=M3cmtT7KCMQet5w1xXFN9w&_=1773574638049 - 200 3 application/octet-stream 0.4593ms
+2026-03-15 13:37:18.054 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=M3cmtT7KCMQet5w1xXFN9w&_=1773574638051 - null null
+2026-03-15 13:37:18.054 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:18.393 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:18.394 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:18.394 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 0.3304ms
+2026-03-15 13:37:18.397 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:18.397 +02:00 [INF] "2026-03-15T11:37:18.0543662Z" -/- test 200 343ms /activityHub
+2026-03-15 13:37:18.397 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=M3cmtT7KCMQet5w1xXFN9w&_=1773574638051 - 499 null null 343.8774ms
+2026-03-15 13:37:18.406 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:18.406 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:18.407 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:18.407 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:18.407 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:18.407 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:18.407 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:18.407 +02:00 [INF] "2026-03-15T11:37:18.4073209Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:18.407 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.9863ms
+2026-03-15 13:37:18.407 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.3761ms
+2026-03-15 13:37:18.407 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:18.407 +02:00 [INF] "2026-03-15T11:37:18.4073237Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:18.407 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.0531ms
+2026-03-15 13:37:18.410 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:18.411 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:18.411 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:18.411 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:18.411 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1517ms
+2026-03-15 13:37:18.411 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:18.411 +02:00 [INF] "2026-03-15T11:37:18.4114135Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:18.411 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.146ms
+2026-03-15 13:37:18.491 +02:00 [INF] Request starting HTTP/2 CONNECT https://localhost:7274/activityHub?id=iL5vq5PlMlPxygmqIFzJNQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:18.491 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:18.491 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:18.491 +02:00 [INF] Request finished HTTP/2 CONNECT https://localhost:7274/activityHub?id=iL5vq5PlMlPxygmqIFzJNQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.2185ms
+2026-03-15 13:37:18.491 +02:00 [INF] Connection id "0HNK2GRTRATKQ", Request id "0HNK2GRTRATKQ:0000011B": the application completed without reading the entire request body.
+2026-03-15 13:37:18.494 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:18.494 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:18.494 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:18.494 +02:00 [INF] "2026-03-15T11:37:18.4941498Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:18.494 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.2931ms
+2026-03-15 13:37:18.495 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=DinMVzxn-TZTS9UgqBiyYA&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:18.496 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:18.496 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:18.496 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=DinMVzxn-TZTS9UgqBiyYA&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.276ms
+2026-03-15 13:37:18.497 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:18.498 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:18.498 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:18.498 +02:00 [INF] "2026-03-15T11:37:18.4979957Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:18.498 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.2937ms
+2026-03-15 13:37:18.500 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=fkDrIwbCz71W16waJX65CA&_=1773574638498 - null null
+2026-03-15 13:37:18.500 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:18.500 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:18.500 +02:00 [INF] "2026-03-15T11:37:18.5002835Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:18.500 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=fkDrIwbCz71W16waJX65CA&_=1773574638498 - 200 0 application/octet-stream 0.4782ms
+2026-03-15 13:37:18.502 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub?id=fkDrIwbCz71W16waJX65CA - text/plain;charset=UTF-8 32
+2026-03-15 13:37:18.502 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=fkDrIwbCz71W16waJX65CA&_=1773574638501 - null null
+2026-03-15 13:37:18.503 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:18.503 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:18.503 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:18.503 +02:00 [INF] "2026-03-15T11:37:18.5030682Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:18.503 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub?id=fkDrIwbCz71W16waJX65CA - 200 0 text/plain 0.4386ms
+2026-03-15 13:37:18.503 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:18.503 +02:00 [INF] "2026-03-15T11:37:18.5031287Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:18.503 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=fkDrIwbCz71W16waJX65CA&_=1773574638501 - 200 3 application/octet-stream 0.8972ms
+2026-03-15 13:37:18.506 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=fkDrIwbCz71W16waJX65CA&_=1773574638504 - null null
+2026-03-15 13:37:18.506 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:19.238 +02:00 [INF] Request starting HTTP/2 DELETE https://localhost:7274/IceCream/3 - null null
+2026-03-15 13:37:19.238 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.Delete (IceCream)'
+2026-03-15 13:37:19.238 +02:00 [INF] Route matched with {action = "Delete", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Delete(Int32) on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:19.238 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:37:19.238 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.Delete (IceCream) in 0.4613ms
+2026-03-15 13:37:19.238 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.Delete (IceCream)'
+2026-03-15 13:37:19.238 +02:00 [INF] "2026-03-15T11:37:19.2382787Z" IceCream/Delete test 404 0ms /IceCream/3
+2026-03-15 13:37:19.238 +02:00 [INF] Request finished HTTP/2 DELETE https://localhost:7274/IceCream/3 - 404 null application/problem+json; charset=utf-8 0.7902ms
+2026-03-15 13:37:21.999 +02:00 [INF] Request starting HTTP/2 PUT https://localhost:7274/IceCream/3 - application/json 43
+2026-03-15 13:37:21.999 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.Update (IceCream)'
+2026-03-15 13:37:22.001 +02:00 [INF] Route matched with {action = "Update", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Update(Int32, IceCreamNamespace.Models.IceCream) on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:22.004 +02:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-03-15 13:37:22.004 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.Update (IceCream) in 3.2071ms
+2026-03-15 13:37:22.004 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.Update (IceCream)'
+2026-03-15 13:37:22.004 +02:00 [INF] "2026-03-15T11:37:21.9994511Z" IceCream/Update test 404 5ms /IceCream/3
+2026-03-15 13:37:22.004 +02:00 [INF] Request finished HTTP/2 PUT https://localhost:7274/IceCream/3 - 404 null application/problem+json; charset=utf-8 5.6725ms
+2026-03-15 13:37:23.434 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:23.434 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:23.434 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 0.4285ms
+2026-03-15 13:37:23.441 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:23.441 +02:00 [INF] "2026-03-15T11:37:18.5065015Z" -/- test 200 4935ms /activityHub
+2026-03-15 13:37:23.442 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=fkDrIwbCz71W16waJX65CA&_=1773574638504 - 499 null null 4935.703ms
+2026-03-15 13:37:23.451 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:23.452 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:23.452 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:23.452 +02:00 [INF] "2026-03-15T11:37:23.4521049Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:23.452 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:23.452 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.8495ms
+2026-03-15 13:37:23.453 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:23.453 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:23.453 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:23.453 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1228ms
+2026-03-15 13:37:23.453 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:23.453 +02:00 [INF] "2026-03-15T11:37:23.4530309Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:23.453 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 0.6091ms
+2026-03-15 13:37:23.456 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:23.457 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:23.457 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:23.457 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:23.458 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1511ms
+2026-03-15 13:37:23.458 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:23.458 +02:00 [INF] "2026-03-15T11:37:23.4575445Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:23.458 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.1976ms
+2026-03-15 13:37:23.549 +02:00 [INF] Request starting HTTP/2 CONNECT https://localhost:7274/activityHub?id=5CzRYmZh1KajPx0cfkBQmA&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:23.549 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:23.549 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:23.549 +02:00 [INF] Request finished HTTP/2 CONNECT https://localhost:7274/activityHub?id=5CzRYmZh1KajPx0cfkBQmA&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.2054ms
+2026-03-15 13:37:23.549 +02:00 [INF] Connection id "0HNK2GRTRATKQ", Request id "0HNK2GRTRATKQ:00000137": the application completed without reading the entire request body.
+2026-03-15 13:37:23.551 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:23.551 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:23.551 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:23.551 +02:00 [INF] "2026-03-15T11:37:23.5512251Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:23.551 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.2812ms
+2026-03-15 13:37:23.553 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=QFKiAXVD0ZovknQu8Jg1Eg&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:23.553 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:23.553 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:23.554 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=QFKiAXVD0ZovknQu8Jg1Eg&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.3269ms
+2026-03-15 13:37:23.555 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:23.556 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:23.556 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:23.556 +02:00 [INF] "2026-03-15T11:37:23.5560141Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:23.556 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.3116ms
+2026-03-15 13:37:23.558 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=c9whzH_AsJVp2Kp7hmE4YA&_=1773574643556 - null null
+2026-03-15 13:37:23.558 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:23.558 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:23.558 +02:00 [INF] "2026-03-15T11:37:23.5582919Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:23.558 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=c9whzH_AsJVp2Kp7hmE4YA&_=1773574643556 - 200 0 application/octet-stream 0.3914ms
+2026-03-15 13:37:23.560 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub?id=c9whzH_AsJVp2Kp7hmE4YA - text/plain;charset=UTF-8 32
+2026-03-15 13:37:23.560 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:23.560 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=c9whzH_AsJVp2Kp7hmE4YA&_=1773574643559 - null null
+2026-03-15 13:37:23.560 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:23.560 +02:00 [INF] "2026-03-15T11:37:23.5606636Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:23.560 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub?id=c9whzH_AsJVp2Kp7hmE4YA - 200 0 text/plain 0.4197ms
+2026-03-15 13:37:23.560 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:23.561 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:23.561 +02:00 [INF] "2026-03-15T11:37:23.5609913Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:23.561 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=c9whzH_AsJVp2Kp7hmE4YA&_=1773574643559 - 200 3 application/octet-stream 0.831ms
+2026-03-15 13:37:23.563 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=c9whzH_AsJVp2Kp7hmE4YA&_=1773574643561 - null null
+2026-03-15 13:37:23.563 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:24.362 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:24.362 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:24.362 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 0.3685ms
+2026-03-15 13:37:24.366 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:24.366 +02:00 [INF] "2026-03-15T11:37:23.5633229Z" -/- test 200 802ms /activityHub
+2026-03-15 13:37:24.366 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=c9whzH_AsJVp2Kp7hmE4YA&_=1773574643561 - 499 null null 803.382ms
+2026-03-15 13:37:24.379 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:24.379 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:24.379 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:24.379 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:24.379 +02:00 [INF] "2026-03-15T11:37:24.3797132Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:24.380 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.6453ms
+2026-03-15 13:37:24.380 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:24.380 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:24.380 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:24.380 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1579ms
+2026-03-15 13:37:24.380 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:24.380 +02:00 [INF] "2026-03-15T11:37:24.3805420Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:24.381 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.3891ms
+2026-03-15 13:37:24.383 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:24.383 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:24.383 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:24.383 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:24.383 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1336ms
+2026-03-15 13:37:24.383 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:24.383 +02:00 [INF] "2026-03-15T11:37:24.3836178Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:24.383 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 0.6472ms
+2026-03-15 13:37:24.678 +02:00 [INF] Request starting HTTP/2 CONNECT https://localhost:7274/activityHub?id=XlD4acMHL_qPUI9DF2vZqA&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:24.678 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:24.678 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:24.678 +02:00 [INF] Request finished HTTP/2 CONNECT https://localhost:7274/activityHub?id=XlD4acMHL_qPUI9DF2vZqA&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.2033ms
+2026-03-15 13:37:24.678 +02:00 [INF] Connection id "0HNK2GRTRATKQ", Request id "0HNK2GRTRATKQ:0000014F": the application completed without reading the entire request body.
+2026-03-15 13:37:24.680 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:24.680 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:24.680 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:24.680 +02:00 [INF] "2026-03-15T11:37:24.6807627Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:24.680 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.2681ms
+2026-03-15 13:37:24.682 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=yPvkPtxDBHekwYPe9jdTgw&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:24.682 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:24.682 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:24.682 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=yPvkPtxDBHekwYPe9jdTgw&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.2946ms
+2026-03-15 13:37:24.684 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:24.684 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:24.684 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:24.684 +02:00 [INF] "2026-03-15T11:37:24.6848604Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:24.684 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.2734ms
+2026-03-15 13:37:24.687 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=gOtdHAMpVKSFGD1VfZolQA&_=1773574644685 - null null
+2026-03-15 13:37:24.688 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:24.688 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:24.688 +02:00 [INF] "2026-03-15T11:37:24.6880969Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:24.688 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=gOtdHAMpVKSFGD1VfZolQA&_=1773574644685 - 200 0 application/octet-stream 0.5356ms
+2026-03-15 13:37:24.691 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=gOtdHAMpVKSFGD1VfZolQA&_=1773574644689 - null null
+2026-03-15 13:37:24.691 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub?id=gOtdHAMpVKSFGD1VfZolQA - text/plain;charset=UTF-8 32
+2026-03-15 13:37:24.691 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:24.691 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:24.691 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:24.691 +02:00 [INF] "2026-03-15T11:37:24.6913548Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:24.691 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub?id=gOtdHAMpVKSFGD1VfZolQA - 200 0 text/plain 0.4256ms
+2026-03-15 13:37:24.691 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:24.691 +02:00 [INF] "2026-03-15T11:37:24.6913638Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:24.691 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=gOtdHAMpVKSFGD1VfZolQA&_=1773574644689 - 200 3 application/octet-stream 0.559ms
+2026-03-15 13:37:24.694 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=gOtdHAMpVKSFGD1VfZolQA&_=1773574644692 - null null
+2026-03-15 13:37:24.694 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:24.786 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:24.786 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:24.786 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 0.3951ms
+2026-03-15 13:37:24.793 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:24.793 +02:00 [INF] "2026-03-15T11:37:24.6944205Z" -/- test 200 98ms /activityHub
+2026-03-15 13:37:24.793 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=gOtdHAMpVKSFGD1VfZolQA&_=1773574644692 - 499 null null 99.4892ms
+2026-03-15 13:37:24.803 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:24.803 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:24.804 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:24.804 +02:00 [INF] "2026-03-15T11:37:24.8037522Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:24.804 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:24.804 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.6946ms
+2026-03-15 13:37:24.805 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:24.805 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:24.805 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:24.805 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.2528ms
+2026-03-15 13:37:24.805 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:24.805 +02:00 [INF] "2026-03-15T11:37:24.8052640Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:24.805 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.9107ms
+2026-03-15 13:37:24.807 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:24.807 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:24.807 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:24.808 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:24.808 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1928ms
+2026-03-15 13:37:24.808 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:24.808 +02:00 [INF] "2026-03-15T11:37:24.8077250Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:24.808 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.1575ms
+2026-03-15 13:37:25.002 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:25.003 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:25.003 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 0.4907ms
+2026-03-15 13:37:25.022 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:25.022 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:25.022 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:25.022 +02:00 [INF] "2026-03-15T11:37:25.0223669Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:25.022 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.45ms
+2026-03-15 13:37:25.022 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:25.022 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:25.023 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:25.023 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:25.023 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1756ms
+2026-03-15 13:37:25.023 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:25.023 +02:00 [INF] "2026-03-15T11:37:25.0229565Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:25.023 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 0.6086ms
+2026-03-15 13:37:25.025 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:25.025 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:25.026 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:25.026 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:25.026 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.2734ms
+2026-03-15 13:37:25.026 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:25.026 +02:00 [INF] "2026-03-15T11:37:25.0258380Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:25.026 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.3973ms
+2026-03-15 13:37:25.170 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/index.html - null null
+2026-03-15 13:37:25.170 +02:00 [INF] The file /index.html was not modified
+2026-03-15 13:37:25.170 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/index.html - 304 null text/html 0.3547ms
+2026-03-15 13:37:25.186 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:25.187 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:25.187 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:25.187 +02:00 [INF] "2026-03-15T11:37:25.1872997Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:25.187 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.7213ms
+2026-03-15 13:37:25.187 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:25.188 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:25.188 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:25.188 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:25.188 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1252ms
+2026-03-15 13:37:25.188 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:25.188 +02:00 [INF] "2026-03-15T11:37:25.1880817Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:25.188 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 1.0125ms
+2026-03-15 13:37:25.190 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:25.190 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:25.190 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:25.190 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:25.191 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.1318ms
+2026-03-15 13:37:25.191 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:25.191 +02:00 [INF] "2026-03-15T11:37:25.1908115Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:25.191 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 0.8581ms
+2026-03-15 13:37:26.607 +02:00 [INF] Request starting HTTP/2 CONNECT https://localhost:7274/activityHub?id=THC2A1QVoiCI_XkATb7uTw&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:26.607 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:26.607 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:26.607 +02:00 [INF] Request finished HTTP/2 CONNECT https://localhost:7274/activityHub?id=THC2A1QVoiCI_XkATb7uTw&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.2158ms
+2026-03-15 13:37:26.607 +02:00 [INF] Connection id "0HNK2GRTRATKQ", Request id "0HNK2GRTRATKQ:00000177": the application completed without reading the entire request body.
+2026-03-15 13:37:26.609 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:26.609 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:26.609 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:26.609 +02:00 [INF] "2026-03-15T11:37:26.6098214Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:26.609 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.2625ms
+2026-03-15 13:37:26.611 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=X3kdxeRAmD9jM9FdjC-Mhg&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - null null
+2026-03-15 13:37:26.612 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2026-03-15 13:37:26.612 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2026-03-15 13:37:26.612 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=X3kdxeRAmD9jM9FdjC-Mhg&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMjM1ODEzIiwidXNlcm5hbWUiOiJ0ZXN0IiwiZXhwIjoxNzc2MTU5MDEzLCJpc3MiOiJodHRwczovL2ljZWNyZWFtLWRlbW8uY29tIiwiYXVkIjoiaHR0cHM6Ly9pY2VjcmVhbS1kZW1vLmNvbSJ9.W_J5YVgz7zk3z2xiG9ciWcisfmXWnDk2LPmE_vG5PsY - 401 0 null 0.496ms
+2026-03-15 13:37:26.614 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:26.614 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:26.614 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:26.614 +02:00 [INF] "2026-03-15T11:37:26.6143616Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:26.614 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.2653ms
+2026-03-15 13:37:26.616 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=feldcwTyMKb8t-A3XaR8-w&_=1773574646615 - null null
+2026-03-15 13:37:26.616 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:26.616 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:26.616 +02:00 [INF] "2026-03-15T11:37:26.6168651Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:26.617 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=feldcwTyMKb8t-A3XaR8-w&_=1773574646615 - 200 0 application/octet-stream 0.3734ms
+2026-03-15 13:37:26.619 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub?id=feldcwTyMKb8t-A3XaR8-w - text/plain;charset=UTF-8 32
+2026-03-15 13:37:26.619 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=feldcwTyMKb8t-A3XaR8-w&_=1773574646617 - null null
+2026-03-15 13:37:26.619 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:26.619 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:26.619 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:26.619 +02:00 [INF] Executed endpoint '/activityHub'
+2026-03-15 13:37:26.619 +02:00 [INF] "2026-03-15T11:37:26.6195829Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:26.619 +02:00 [INF] "2026-03-15T11:37:26.6196924Z" -/- test 200 0ms /activityHub
+2026-03-15 13:37:26.619 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub?id=feldcwTyMKb8t-A3XaR8-w - 200 0 text/plain 0.4494ms
+2026-03-15 13:37:26.619 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=feldcwTyMKb8t-A3XaR8-w&_=1773574646617 - 200 3 application/octet-stream 0.4393ms
+2026-03-15 13:37:26.623 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/activityHub?id=feldcwTyMKb8t-A3XaR8-w&_=1773574646621 - null null
+2026-03-15 13:37:26.623 +02:00 [INF] Executing endpoint '/activityHub'
+2026-03-15 13:37:31.402 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - null 0
+2026-03-15 13:37:31.403 +02:00 [INF] Executing endpoint '/activityHub/negotiate'
+2026-03-15 13:37:31.403 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:31.404 +02:00 [INF] Executed endpoint '/activityHub/negotiate'
+2026-03-15 13:37:31.404 +02:00 [INF] "2026-03-15T11:37:31.4033225Z" -/- test 200 0ms /activityHub/negotiate
+2026-03-15 13:37:31.404 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7274/activityHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.3256ms
+2026-03-15 13:37:31.404 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:31.404 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:31.405 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:31.405 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.7616ms
+2026-03-15 13:37:31.405 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:31.405 +02:00 [INF] "2026-03-15T11:37:31.4045154Z" IceCream/GetAll test 200 1ms /IceCream
+2026-03-15 13:37:31.405 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 2.0479ms
+2026-03-15 13:37:31.407 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7274/IceCream - null null
+2026-03-15 13:37:31.407 +02:00 [INF] Executing endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:31.407 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
+2026-03-15 13:37:31.407 +02:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[IceCreamNamespace.Models.IceCream, IceCream, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-03-15 13:37:31.407 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.0989ms
+2026-03-15 13:37:31.407 +02:00 [INF] Executed endpoint 'IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream)'
+2026-03-15 13:37:31.407 +02:00 [INF] "2026-03-15T11:37:31.4077568Z" IceCream/GetAll test 200 0ms /IceCream
+2026-03-15 13:37:31.408 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/IceCream - 200 null application/json; charset=utf-8 0.5765ms
