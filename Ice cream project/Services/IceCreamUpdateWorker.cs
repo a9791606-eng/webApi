@@ -16,7 +16,7 @@ public class IceCreamUpdateWorker : BackgroundService
     private readonly IHubContext<ActivityHub> hubContext;
     private IConnection? connection;
     
-    // בגרסאות RabbitMQ 8.0 ומעלה משתמשים ב-IChannel במקום IModel
+  
     private IChannel? channel; 
 
     public IceCreamUpdateWorker(IHubContext<ActivityHub> hubContext)
@@ -26,7 +26,7 @@ public class IceCreamUpdateWorker : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        // יצירת נתיב לקבצי נתונים בתוך תיקיית הפרויקט
+     
         var dataDir = Path.Combine(AppContext.BaseDirectory, "Data");
         if (!Directory.Exists(dataDir)) Directory.CreateDirectory(dataDir);
         
@@ -45,7 +45,7 @@ public class IceCreamUpdateWorker : BackgroundService
                         var message = JsonSerializer.Deserialize<IceCreamUpdatedMessage>(line);
                         if (message != null)
                         {
-                            // שליחה לכל הלקוחות המחוברים דרך SignalR
+                           
                             await hubContext.Clients.All.SendAsync(
                                 "ReceiveActivity", 
                                 message.Username, 
@@ -55,10 +55,10 @@ public class IceCreamUpdateWorker : BackgroundService
                             );
                         }
                     }
-                    // ניקוי הקובץ לאחר העיבוד
+                 
                     await File.WriteAllTextAsync(filePath, string.Empty, stoppingToken);
                 } catch {
-                    // במידה והקובץ תפוס, ננסה שוב בסיבוב הבא
+               
                 }
             }
             await Task.Delay(2000, stoppingToken);
@@ -67,7 +67,7 @@ public class IceCreamUpdateWorker : BackgroundService
 
     public override async Task StopAsync(CancellationToken cancellationToken)
     {
-        // סגירת חיבורים בצורה בטוחה
+       
         if (channel != null) await channel.CloseAsync(cancellationToken: cancellationToken);
         if (connection != null) await connection.CloseAsync(cancellationToken: cancellationToken);
         

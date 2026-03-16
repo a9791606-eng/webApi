@@ -17,7 +17,7 @@ body{
     margin:0;
 }
 
-.container{ max-width:1100px; margin:0 auto; }
+.container{ max-width:1100px; margin:0 auto; text-align: center; }
 
 h1{ color: #FF6B81; margin:0 0 8px 0 }
 h3{ color:#FF6B81; margin:6px 0 }
@@ -43,6 +43,8 @@ button{
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap:18px;
     margin-top:18px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .card{
     background: linear-gradient(180deg, var(--card), #FFFFFF);
@@ -59,11 +61,15 @@ button{
 .actions{ margin-top:12px; display:flex; gap:8px }
 
 /* Form styling */
-.form-row{ display:flex; gap:8px; align-items:center; margin-top:12px }
+.form-row{ display:flex; gap:8px; align-items:center; margin-top:12px; justify-content: center; }
 input[type='text']{ padding:8px 10px; border-radius:8px; border:1px solid #F0E6E6; }
 label{ font-size:0.95rem }
 
-#counter{ font-weight:600; color:#FF6B81; margin-top:10px }
+#counter{ font-weight:600; color:#FF6B81; margin-top:10px; display: block; }
+
+#activityFeed { margin-top: 30px; }
+#activityFeed h3 { margin-top: 20px; }
+#activityList { list-style: none; padding: 0; margin: 10px 0; text-align: center; }
 
 /* fallback table hidden in modern UI */
 table{ display:none }

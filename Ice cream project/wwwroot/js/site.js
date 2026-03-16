@@ -1,6 +1,6 @@
 const uri = '/IceCream';
 const tokenKey = 'icecream_token';
-let authToken = localStorage.getItem(tokenKey) || '';
+let authToken = sessionStorage.getItem(tokenKey) || '';
 let iceCreams = [];
 
 // --- עזרים לטוקן ואבטחה ---
@@ -21,7 +21,7 @@ function isTokenValid(token) {
 }
 
 if (!isTokenValid(authToken)) {
-    localStorage.removeItem(tokenKey);
+    sessionStorage.removeItem(tokenKey);
     authToken = '';
     if (!location.pathname.endsWith('login.html')) {
         window.location.href = '/login.html';
@@ -56,6 +56,13 @@ function showToast(msg) {
 function toggleAdminLinks() {
     const usersLink = document.getElementById('usersLink');
     if (usersLink) usersLink.style.display = isAdminFromToken() ? 'inline' : 'none';
+}
+
+function logout() {
+    sessionStorage.removeItem(tokenKey);
+    localStorage.removeItem('icecream_token');
+    authToken = '';
+    location.reload();
 }
 
 function closeInput() { 
@@ -93,8 +100,11 @@ function addItem() {
     })
     .then(response => {
         if (!response.ok) throw new Error('Failed to add');
-        showToast('Item added successfully');
+        const isEmployeePage = window.location.pathname.includes('user.html');
+        const message = isEmployeePage ? 'עובד נוסף בהצלחה' : 'פריט נוסף בהצלחה';
+        showToast(message);
         addNameTextbox.value = '';
+        getItems();
      
     })
     .catch(error => console.error('Error adding item:', error));
@@ -107,7 +117,10 @@ function deleteItem(id) {
     })
     .then(response => {
         if (!response.ok) throw new Error('Delete failed');
-        showToast('Item deleted successfully');
+        const isEmployeePage = window.location.pathname.includes('user.html');
+        const message = isEmployeePage ? 'עובד נמחק בהצלחה' : 'פריט נמחק בהצלחה';
+        showToast(message);
+        getItems();
      
     })
     .catch(error => console.error('Error deleting item:', error));
@@ -128,8 +141,11 @@ function updateItem() {
     })
     .then(response => {
         if (!response.ok) throw new Error('Failed to update');
-        showToast('Item updated successfully');
+        const isEmployeePage = window.location.pathname.includes('user.html');
+        const message = isEmployeePage ? 'עובד עודכן בהצלחה' : 'פריט עודכן בהצלחה';
+        showToast(message);
         closeInput();
+        getItems();
         
     })
     .catch(error => console.error('Error updating item:', error));
@@ -148,7 +164,8 @@ function displayEditForm(id) {
 
 
 function _displayCount(itemCount) {
-    const name = (itemCount === 1) ? 'iceCream' : 'iceCream kinds';
+    const isEmployeePage = window.location.pathname.includes('user.html');
+    const name = isEmployeePage ? (itemCount === 1 ? 'עובד' : 'עובדים') : (itemCount === 1 ? 'גלידה' : 'סוגי גלידה');
     document.getElementById('counter').innerText = `${itemCount} ${name}`;
 }
 
@@ -159,19 +176,29 @@ function _displayItems(data) {
         IsGlutenFree: (d.IsGlutenFree !== undefined) ? d.IsGlutenFree : d.isGlutenFree 
     }));
 
-    const grid = document.getElementById('iceCreamGrid');
-    grid.innerHTML = '';
     _displayCount(iceCreams.length);
+
+    const isEmployeePage = window.location.pathname.includes('user.html');
+    const grid = document.getElementById('iceCreamGrid');
+    
+    if (!grid) return;
+    
+    grid.innerHTML = '';
 
     iceCreams.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
+        
         const title = document.createElement('h4');
         title.innerText = item.Name;
         card.appendChild(title);
 
         const desc = document.createElement('p');
-        desc.innerText = item.IsGlutenFree ? 'Gluten free' : 'Contains gluten';
+        if (isEmployeePage) {
+            desc.innerText = item.IsGlutenFree ? '⭐ עובד מנוסה' : '👤 עובד חדש';
+        } else {
+            desc.innerText = item.IsGlutenFree ? '✓ ללא גלוטן' : '✗ מכיל גלוטן';
+        }
         card.appendChild(desc);
 
         const actions = document.createElement('div');
@@ -179,12 +206,12 @@ function _displayItems(data) {
         
         const editBtn = document.createElement('button');
         editBtn.className = 'button ghost';
-        editBtn.innerText = 'Edit';
+        editBtn.innerText = '✎ עריכה';
         editBtn.onclick = () => displayEditForm(item.Id);
 
         const delBtn = document.createElement('button');
         delBtn.className = 'button';
-        delBtn.innerText = 'Delete';
+        delBtn.innerText = '🗑 מחיקה';
         delBtn.onclick = () => deleteItem(item.Id);
 
         actions.appendChild(editBtn);

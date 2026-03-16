@@ -218,3 +218,11 @@ System.IO.IOException: Failed to bind to address http://127.0.0.1:5000: address 
 2026-03-16 18:58:11.780 +02:00 [INF] Route matched with {action = "GetAll", controller = "IceCream"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[IceCreamNamespace.Models.IceCream]] GetAll() on controller IceCreamNamespace.Controllers.IceCreamController (IceCream).
 2026-03-16 18:58:11.827 +02:00 [INF] Executed action IceCreamNamespace.Controllers.IceCreamController.GetAll (IceCream) in 0.5347ms
 2026-03-16 19:03:24.499 +02:00 [INF] Application is shutting down...
+2026-03-16 19:10:15.230 +02:00 [INF] Starting Ice Cream Web API...
+2026-03-16 19:10:15.362 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-16 19:10:15.363 +02:00 [INF] Hosting environment: Development
+2026-03-16 19:10:15.364 +02:00 [INF] Content root path: C:\Users\User\Desktop\הורדה מגיט\webApi\Ice cream project
+2026-03-16 19:13:03.174 +02:00 [INF] Starting Ice Cream Web API...
+2026-03-16 19:13:03.270 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-16 19:13:03.270 +02:00 [INF] Hosting environment: Development
+2026-03-16 19:13:03.271 +02:00 [INF] Content root path: C:\Users\User\Desktop\הורדה מגיט\webApi\Ice cream project

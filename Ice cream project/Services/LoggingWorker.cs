@@ -15,7 +15,7 @@ namespace IceCreamNamespace.Services
             _queue = queue;
             _rabbit = rabbit;
 
-            // הגדרת Serilog עם Rotation של 50MB כפי שנדרש באתגר
+            
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.File(Path.Combine(AppContext.BaseDirectory, "Data", "logs.txt"), 
                     rollingInterval: RollingInterval.Day,
@@ -32,11 +32,11 @@ namespace IceCreamNamespace.Services
                 {
                     try
                     {
-                        // כתיבה ללוג דרך Serilog
+                        
                         Log.Information("Request: {Controller}/{Action} | User: {Username} | Duration: {Duration}ms", 
                             entry.Controller, entry.Action, entry.Username, entry.DurationMs);
 
-                        // שליחה ל-RabbitMQ אם קיים
+                      
                         if (_rabbit != null)
                         {
                             var msg = new IceCreamUpdatedMessage

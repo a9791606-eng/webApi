@@ -17,7 +17,7 @@ async function doLogin() {
         }
         const token = await response.text();
         // store token
-        localStorage.setItem('icecream_token', token);
+        sessionStorage.setItem('icecream_token', token);
         // redirect to main page
         window.location.href = '/index.html';
     } catch (e) {

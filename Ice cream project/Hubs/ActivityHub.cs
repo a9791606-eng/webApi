@@ -10,7 +10,7 @@ namespace IceCreamNamespace.Hubs;
 [Authorize]
 public class ActivityHub : Hub
 {
-    // mapping from user id to list of connection ids
+    
     private static readonly ConcurrentDictionary<string, ConcurrentBag<string>> _userConnections = new();
 
     public override Task OnConnectedAsync()
@@ -29,7 +29,7 @@ public class ActivityHub : Hub
         var userId = Context.User?.FindFirst("id")?.Value;
         if (!string.IsNullOrEmpty(userId) && _userConnections.TryGetValue(userId, out var bag))
         {
-            // remove connection id from bag
+    
             var remaining = new ConcurrentBag<string>(bag.Where(cid => cid != Context.ConnectionId));
             _userConnections[userId] = remaining;
         }
@@ -44,7 +44,7 @@ public class ActivityHub : Hub
         return Clients.Clients(connectionIds).SendAsync("ReceiveActivity", username, action, iceCreamName);
     }
 
-    // helper for other services to access connection ids (optional)
+   
     public static string[] GetConnectionsForUser(string userId)
     {
         if (string.IsNullOrEmpty(userId)) return new string[0];

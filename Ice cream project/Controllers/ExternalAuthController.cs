@@ -13,27 +13,39 @@ namespace IceCreamNamespace.Controllers
     public class ExternalAuthController : ControllerBase
     {
         private readonly IUserRepository _userRepo;
-        // הכניסי כאן את ה-Client ID שקיבלת מגוגל
-        private const string GoogleClientId = "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com";
+        private readonly IConfiguration _configuration;
 
-        public ExternalAuthController(IUserRepository userRepo)
+        public ExternalAuthController(IUserRepository userRepo, IConfiguration configuration)
         {
             _userRepo = userRepo;
+            _configuration = configuration;
         }
+
+        private string GoogleClientId => _configuration["Google:ClientId"] ?? "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com";
 
         [HttpGet("google-login")]
         public IActionResult GoogleLogin()
         {
-            // שימוש ב-GoogleDefaults.AuthenticationScheme אם קיים, או פשוט "Google"
+            var clientId = _configuration["Google:ClientId"];
+            if (string.IsNullOrEmpty(clientId) || clientId.Contains("YOUR_"))
+            {
+                return BadRequest("Google OAuth is not configured. Please add Google:ClientId and Google:ClientSecret to appsettings.json");
+            }
+            
             var props = new AuthenticationProperties { RedirectUri = Url.Action("GoogleCallback") };
             return Challenge(props, "Google");
         }
 
         [HttpGet("google-callback")]
-        public async Task<IActionResult> GoogleCallback() // שינוי ל-async Task
+        public async Task<IActionResult> GoogleCallback()
         {
-            // שימוש ב-await במקום .Result
-            var result = await HttpContext.AuthenticateAsync("External");
+            var clientId = _configuration["Google:ClientId"];
+            if (string.IsNullOrEmpty(clientId) || clientId.Contains("YOUR_"))
+            {
+                return BadRequest("Google OAuth is not configured.");
+            }
+            
+            var result = await HttpContext.AuthenticateAsync("Google");
             
             if (!result.Succeeded || result.Principal == null)
                 return Unauthorized("Google authentication failed.");
@@ -83,7 +95,7 @@ namespace IceCreamNamespace.Controllers
                 <html>
                 <body>
                     <script>
-                        localStorage.setItem('icecream_token', '{jwt}');
+                        sessionStorage.setItem('icecream_token', '{jwt}');
                         window.location.href = '/index.html';
                     </script>
                     <p>Redirecting...</p>

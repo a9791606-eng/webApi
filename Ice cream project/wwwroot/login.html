@@ -11,10 +11,12 @@
         .login-row{ display:flex; flex-direction:column; gap:8px }
         input[type="password"], input[type="text"]{ padding:10px; border-radius:8px; border:1px solid #F0E6E6 }
         .notice{ color:var(--muted); font-size:0.95rem }
+        .login-container { text-align: center; }
+        .login-back-link { display: inline-block; margin-top: 20px; }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container login-container">
         <div class="login-wrapper">
             <h2>התחברות לחנות הגלידה</h2>
             <p class="notice">הכנס שם משתמש וסיסמה כדי לגשת למערכת.</p>
@@ -22,11 +24,12 @@
                 <input id="username" type="text" placeholder="Username">
                 <input id="password" type="password" placeholder="Password">
                 <button class="button" onclick="doLogin()">התחבר</button>
+                <button class="button" onclick="window.location.href='/signup.html'" style="background: linear-gradient(90deg, #FFD6A5, #FFB3BA);">הצטרפות</button>
                 <button class="button" onclick="window.open('/external/google-login','_blank','width=500,height=600')">התחבר עם Google</button>
                 <p id="error" style="color:#b00020"></p>
             </div>
         </div>
-        <p><a href="index.html">חזור לרשימת הגלידות</a></p>
+        <p class="login-back-link"><a href="index.html">← חזור לרשימת הגלידות</a></p>
     </div>
     <script src="js/login.js"></script>
 </body>

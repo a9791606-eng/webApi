@@ -2,6 +2,7 @@ using IceCreamNamespace.Services;
 using IceCreamNamespace.Interfaces;
 using IceCreamNamespace.Middleware; 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.Google;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,11 +35,26 @@ builder.Services.AddSingleton<LoggingQueue>();
 builder.Services.AddHostedService<LoggingWorker>();
 builder.Services.AddHostedService<IceCreamUpdateWorker>();
 
-// הגדרת אימות JWT
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+// הגדרת אימות JWT + Google (optional)
+var googleConfig = builder.Configuration.GetSection("Google");
+var clientId = googleConfig["ClientId"];
+var clientSecret = googleConfig["ClientSecret"];
+
+var authBuilder = builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options => {
         options.TokenValidationParameters = IceCreamTokenService.GetTokenValidationParameters();
     });
+
+// הוסף Google רק אם יש credentials
+if (!string.IsNullOrEmpty(clientId) && !clientId.Contains("YOUR_") && !string.IsNullOrEmpty(clientSecret) && !clientSecret.Contains("YOUR_"))
+{
+    authBuilder.AddGoogle(options => {
+        options.ClientId = clientId;
+        options.ClientSecret = clientSecret;
+        options.CallbackPath = new PathString("/signin-google");
+        options.SaveTokens = true;
+    });
+}
 
 builder.Services.AddAuthorization(options => {
     options.AddPolicy("AdminOnly", policy => policy.RequireClaim("type", "Admin"));

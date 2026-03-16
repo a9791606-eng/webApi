@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>הצטרפות - חנות הגלידה</title>
+    <link rel="stylesheet" href="css/site.css" />
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .signup-wrapper { 
+            max-width: 500px; 
+            width: 90%;
+            background: var(--card); 
+            padding: 30px; 
+            border-radius: 14px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+        
+        .signup-wrapper h2 { 
+            color: #FF6B81; 
+            margin: 0 0 12px 0;
+            font-size: 1.8rem;
+        }
+        
+        .signup-row { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            color: #FF6B81;
+            font-size: 0.95rem;
+        }
+        
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] { 
+            padding: 12px; 
+            border-radius: 8px; 
+            border: 2px solid #F0E6E6;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #FF6B81;
+        }
+        
+        .signup-row button {
+            margin-top: 10px;
+        }
+        
+        .signup-row .error {
+            color: #b00020;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .login-link {
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .login-link a {
+            color: #FF6B81;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .notice {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-wrapper">
+        <h2>🍦 הצטרפות לחנות הגלידה</h2>
+        <p class="notice">הצטרפו לחנות הגלידה שלנו והתחילו להנות!</p>
+        
+        <div class="signup-row">
+            <div class="form-group">
+                <label for="username">שם משתמש</label>
+                <input type="text" id="username" placeholder="בחר שם משתמש">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">אימייל</label>
+                <input type="email" id="email" placeholder="example@email.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">סיסמה</label>
+                <input type="password" id="password" placeholder="הכנס סיסמה">
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmPassword">אימות סיסמה</label>
+                <input type="password" id="confirmPassword" placeholder="חזור על הסיסמה">
+            </div>
+            
+            <div class="form-group">
+                <label for="branch">שם סניף</label>
+                <input type="text" id="branch" placeholder="שם הסניף / תאור">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">טלפון (אופציונלי)</label>
+                <input type="text" id="phone" placeholder="0501234567">
+            </div>
+            
+            <button class="button" onclick="doSignup()" style="margin-top: 20px;">הצטרפות</button>
+            <p id="error" class="error" style="display:none;"></p>
+        </div>
+        
+        <div class="login-link">
+            כבר יש לך חשבון? <a href="login.html">← התחבר כאן</a>
+        </div>
+    </div>
+    
+    <script src="js/signup.js"></script>
+</body>
+</html>

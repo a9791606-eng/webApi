@@ -5,15 +5,24 @@
     <meta charset="UTF-8">
      <title>IceCream Shop</title>
      <link rel="stylesheet" href="css/site.css" />
+     <style>
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
      <div class="container">
-        <h1>IceCream Shop</h1>
-        <h3>Add</h3>
+        <h1>🍦 חנות הגלידה</h1>
+        <h3>הוספת גלידה חדשה</h3>
         <div class="form-row">
-            <input type="text" id="add-name" placeholder="New iceCream">
-            <button class="button" onclick="addItem()">Add</button>
+            <input type="text" id="add-name" placeholder="שם הגלידה החדשה">
+            <button class="button" onclick="addItem()">הוסף</button>
         </div>
         <!-- <h3>Add</h3>
         <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
@@ -23,15 +32,15 @@
 
       
         <div id="editForm" style="display:none; margin-top:12px;">
-            <h3>Edit</h3>
+            <h3>עריכה</h3>
             <form action="javascript:void(0);" onsubmit="updateItem()">
                 <input type="hidden" id="edit-id">
                 <label>
-                    <input type="checkbox" id="edit-isGlutenFree"> Is Gluten Free
+                    <input type="checkbox" id="edit-isGlutenFree"> ללא גלוטן
                 </label>
-                <input type="text" id="edit-name" placeholder="Ice cream name">
-                <input type="submit" value="Save" class="button">
-                <a onclick="closeInput()" aria-label="Close">&#10006;</a>
+                <input type="text" id="edit-name" placeholder="שם הגלידה">
+                <input type="submit" value="שמור" class="button">
+                <a onclick="closeInput()" aria-label="Close">✕</a>
             </form>
         </div>
 
@@ -40,19 +49,13 @@
             <h3>Activity Feed</h3>
             <ul id="activityList"></ul>
         </div>
-        <div class="grid" id="iceCreamGrid">
-            <table>
-                <tr>
-                    <th>Is gluten free?</th>
-                    <th>Name</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tbody id="iceCreams"></tbody>
-            </table>
-        </div>
+        <div class="grid" id="iceCreamGrid"></div>
 
-        <a id="usersLink" href="user.html">למעבר לרשימת המשתמשים</a>
+        <div class="footer-links">
+            <a id="usersLink" href="user.html">→ רשימת המשתמשים</a>
+            <span>|</span>
+            <button class="button ghost" onclick="logout()" style="background-color:#FF6B81; color:white; border:none;">התנתק</button>
+        </div>
     </div>
     <div id="toast" class="toast" style="opacity:0"></div>
     <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@7.0.0/dist/browser/signalr.min.js"></script>

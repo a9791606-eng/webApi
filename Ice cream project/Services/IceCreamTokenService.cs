@@ -15,7 +15,7 @@ namespace IceCreamNamespace.Services
         private static readonly SymmetricSecurityKey key = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes("B7nLp3ZqVr6Ty0WxCs2DfGh8JkLm4NpQrSt9UvXy"));
         private static readonly string issuer = "https://icecream-demo.com";
-        private static readonly string audience = "https://icecream-demo.com"; // כדאי לשנות אם יש צורך
+        private static readonly string audience = "https://icecream-demo.com"; 
 
         public static JwtSecurityToken GetToken(List<Claim> claims) =>
             new JwtSecurityToken(
@@ -32,7 +32,7 @@ namespace IceCreamNamespace.Services
                 ValidIssuer = issuer,
                 ValidAudience = audience,
                 IssuerSigningKey = key,
-                ClockSkew = TimeSpan.Zero // הסרת עיכוב כאשר הטוקן פג
+                ClockSkew = TimeSpan.Zero 
             };
 
         public static string WriteToken(JwtSecurityToken token) =>

@@ -3,41 +3,52 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>User CRUD</title>
+    <title>עובדים</title>
     <link rel="stylesheet" href="css/site.css" />
+    <style>
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>User CRUD</h1>
-    <h3>Add</h3>
-    <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
-        <input type="text" id="add-name" placeholder="New User">
-        <input type="submit" value="Add">
-    </form>
+    <div class="container">
+        <h1>👥 עובדים</h1>
+        <h3>הוספת עובד חדש</h3>
+        <div class="form-row">
+            <input type="text" id="add-name" placeholder="שם העובד החדש">
+            <button class="button" onclick="addItem()">הוסף</button>
+        </div>
 
-    <div id="editForm">
-        <h3>Edit</h3>
-        <form action="javascript:void(0);" onsubmit="updateItem()">
-            <input type="hidden" id="edit-id">
-            <input type="checkbox" id="edit-isGlutenFree">
-            <input type="text" id="edit-name">
-            <input type="submit" value="Save">
-            <a onclick="closeInput()" aria-label="Close">&#10006;</a>
-        </form>
+        <div id="editForm" style="display:none; margin-top:12px;">
+            <h3>עריכה</h3>
+            <form action="javascript:void(0);" onsubmit="updateItem()">
+                <input type="hidden" id="edit-id">
+                <label>
+                    <input type="checkbox" id="edit-isGlutenFree"> עובד מנוסה
+                </label>
+                <input type="text" id="edit-name" placeholder="שם העובד">
+                <input type="submit" value="שמור" class="button">
+                <a onclick="closeInput()" aria-label="Close">✕</a>
+            </form>
+        </div>
+
+        <p id="counter"></p>
+
+        <div class="grid" id="iceCreamGrid"></div>
+
+        <div class="footer-links">
+            <a id="itemsLink" href="index.html">← חזור לרשימת הגלידות</a>
+            <span>|</span>
+            <button class="button ghost" onclick="logout()" style="background-color:#FF6B81; color:white; border:none;">התנתק</button>
+        </div>
     </div>
 
-    <p id="counter"></p>
-
-    <table>
-        <tr>
-            <th>isGloutenFree?</th>
-            <th>Name</th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tbody id="User"></tbody>
-    </table>
-<a id="itemsLink" href="index.html">מעבר לרשימת הגלידות</a>
     <div id="toast" class="toast" style="opacity:0"></div>
     <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@7.0.0/dist/browser/signalr.min.js"></script>
     <script src="js/site.js" asp-append-version="true"></script>

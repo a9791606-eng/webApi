@@ -10,23 +10,45 @@ using Microsoft.AspNetCore.Authorization;
 namespace IceCreamNamespace.Controllers;
 
 [ApiController]
-[Route("user")]
-[Authorize]
+[Route("[controller]")]
 public class UsersController : ControllerBase
 {  
    IUserService services;
-    public UsersController(IUserService Userservices)
+    IUserRepository userRepository;
+    
+    public UsersController(IUserService Userservices, IUserRepository repository)
     {
         this.services=Userservices;
+        this.userRepository=repository;
+    }
+
+    [HttpPost("signup")]
+    [AllowAnonymous]
+    public ActionResult Signup([FromBody] User newUser)
+    {
+        if (string.IsNullOrWhiteSpace(newUser?.Username) || string.IsNullOrWhiteSpace(newUser?.Password))
+            return BadRequest("Username and Password are required");
+        
+        // בדוק אם משתמש כבר קיים
+        var allUsers = userRepository.GetAll();
+        var existing = allUsers?.FirstOrDefault(u => u.Username.ToLower() == newUser.Username.ToLower());
+        if (existing != null)
+            return BadRequest("Username already exists");
+        
+        newUser.IsAdmin = false; // תמיד False לחדשים
+        userRepository.Add(newUser);
+        return CreatedAtAction(nameof(Signup), new { id = newUser.Id }, newUser);
     }
 
     [HttpGet()]
+    [Authorize]
     public ActionResult<IEnumerable<User>> Get()
     {
         return services.Get();
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public ActionResult<User> Get(int id)
     {
         var m = services.Get(id);
@@ -46,6 +68,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize]
     public ActionResult Update(int id, User newUser)
     {
         var ans= services.Update( id, newUser);
