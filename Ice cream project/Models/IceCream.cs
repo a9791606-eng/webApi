@@ -4,7 +4,7 @@
     {
         public int UserId { get; internal set; }
         public int Id { get; set; }
-        public string Name { get; set; }
-        public bool isGloutenFree { get; set; }
+        public string Name { get; set; } = string.Empty; 
+        public bool IsGlutenFree { get; set; } 
     }
 }

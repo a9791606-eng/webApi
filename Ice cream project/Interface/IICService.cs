@@ -5,12 +5,16 @@ namespace IceCreamNamespace.Interfaces
 {
     public interface IICService
     {
-     List<IceCream> GetAll();
-     IceCream Get(int id);
-     void Create(IceCream newIceCream);
-     void Delete(int id);
-     void Update(IceCream newIceCream);
-     int Count { get; }
+        List<IceCream> GetAll();
+
+        IceCream? Get(int id);
+
+        void Create(IceCream newIceCream);
+        
+        void Delete(int id);
+        
+        void Update(IceCream newIceCream);
+        
+        int Count { get; }
     }
 }
-

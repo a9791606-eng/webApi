@@ -1,34 +1,23 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Extensions.DependencyInjection;
 using IceCreamNamespace.Models;
 using IceCreamNamespace.Interfaces;
-using IceCreamNamespace.Hubs;
-
+using Microsoft.Extensions.DependencyInjection;
 
 namespace IceCreamNamespace.Services;
 
-    public  class UsersService : IUserService
-    {
-      
-     private readonly IUserRepository userRepository;
-     private readonly IActiveUser activeUser;
-     private readonly IIceCreamRepository iceCreamRepository;
- 
-     public UsersService(IUserRepository userRepository, IActiveUser activeUser)
-     {
-         this.userRepository = userRepository;
-         this.activeUser = activeUser;
-     }
+public class UsersService : IUserService
+{
+    private readonly IUserRepository userRepository;
+    private readonly IActiveUser activeUser;
+    private readonly IIceCreamRepository? iceCreamRepository;
 
-     public UsersService(IUserRepository userRepository, IActiveUser activeUser, IIceCreamRepository iceCreamRepository)
-     {
-         this.userRepository = userRepository;
-         this.activeUser = activeUser;
-         this.iceCreamRepository = iceCreamRepository;
-     }
+    public UsersService(IUserRepository userRepository, IActiveUser activeUser, IIceCreamRepository? iceCreamRepository = null)
+    {
+        this.userRepository = userRepository;
+        this.activeUser = activeUser;
+        this.iceCreamRepository = iceCreamRepository;
+    }
 
     public List<User> Get()
     {
@@ -43,13 +32,13 @@ namespace IceCreamNamespace.Services;
         return me == null ? new List<User>() : new List<User> { me };
     }
 
-    public User Get(int id) => userRepository.Get(id);
+    public User? Get(int id) => userRepository.Get(id);
 
-    public User Create(User newUser)
+    public User? Create(User newUser)
     {
         var user = activeUser.ActiveUser;
         if (user == null || !user.IsAdmin)
-            return null; // only admin can create users
+            return null;
 
         userRepository.Add(newUser);
         return newUser;
@@ -63,9 +52,7 @@ namespace IceCreamNamespace.Services;
 
         var current = activeUser.ActiveUser;
         if (current == null) return 4;
-
         if (!current.IsAdmin && current.Id != id) return 4;
-
         if (!current.IsAdmin && newUser.IsAdmin) newUser.IsAdmin = false;
 
         userRepository.Update(newUser);
@@ -76,31 +63,25 @@ namespace IceCreamNamespace.Services;
     {
         var current = activeUser.ActiveUser;
         if (current == null || !current.IsAdmin) return false;
-        var u = userRepository.Get(id);
-        if (u == null) return false;
-
-        // delete user's items as well
-        // Use IIceCreamRepository to remove items belonging to this user
-        // ensure we have the repo via DI
+        
         if (iceCreamRepository != null)
         {
             var items = iceCreamRepository.GetAll().Where(i => i.UserId == id).ToList();
             foreach (var it in items) iceCreamRepository.Delete(it.Id);
         }
+        
         userRepository.Delete(id);
         return true;
     }
 
     public int Count => userRepository.Count;
 }
-    public static partial class UserExtension{
-      public static IServiceCollection AddUserService(this IServiceCollection services)
-        {
-            services.AddScoped<IUserService, UsersService>();
-            return services;
-        }
 
-
-
- }
-
+public static class UserServiceExtensions
+{
+    public static IServiceCollection AddUserService(this IServiceCollection services)
+    {
+        services.AddScoped<IUserService, UsersService>();
+        return services;
+    }
+}

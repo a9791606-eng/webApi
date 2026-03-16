@@ -983,3 +983,21 @@ System.InvalidOperationException: Collection was modified; enumeration operation
 2026-03-16 01:40:05.468 +02:00 [INF] Executed endpoint '/activityHub'
 2026-03-16 01:40:05.468 +02:00 [INF] "2026-03-15T23:39:58.8718999Z" -/- user1 200 6596ms /activityHub
 2026-03-16 01:40:05.468 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7274/activityHub?id=8-cSbVTw12N9MpfeHdKixw&_=1773617998869 - 200 33 application/octet-stream 6596.9471ms
+2026-03-16 16:26:03.496 +02:00 [INF] User profile is available. Using 'C:\Users\user\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-16 16:26:03.758 +02:00 [INF] Now listening on: https://localhost:7274
+2026-03-16 16:26:03.760 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-16 16:26:03.761 +02:00 [INF] Hosting environment: Development
+2026-03-16 16:26:03.761 +02:00 [INF] Content root path: C:\Users\user\Pictures\webApi\Ice cream project
+2026-03-16 16:26:15.913 +02:00 [INF] Application is shutting down...
+2026-03-16 16:35:52.586 +02:00 [INF] User profile is available. Using 'C:\Users\user\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-16 16:35:52.712 +02:00 [INF] Now listening on: https://localhost:7274
+2026-03-16 16:35:52.715 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-16 16:35:52.716 +02:00 [INF] Hosting environment: Development
+2026-03-16 16:35:52.716 +02:00 [INF] Content root path: C:\Users\user\Pictures\webApi\Ice cream project
+2026-03-16 16:36:12.589 +02:00 [INF] Application is shutting down...
+2026-03-16 16:36:30.307 +02:00 [INF] User profile is available. Using 'C:\Users\user\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-03-16 16:36:30.429 +02:00 [INF] Now listening on: https://localhost:7274
+2026-03-16 16:36:30.432 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-03-16 16:36:30.433 +02:00 [INF] Hosting environment: Development
+2026-03-16 16:36:30.433 +02:00 [INF] Content root path: C:\Users\user\Pictures\webApi\Ice cream project
+2026-03-16 16:44:25.861 +02:00 [INF] Application is shutting down...

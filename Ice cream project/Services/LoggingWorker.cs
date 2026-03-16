@@ -1,26 +1,27 @@
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
-using System.IO;
 using IceCreamNamespace.Models;
-using System;
+using Serilog;
 
 namespace IceCreamNamespace.Services
 {
     public class LoggingWorker : BackgroundService
     {
         private readonly LoggingQueue _queue;
-        private readonly string logPath;
-        private readonly IRabbitMqService? rabbit;
+        private readonly IRabbitMqService? _rabbit;
 
-        public LoggingWorker(LoggingQueue queue, IWebHostEnvironment env, IRabbitMqService? rabbit = null)
+        public LoggingWorker(LoggingQueue queue, IRabbitMqService? rabbit = null)
         {
             _queue = queue;
-            this.rabbit = rabbit;
-            var dataDir = Path.Combine(env.ContentRootPath, "Data");
-            Directory.CreateDirectory(dataDir);
-            logPath = Path.Combine(dataDir, "logs.jsonl");
+            _rabbit = rabbit;
+
+            // הגדרת Serilog עם Rotation של 50MB כפי שנדרש באתגר
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.File(Path.Combine(AppContext.BaseDirectory, "Data", "logs.txt"), 
+                    rollingInterval: RollingInterval.Day,
+                    fileSizeLimitBytes: 50 * 1024 * 1024, // 50MB
+                    rollOnFileSizeLimit: true)
+                .CreateLogger();
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -31,23 +32,23 @@ namespace IceCreamNamespace.Services
                 {
                     try
                     {
-                        var line = JsonSerializer.Serialize(entry);
-                        await File.AppendAllTextAsync(logPath, line + Environment.NewLine, stoppingToken);
+                        // כתיבה ללוג דרך Serilog
+                        Log.Information("Request: {Controller}/{Action} | User: {Username} | Duration: {Duration}ms", 
+                            entry.Controller, entry.Action, entry.Username, entry.DurationMs);
 
-                        // Optionally publish to RabbitMQ for other consumers
-                        if (rabbit != null)
+                        // שליחה ל-RabbitMQ אם קיים
+                        if (_rabbit != null)
                         {
                             var msg = new IceCreamUpdatedMessage
                             {
-                                UserId = 0,
                                 Username = entry.Username,
                                 IceCreamName = entry.Path,
                                 Timestamp = entry.Start
                             };
-                            await rabbit.PublishIceCreamUpdated(msg);
+                            await _rabbit.PublishIceCreamUpdated(msg);
                         }
                     }
-                    catch { /* swallow for robustness */ }
+                    catch { /* robustness */ }
                 }
                 else
                 {

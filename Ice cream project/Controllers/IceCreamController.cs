@@ -1,76 +1,61 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Cryptography.X509Certificates;
 using IceCreamNamespace.Models;
-using IceCreamNamespace.Services;
 using IceCreamNamespace.Interfaces;
 
 namespace IceCreamNamespace.Controllers
 {
-
     [ApiController]
     [Route("[controller]")]
     [Authorize]
     public class IceCreamController : ControllerBase
     {  
-    IICService services;
-        public IceCreamController(IICService IceCreamService)
+        private readonly IICService _services;
+
+        public IceCreamController(IICService iceCreamService)
         {
-            this.services=IceCreamService;
+            _services = iceCreamService;
         }
 
-        [HttpGet()]
-        public ActionResult<List<IceCream>> GetAll()
-        {
-            return services.GetAll();
-        }
+        [HttpGet]
+        public ActionResult<List<IceCream>> GetAll() => _services.GetAll();
 
         [HttpGet("{id}")]
         public ActionResult<IceCream> Get(int id)
         {
-            var Ice = services.Get(id);
-            if(Ice==null)
-                return NotFound();
-            return Ice;
-
+            var ice = _services.Get(id);
+            if(ice == null) return NotFound();
+            return ice;
         }
 
         [HttpPost]
         public IActionResult Create(IceCream newIceCream)
         {
-            services.Create(newIceCream);
-            return CreatedAtAction(nameof(Create), new { id = newIceCream.Id }, newIceCream);
+            _services.Create(newIceCream);
+            return CreatedAtAction(nameof(Get), new { id = newIceCream.Id }, newIceCream);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, IceCream newIceCream)
         {
-           if (id != newIceCream.Id)
-                return BadRequest();
+            if (id != newIceCream.Id) return BadRequest();
 
-            var existingIceCream = services.Get(id);
-            if (existingIceCream is null)
-                return  NotFound();
+            var existing = _services.Get(id);
+            if (existing == null) return NotFound();
 
-            services.Update(newIceCream);
-
+            _services.Update(newIceCream);
             return NoContent();
-
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var IceCream = services.Get(id);
-            if (IceCream is null)
-                return  NotFound();
+            var ice = _services.Get(id);
+            if (ice == null) return NotFound();
 
-            // services.Delete enforces ownership; Admin policy is enforced at controller level if needed
-            services.Delete(id);
-
+            _services.Delete(id);
             return NoContent();
-         }
-     }
- }
+        }
+    }
+}

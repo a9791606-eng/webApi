@@ -23,6 +23,14 @@ namespace IceCreamNamespace.Middleware
         {
             var sw = Stopwatch.StartNew();
             var start = DateTime.UtcNow;
+
+
+            await _next(context);
+
+           
+            sw.Stop();
+
+          
             string controller = "-";
             string action = "-";
             var endpoint = context.GetEndpoint();
@@ -33,17 +41,16 @@ namespace IceCreamNamespace.Middleware
                 if (routeValues.TryGetValue("action", out var a)) action = a?.ToString() ?? "-";
             }
 
-            string username = "";
+           
+            string username = "Anonymous";
             if (context.User?.Identity?.IsAuthenticated == true)
             {
-                username = context.User.FindFirst("username")?.Value
-                           ?? context.User.Identity?.Name
-                           ?? "";
+                username = context.User.FindFirst("username")?.Value 
+                           ?? context.User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value
+                           ?? context.User.Identity?.Name 
+                           ?? "AuthenticatedUser";
             }
 
-            await _next(context);
-
-            sw.Stop();
             var entry = new IceCreamNamespace.Models.LogEntry
             {
                 Start = start,
@@ -57,13 +64,14 @@ namespace IceCreamNamespace.Middleware
 
             try
             {
-                // write structured log to Serilog
-                Log.Information("{Start} {Controller}/{Action} {Username} {StatusCode} {DurationMs}ms {Path}", entry.Start, entry.Controller, entry.Action, entry.Username, entry.StatusCode, entry.DurationMs, entry.Path);
+               
+                Log.Information("{Start} {Controller}/{Action} {Username} {StatusCode} {DurationMs}ms {Path}", 
+                    entry.Start, entry.Controller, entry.Action, entry.Username, entry.StatusCode, entry.DurationMs, entry.Path);
 
-                // keep backward compatibility: enqueue to queue if present
+             
                 _queue?.Enqueue(entry);
             }
-            catch { /* swallow but keep server alive */ }
+            catch { /* שמירה על יציבות השרת במקרה של תקלה בלוג */ }
         }
     }
 }

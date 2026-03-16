@@ -1,64 +1,76 @@
 using System;
 using System.IO;
-using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.SignalR;
 using IceCreamNamespace.Hubs;
 using IceCreamNamespace.Models;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Hosting;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
+using RabbitMQ.Client; 
 
-namespace IceCreamNamespace.Services
+namespace IceCreamNamespace.Services;
+
+public class IceCreamUpdateWorker : BackgroundService
 {
-    public class IceCreamUpdateWorker : BackgroundService
+    private readonly IHubContext<ActivityHub> hubContext;
+    private IConnection? connection;
+    
+    // בגרסאות RabbitMQ 8.0 ומעלה משתמשים ב-IChannel במקום IModel
+    private IChannel? channel; 
+
+    public IceCreamUpdateWorker(IHubContext<ActivityHub> hubContext)
     {
-        private readonly IHubContext<ActivityHub> hubContext;
-        private dynamic connection;
-        private dynamic channel;
-        private const string QueueName = "ice-cream-updates";
+        this.hubContext = hubContext;
+    }
 
-        public IceCreamUpdateWorker(IHubContext<ActivityHub> hubContext)
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        // יצירת נתיב לקבצי נתונים בתוך תיקיית הפרויקט
+        var dataDir = Path.Combine(AppContext.BaseDirectory, "Data");
+        if (!Directory.Exists(dataDir)) Directory.CreateDirectory(dataDir);
+        
+        var filePath = Path.Combine(dataDir, "rabbit_messages.jsonl");
+
+        while (!stoppingToken.IsCancellationRequested)
         {
-            this.hubContext = hubContext;
-        }
-
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            var dataDir = Path.Combine(AppContext.BaseDirectory, "..", "Data");
-            var filePath = Path.Combine(dataDir, "rabbit_messages.jsonl");
-
-            while (!stoppingToken.IsCancellationRequested)
+            if (File.Exists(filePath))
             {
-                if (File.Exists(filePath))
-                {
-                    var lines = File.ReadAllLines(filePath);
+                try {
+                    var lines = await File.ReadAllLinesAsync(filePath, stoppingToken);
                     foreach (var line in lines)
                     {
-                        try
+                        if (string.IsNullOrWhiteSpace(line)) continue;
+                        
+                        var message = JsonSerializer.Deserialize<IceCreamUpdatedMessage>(line);
+                        if (message != null)
                         {
-                            var message = JsonSerializer.Deserialize<IceCreamUpdatedMessage>(line);
-                            await Task.Delay(1000, stoppingToken);
-                            await hubContext.Clients.All.SendAsync("ReceiveActivity", message.Username, "updated", message.IceCreamName, stoppingToken);
+                            // שליחה לכל הלקוחות המחוברים דרך SignalR
+                            await hubContext.Clients.All.SendAsync(
+                                "ReceiveActivity", 
+                                message.Username, 
+                                "updated", 
+                                message.IceCreamName, 
+                                stoppingToken
+                            );
                         }
-                        catch { }
                     }
-
-                    // truncate file after processing
-                    File.WriteAllText(filePath, string.Empty);
+                    // ניקוי הקובץ לאחר העיבוד
+                    await File.WriteAllTextAsync(filePath, string.Empty, stoppingToken);
+                } catch {
+                    // במידה והקובץ תפוס, ננסה שוב בסיבוב הבא
                 }
-
-                await Task.Delay(1000, stoppingToken);
             }
+            await Task.Delay(2000, stoppingToken);
         }
+    }
 
-        public override Task StopAsync(CancellationToken cancellationToken)
-        {
-            try { channel?.Close(); } catch { }
-            try { connection?.Close(); } catch { }
-            return base.StopAsync(cancellationToken);
-        }
+    public override async Task StopAsync(CancellationToken cancellationToken)
+    {
+        // סגירת חיבורים בצורה בטוחה
+        if (channel != null) await channel.CloseAsync(cancellationToken: cancellationToken);
+        if (connection != null) await connection.CloseAsync(cancellationToken: cancellationToken);
+        
+        await base.StopAsync(cancellationToken);
     }
 }

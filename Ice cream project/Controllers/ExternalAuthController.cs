@@ -1,10 +1,10 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Mvc;
 using IceCreamNamespace.Models;
 using IceCreamNamespace.Services;
 using IceCreamNamespace.Interfaces;
+using Google.Apis.Auth; // חובה עבור האימות המאובטח
 
 namespace IceCreamNamespace.Controllers
 {
@@ -13,6 +13,8 @@ namespace IceCreamNamespace.Controllers
     public class ExternalAuthController : ControllerBase
     {
         private readonly IUserRepository _userRepo;
+        // הכניסי כאן את ה-Client ID שקיבלת מגוגל
+        private const string GoogleClientId = "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com";
 
         public ExternalAuthController(IUserRepository userRepo)
         {
@@ -22,27 +24,48 @@ namespace IceCreamNamespace.Controllers
         [HttpGet("google-login")]
         public IActionResult GoogleLogin()
         {
+            // שימוש ב-GoogleDefaults.AuthenticationScheme אם קיים, או פשוט "Google"
             var props = new AuthenticationProperties { RedirectUri = Url.Action("GoogleCallback") };
             return Challenge(props, "Google");
         }
 
         [HttpGet("google-callback")]
-        public IActionResult GoogleCallback()
+        public async Task<IActionResult> GoogleCallback() // שינוי ל-async Task
         {
-            var result = HttpContext.AuthenticateAsync("External").Result;
+            // שימוש ב-await במקום .Result
+            var result = await HttpContext.AuthenticateAsync("External");
+            
             if (!result.Succeeded || result.Principal == null)
-                return Unauthorized();
+                return Unauthorized("Google authentication failed.");
 
-            var email = result.Principal.FindFirst(ClaimTypes.Email)?.Value ?? result.Principal.FindFirst("email")?.Value;
-            var name = result.Principal.FindFirst(ClaimTypes.Name)?.Value ?? result.Principal.FindFirst("name")?.Value;
+            // חילוץ ה-id_token שחזר מגוגל
+            var idToken = result.Properties.GetTokenValue("id_token");
 
-            // find or create local user
-            var existing = _userRepo.GetAll().Find(u => u.Username == email);
+            // --- תחילת האימות המאובטח (מה שהמרצה ביקשה) ---
+            GoogleJsonWebSignature.Payload payload;
+            try
+            {
+                // כאן השרת שלך פונה לגוגל ומאמת שהטוקן אמיתי ותקין
+                payload = await GoogleJsonWebSignature.ValidateAsync(idToken, new GoogleJsonWebSignature.ValidationSettings
+                {
+                    Audience = new[] { GoogleClientId }
+                });
+            }
+            catch (Exception)
+            {
+                return Unauthorized("Invalid Google Token - Validation failed.");
+            }
+            // --- סוף אימות שרת ---
+
+            var email = payload.Email;
+            var name = payload.Name;
+
+            // מציאת משתמש או יצירה
+            var existing = _userRepo.GetAll().FirstOrDefault(u => u.Username == email);
             if (existing == null)
             {
-                var newUser = new User { Username = email, Password = "", IsAdmin = false };
-                _userRepo.Add(newUser);
-                existing = newUser;
+                existing = new User { Username = email, Password = "", IsAdmin = false };
+                _userRepo.Add(existing);
             }
 
             var claims = new List<Claim>
@@ -55,11 +78,17 @@ namespace IceCreamNamespace.Controllers
             var token = IceCreamTokenService.GetToken(claims);
             var jwt = IceCreamTokenService.WriteToken(token);
 
-            // return a simple page that sets the token in localStorage and closes the popup
-            var html = $@"<html><body><script>
-localStorage.setItem('icecream_token', '{jwt}');
-window.location = '/index.html';
-</script></body></html>";
+            // דף HTML פשוט להעברת הטוקן ללקוח
+            var html = $@"
+                <html>
+                <body>
+                    <script>
+                        localStorage.setItem('icecream_token', '{jwt}');
+                        window.location.href = '/index.html';
+                    </script>
+                    <p>Redirecting...</p>
+                </body>
+                </html>";
 
             return Content(html, "text/html");
         }
