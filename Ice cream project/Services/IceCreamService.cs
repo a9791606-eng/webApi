@@ -30,10 +30,8 @@ public class IceCreamService : IICService
         public List<IceCream> GetAll()
         {
             var all = repository.GetAll();
-            // admins see all; owners see own; anonymous see none
-            // read active user from hub context via ActiveUser service was stored on construction
             if (activeUserId == 0) return new List<IceCream>();
-            // check if current user is admin (will be enforced at controller if needed)
+            if (isAdmin) return all;
             return all.Where(i => i.UserId == activeUserId).ToList();
         }
 
@@ -58,7 +56,7 @@ public class IceCreamService : IICService
             var IceCream = repository.Get(id);
             if (IceCream is null) return;
             var isOwner = IceCream.UserId == activeUserId;
-            if (!isOwner && !isAdmin) return; // only owner or admin can delete
+            if (!isOwner && !isAdmin) return;
             repository.Delete(id);
             BroadcastActivity("deleted", IceCream);
         }
@@ -75,11 +73,10 @@ public class IceCreamService : IICService
 
         private void BroadcastActivity(string action, IceCream IceCream)
         {
-            // broadcast to all clients (legacy)
-            hubContext.Clients.All.SendAsync("ReceiveActivity", activeUsername, action, IceCream.Name);
-            // send to all connections of this user specifically
-            ActivityHub.GetConnectionsForUser(activeUserId.ToString());
-            hubContext.Clients.Clients(ActivityHub.GetConnectionsForUser(activeUserId.ToString())).SendAsync("ReceiveActivity", activeUsername, action, IceCream.Name);
+            // שלח הודעה רק למשתמש הנוכחי
+            var connections = ActivityHub.GetConnectionsForUser(activeUserId.ToString());
+            if (connections != null && connections.Count > 0)
+                hubContext.Clients.Clients(connections).SendAsync("ReceiveActivity", activeUsername, action, IceCream.Name);
         }
 
         public int Count => GetAll().Count;

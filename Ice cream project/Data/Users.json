@@ -1,1 +1,20 @@
-[{"Id":1,"Username":"admin","Password":"admin","IsAdmin":true}]
+[
+	{
+		"Id": 1,
+		"Username": "admin",
+		"Password": "admin",
+		"IsAdmin": true
+	},
+	{
+		"Id": 2,
+		"Username": "user1",
+		"Password": "userpass",
+		"IsAdmin": false
+	},
+	{
+		"Id": 3,
+		"Username": "user2",
+		"Password": "userpass2",
+		"IsAdmin": false
+	}
+]

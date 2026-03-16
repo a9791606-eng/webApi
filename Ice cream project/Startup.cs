@@ -33,17 +33,7 @@ namespace IceCreamNamespace
             services.AddSingleton<IRabbitMqService, RabbitMqService>();
             services.AddRabbitMq();
 
-            services
-                .AddAuthentication(options =>
-                {
-                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(cfg =>
-                {
-                    cfg.RequireHttpsMetadata = false;
-                    cfg.TokenValidationParameters = IceCreamTokenService.GetTokenValidationParameters();
-                    cfg.Events = new JwtBearerEvents();
-                });
+            // ...existing code...
 
             services.AddAuthorization(cfg =>
             {

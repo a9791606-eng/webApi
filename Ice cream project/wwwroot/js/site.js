@@ -103,9 +103,9 @@ function addItem() {
             return response.json().catch(() => null);
         })
          .then(() => {
-            // Do not refresh immediately; rely on SignalR notification to update the list
             showToast('Item added successfully');
             addNameTextbox.value = '';
+            getItems(); // רענון מיידי לאחר הוספה
         })
           .catch(error => {
             console.warn('Unable to add item to server, adding locally.', error);
@@ -124,6 +124,7 @@ function deleteItem(id) {
         })
         .then(() => {
             showToast('Item deleted successfully');
+            getItems(); // רענון מיידי לאחר מחיקה
         })
         .catch(error => {
             console.error('Unable to delete item.', error);
