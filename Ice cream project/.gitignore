@@ -199,6 +199,9 @@ Icon?
 # dotnet stuff
 project.lock.json
 
+# Ignore generated log files
+Data/logs*.txt
+
 # VS 2015+
 *.vc.vc.opendb
 *.vc.db
